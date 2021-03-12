@@ -7,11 +7,14 @@ package teamProject.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import teamProject.entity.City;
 import teamProject.entity.Event;
 import teamProject.service.CountyService;
@@ -37,11 +40,10 @@ public class AdventureController {
         return "index";
     }
     
-    @GetMapping("/find")
-    public String returnCities(@PathVariable("id") int id, Model model){
-        List<City> cities = countyService.getCountyById(id).getCityList();
-        model.addAttribute("cities", cities);
-        return "index";
+    @ResponseBody
+    @GetMapping("/{id}")
+    public ResponseEntity<City> returnCities(@PathVariable("id") int id, Model model){
+        return new ResponseEntity(countyService.getCountyById(id).getCityList(), HttpStatus.OK);
     }
     
     
