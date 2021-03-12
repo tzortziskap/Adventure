@@ -6,6 +6,7 @@
 package teamProject.service;
 
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import teamProject.entity.Credentials;
 
 /**
@@ -13,7 +14,7 @@ import teamProject.entity.Credentials;
  * @author tzortziskapellas
  */
 
-public interface CredentialsService{
+public interface CredentialsService extends UserDetailsService{
     
     List<Credentials> getCredentials();
 

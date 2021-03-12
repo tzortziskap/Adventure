@@ -53,9 +53,9 @@ public class Credentials implements Serializable {
     @Size(min = 1, max = 68)
     @Column(name = "password")
     private String password;
-    @JoinColumn(name = "roleId", referencedColumnName = "id")
+    @JoinColumn(name = "rolesId", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Roles roleId;
+    private Roles rolesId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "credentialsId")
     private Organiser organiser;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "credentialsId")
@@ -100,12 +100,12 @@ public class Credentials implements Serializable {
         this.password = password;
     }
 
-    public Roles getRoleId() {
-        return roleId;
+    public Roles getRolesId() {
+        return rolesId;
     }
 
-    public void setRoleId(Roles roleId) {
-        this.roleId = roleId;
+    public void setRolesId(Roles rolesId) {
+        this.rolesId = rolesId;
     }
 
     public Organiser getOrganiser() {

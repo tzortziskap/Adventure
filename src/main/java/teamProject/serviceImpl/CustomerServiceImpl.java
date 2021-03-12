@@ -8,6 +8,7 @@ package teamProject.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import teamProject.entity.Customer;
@@ -22,7 +23,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
     @Autowired
-    private RolesRepo roleRepo;
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public List<Customer> getCustomers() {
@@ -31,6 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer addCustomer(Customer customer) {
+        String plainPassword = customer.getCredentialsId().getPassword();
+        String hashedPassword = passwordEncoder.encode(plainPassword);
+        customer.getCredentialsId().setPassword(hashedPassword);
         customerRepo.save(customer);
         return customer;
     }

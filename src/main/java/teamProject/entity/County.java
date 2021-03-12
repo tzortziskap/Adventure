@@ -5,7 +5,6 @@
  */
 package teamProject.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -48,7 +47,6 @@ public class County implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "name")
     private String name;
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "countyId")
     private List<City> cityList;
 
