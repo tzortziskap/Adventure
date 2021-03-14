@@ -164,7 +164,8 @@
                         $.fn.populate = function(list) {
                             return this.append(list.map(item => $('<option>', {
                             text  : item.name,
-                            value : item.id
+                            value : item.id,
+                            name : "cityId"
                         })));
                     };
                 })(jQuery);
