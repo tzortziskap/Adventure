@@ -31,7 +31,7 @@ public class EventController {
 
  @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showForm(){
-        return " ";
+        return "index";
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)

@@ -35,16 +35,11 @@ public class CustomerController {
     @Autowired
     private CustomerService service;
     @Autowired
-    private RolesService roleService;
-    @Autowired
-    private CityService cityService;
-    @Autowired
     private CountyService countyService;
 
 
  @GetMapping("/register")
     public String showForm(@ModelAttribute("customer") Customer customer, Model model){
-        model.addAttribute("cities",cityService.getCitys());
         model.addAttribute("counties",countyService.getCountys());
         return "customer-register-form";
     }
