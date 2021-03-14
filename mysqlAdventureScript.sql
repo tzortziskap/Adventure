@@ -164,12 +164,12 @@ CREATE TABLE `credentials` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `password` varchar(68) NOT NULL,
-  `roleId` int NOT NULL,
+  `roles_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
-  KEY `fk_credentials_role_idx` (`roleId`),
-  CONSTRAINT `fk_credentials_role` FOREIGN KEY (`roleId`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `fk_credentials_role_idx` (`roles_id`),
+  CONSTRAINT `fk_credentials_role` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +178,7 @@ CREATE TABLE `credentials` (
 
 LOCK TABLES `credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
+INSERT INTO `credentials` VALUES (1,'edaxhxho','$2a$10$PuvlSGILlZhG4C8kQ2u2gOMlK5ip9Po15ud.6YCrlpd/eS.Tf8N3e',1);
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +205,7 @@ CREATE TABLE `customer` (
   KEY `fk_customer_city` (`city_id`),
   CONSTRAINT `fk_customer_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `fk_customer_credentials` FOREIGN KEY (`credentials_id`) REFERENCES `credentials` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +214,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (24,'Eda','Xhixho','1991-09-26','edaxhix','Karaoli 77A',1,'18345',0);
+INSERT INTO `customer` VALUES (25,'eda','xhixho','1991-09-26','edaxhixho@gmail.com','Neossoikon 77',26,'18537',1);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -484,4 +485,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-11 20:50:16
+-- Dump completed on 2021-03-14 21:29:09
