@@ -331,7 +331,7 @@ $('.carousel .carousel-item').each(function(){
                 $("#county").change(function(){
                     if ($("#countySpacer").is(":selected")) {
                         $("#cityDiv").prop("hidden", true);
-                        $("#citySpacer").prop("hidden", true);
+                        
                     } else {
                         var data = $("#county").children("option:selected").val();
                         var url="http://localhost:8080/Adventure/county/cities/" + data;
