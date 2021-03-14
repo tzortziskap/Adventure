@@ -115,11 +115,19 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputState">Νομός</label>
-                            <select  class="form-control">
-                                <option selected value='SPACER'>Choose...</option>
+                            <select  id="county" class="form-control">
+                                <option selected id="countySpacer" value='SPACER'>Choose...</option>
                                  <c:forEach items="${counties}" var = "county">
                                      <option value="${county.id}">${county.name}</option>
                                  </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="cityDiv" class="form-group col-md-6">
+                            <label for="inputState">Πόλη</label>
+                            <select id="city" class="form-control">
+                                <option id="citySpacer" selected value='SPACER'>Choose...</option>
+                                 
                             </select>
                         </div>
                     </div>
@@ -316,6 +324,37 @@ $('.carousel .carousel-item').each(function(){
       }
 });
         </script>
+<script>
+            $(document).ready(function() {
+                $("#cityDiv").prop("hidden",true);
+                
+                $("#county").change(function(){
+                    if ($("#countySpacer").is(":selected")) {
+                        $("#cityDiv").prop("hidden", true);
+                        $("#citySpacer").prop("hidden", true);
+                    } else {
+                        var data = $("#county").children("option:selected").val();
+                        var url="http://localhost:8080/Adventure/county/cities/" + data;
+                        $.getJSON(url,function(result){
+                           $('#city').empty();
+                           $('#city').append('<option selected id="citySpacer" value="SPACER">Choose...</option>');
+                           $('#city').populate(result);
+                        $("#cityDiv").prop("hidden", false);  
+                        });
+                    }
+                });
+            
+                (function($) {
+                        // Populates a select drop-down with options in a list 
+                        $.fn.populate = function(list) {
+                            return this.append(list.map(item => $('<option>', {
+                            text  : item.name,
+                            value : item.id
+                        })));
+                    };
+                })(jQuery);
 
+            });
+        </script>
     </body>
 </html>

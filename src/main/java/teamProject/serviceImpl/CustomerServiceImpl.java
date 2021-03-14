@@ -15,6 +15,7 @@ import teamProject.entity.Customer;
 import teamProject.repository.CustomerRepo;
 import teamProject.repository.RolesRepo;
 import teamProject.service.CustomerService;
+import teamProject.service.RolesService;
 
 @Service
 @Transactional
@@ -24,7 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepo customerRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private RolesService rolesService;
+    
 
     @Override
     public List<Customer> getCustomers() {
@@ -36,6 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
         String plainPassword = customer.getCredentialsId().getPassword();
         String hashedPassword = passwordEncoder.encode(plainPassword);
         customer.getCredentialsId().setPassword(hashedPassword);
+        customer.getCredentialsId().setRolesId(rolesService.getRolesById(1)); 
         customerRepo.save(customer);
         return customer;
     }

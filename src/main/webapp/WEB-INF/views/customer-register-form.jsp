@@ -76,13 +76,31 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="cityId" class="cols-sm-2 control-label">Your Postal Code</label>
+                            <label for="cityId.countyId" class="cols-sm-2 control-label">Νομός</label>
                             <div class="cols-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                        <form:select path="cityId" items="${cities}" itemLabel="name" itemValue="id"/>
-                                        <form:errors path="cityId"/>
+                                    <select id="county">
+                                        <option selected id="countySpacer" value='SPACER'>Choose...</option>
+                                        <c:forEach items="${counties}" var = "county">
+                                            <option value="${county.id}">${county.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cityId" class="cols-sm-2 control-label">Πόλη</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                        <form:select path="cityId" id="city">
+                                        <option selected id="citySpacer" value='SPACER'>Choose...</option>
+                                    </form:select>
+                                    <form:errors path="cityId"/>
                                 </div>
                             </div>
                         </div>
@@ -104,25 +122,14 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                         <form:password class="form-control" path="credentialsId.password" id="credentialsId.password"  placeholder="Enter your Password"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="credentialsId.rolesId" class="cols-sm-2 control-label">Password</label>
-                            <div class="cols-sm-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                        <form:select path="credentialsId.rolesId" items="${roles}" itemLabel="role" itemValue="id"/>
-                                        <form:errors path="credentialsId.rolesId"/>
+                                        <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group ">
                             <input id="button" type="submit" class="btn btn-primary btn-lg btn-block login-button" value="Register"/>
-
                         </div>
-
                     </form:form>
                 </div>
             </div>
@@ -132,6 +139,37 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#city").prop("disabled",true);
+                
+                $("#county").change(function(){
+                    if ($("#countySpacer").is(":selected")) {
+                        $("#city").prop("disabled", true);
+                        $("#citySpacer").prop("selected", true);
+                    } else {
+                        var data = $("#county").children("option:selected").val();
+                        var url="http://localhost:8080/Adventure/county/cities/" + data;
+                        $.getJSON(url,function(result){
+                           $('#city').empty();
+                           $('#city').append('<option selected id="citySpacer" value="SPACER">Choose...</option>');
+                           $('#city').populate(result);
+                        $("#city").prop("disabled", false);  
+                        });
+                    }
+                });
+            
+                (function($) {
+                        // Populates a select drop-down with options in a list 
+                        $.fn.populate = function(list) {
+                            return this.append(list.map(item => $('<option>', {
+                            text  : item.name,
+                            value : item.id
+                        })));
+                    };
+                })(jQuery);
 
+            });
+        </script>
     </body>
 </html>

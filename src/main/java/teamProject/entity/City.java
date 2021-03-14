@@ -5,6 +5,7 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -49,15 +50,20 @@ public class City implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @JoinColumn(name = "county_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private County countyId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
     private List<Organiser> organiserList;
+    @JsonIgnore
     @OneToMany(mappedBy = "cityId")
     private List<Company> companyList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
     private List<Location> locationList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cityId")
     private List<Customer> customerList;
 

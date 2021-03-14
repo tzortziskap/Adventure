@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Customer;
 import teamProject.service.CityService;
+import teamProject.service.CountyService;
 import teamProject.service.CustomerService;
 import teamProject.service.RolesService;
 
@@ -37,13 +38,15 @@ public class CustomerController {
     private RolesService roleService;
     @Autowired
     private CityService cityService;
+    @Autowired
+    private CountyService countyService;
 
 
  @GetMapping("/register")
     public String showForm(@ModelAttribute("customer") Customer customer, Model model){
-        model.addAttribute("roles",roleService.getRoles());
         model.addAttribute("cities",cityService.getCitys());
-        return "register-form";
+        model.addAttribute("counties",countyService.getCountys());
+        return "customer-register-form";
     }
     
     @PostMapping("/register")
@@ -51,8 +54,6 @@ public class CustomerController {
         if(result.hasErrors()){
             return "redirect:/customer/register";
         }
-        //save user to DB
-        //System.out.println(">>>>> xrhsths:"+xrhsths);
         service.addCustomer(customer);
         attributes.addFlashAttribute("registered", "Successfully registered");
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
