@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import teamProject.entity.Customer;
 import teamProject.repository.CustomerRepo;
-import teamProject.repository.RolesRepo;
 import teamProject.service.CustomerService;
 import teamProject.service.RolesService;
 
