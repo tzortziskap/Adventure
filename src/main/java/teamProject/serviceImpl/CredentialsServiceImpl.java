@@ -78,4 +78,23 @@ public class CredentialsServiceImpl implements CredentialsService {
         authorities.add(authority);
         return authorities;
     }
+    
+    public void updateResetPassword(String token, String username){
+        
+        Credentials credentials = credentialRepo.findByUsername(username);
+        if (credentials!=null) {
+            credentials.setPasswordResetToken(token);
+        } 
+    }
+    
+    public Credentials get(String resetPasswordToken){
+        return credentialRepo.findByPasswordResetToken(resetPasswordToken);
+    }
+    
+    public void updatePassword(Credentials credentials,String newPassword){
+        String encodePassword = passwordEncoder.encode(newPassword);
+        credentials.setPassword(encodePassword);
+        credentials.setPasswordResetToken(null);
+        credentialRepo.save(credentials);
+    }
 }

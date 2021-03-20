@@ -17,7 +17,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-        <title>Login</title>
+        <title>Forgot Password</title>
         <link rel="stylesheet" href="css/login.css">
     </head>
 
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-lg-7 px-5 pt-5">
                         <h1 class="font-weight-bold py-3">Logo</h1>
-                        <h4>Σύνδεση για:</h4>
+                        <h4>Υπενθύμηση το συνθηματικό</h4>
                         <form:form action="${pageContext.request.contextPath}/authenticate" method="post">
                             <div class="form-row">
                                 <div class="col-lg-7">
@@ -53,13 +53,11 @@
                                 </div>
                             </div>
                             </form:form>
-                            <a href="forgotpassword">Ξέχασες το συνθηματικό;</a>
                             <div id="formFooter">
                                 <p>Δεν έχεις λογαριασμό;
                                 <a class="underlineHover" href="register">Κάνε εγγραφή τώρα</a>
                             </div>
-                            </p>
-                        
+                            </p>     
                     </div>
                 </div>
             </div>

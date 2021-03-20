@@ -38,17 +38,3 @@ label {
     color: black;
 }
 
-footer {
-    text-align: center;
-    color: whitesmoke;
-    line-height: 50px;
-    position: sticky;
-    bottom: 0;
-    background-color: aqua;
-    width: 100%;
-}
-
-footer a {
-    text-decoration: none;
-    color: whitesmoke;
-}

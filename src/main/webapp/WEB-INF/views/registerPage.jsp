@@ -37,40 +37,40 @@
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="firstname">Όνομα:</label>
-                                    <form:input type="text" class="form-control" path="firstname" id="firstname"  placeholder="Όνομα..."/>
+                                    <label for="custfirstname">Όνομα:</label>
+                                    <form:input type="text" class="form-control" path="firstname" id="custfirstname"  placeholder="Όνομα..."/>
                                 </div>
                                 <div class="col-lg-6 ">
-                                    <label for="lastname">Επίθετο:</label>
-                                    <form:input type="text" class="form-control" path="lastname" id="lastname"  placeholder="Επίθετο..."/>
+                                    <label for="custlastname">Επίθετο:</label>
+                                    <form:input type="text" class="form-control" path="lastname" id="custlastname"  placeholder="Επίθετο..."/>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3">
                                 <div class="col-lg-6">
-                                    <label for="dateOfBirth">Ημερομηνία Γέννησης</label>
-                                    <form:input type="date" class="form-control" path="dateOfBirth" id="dateOfBirth" />
+                                    <label for="custdateOfBirth">Ημερομηνία Γέννησης</label>
+                                    <form:input type="date" class="form-control" path="dateOfBirth" id="custdateOfBirth" />
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="address">Διεύθυνση:</label>
-                                    <form:input type="text" class="form-control" path="address" id="address"  placeholder="Διεύθυνση..."/>
+                                    <label for="custaddress">Διεύθυνση:</label>
+                                    <form:input type="text" class="form-control" path="address" id="custaddress"  placeholder="Διεύθυνση..."/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="address">Ταχυδρομικός Κώδικας:</label>
-                                    <form:input type="text" class="form-control" path="postalCode" id="postalCode"  placeholder="Ταχυδρομικός Κώδικας..."/>
+                                    <label for="custpostalCode">Ταχυδρομικός Κώδικας:</label>
+                                    <form:input type="text" class="form-control" path="postalCode" id="custpostalCode"  placeholder="Ταχυδρομικός Κώδικας..."/>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="county">Νομός:</label>
-                                    <select  class="county">
+                                    <label for="custcounty">Νομός:</label>
+                                    <select  class="county form-control" id="custcountycounty">
                                         <option selected id="countySpacer" value='SPACER'>Choose...</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 ">
-                                    <label for="city">Πόλη:</label>
-                                    <form:select path="cityId"  class="city">
+                                    <label for="custcity">Πόλη:</label>
+                                    <form:select path="cityId"  class="city form-control" id="custcity">
                                         <option selected id="citySpacer" value='SPACER'>Choose...</option>
                                     </form:select>
                                 </div>
@@ -78,31 +78,31 @@
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="email">Ε-mail:</label>
-                                    <form:input type="email" class="form-control" path="email" id="email"  placeholder="Ε-mail..."/>
+                                    <label for="custemail">Ε-mail:</label>
+                                    <form:input type="email" class="form-control" path="email" id="custemail"  placeholder="Ε-mail..."/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="username">Username:</label>
-                                    <form:input class="form-control" path="credentialsId.username" id="username"  placeholder="Enter your Username"/>
+                                    <label for="custusername">Username:</label>
+                                    <form:input class="form-control" path="credentialsId.username" id="custusername"  placeholder="Enter your Username"/>
                                     <form:errors class="form-control" path="credentialsId.username"  />
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="password">Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="password"  placeholder="Συνθηματικό..."/>
+                                    <label for="custpassword">Συνθηματικό:</label>
+                                    <form:password class="form-control" path="credentialsId.password" id="custpassword"  placeholder="Συνθηματικό..."/>
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="password"> Eπιβεβαίωση Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="password"  placeholder="Συνθηματικό..."/>
+                                    <label for="custpassword2"> Eπιβεβαίωση Συνθηματικό:</label>
+                                    <form:password class="form-control" path="credentialsId.password" id="custpassword2"  placeholder="Συνθηματικό..."/>
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                             </div>
                             <br>
                             <div class="col-lg-2">
-                                <button type="button" class="btn1 mt-3 mb-5">Εγγραφή</button>
+                                <input type="submit" value="Εγγραφή" class="btn1 mt-3 mb-5">
                             </div>
 
                         </form:form>
@@ -110,36 +110,36 @@
                         <form:form id="userForm" method="post" action="${pageContext.request.contextPath}/company/register" modelAttribute="company">
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label name="name">Όνομα Εταιρίας:</label>
-                                    <form:input type="text" path="name" id="name" class=" form-control " placeholder="Όνομα Εταιρίας..." />
+                                    <label name="compname">Όνομα Εταιρίας:</label>
+                                    <form:input type="text" path="name" id="compname" class=" form-control " placeholder="Όνομα Εταιρίας..." />
                                 </div>
                                 <div class=" col-lg-6 ">
-                                    <label for="afm">ΑΦΜ:</label>
-                                    <form:input type="text" class="form-control" path="afm" id="afm"  placeholder="ΑΦΜ..."/>
+                                    <label for="compafm">ΑΦΜ:</label>
+                                    <form:input type="text" class="form-control" path="afm" id="compafm"  placeholder="ΑΦΜ..."/>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3">
                                 <div class="col-lg-6">
-                                    <label for="address">Διεύθυνση:</label>
-                                    <form:input type="text" class="form-control" path="address" id="address"  placeholder="Διεύθυνση..."/>
+                                    <label for="compaddress">Διεύθυνση:</label>
+                                    <form:input type="text" class="form-control" path="address" id="compaddress"  placeholder="Διεύθυνση..."/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="address">Ταχυδρομικός Κώδικας:</label>
-                                    <form:input type="text" class="form-control" path="afm" id="afm"  placeholder="Ταχυδρομικός Κώδικας..."/>
+                                    <label for="comppostalCode">Ταχυδρομικός Κώδικας:</label>
+                                    <form:input type="text" class="form-control" path="postalCode" id="comppostalCode"  placeholder="Ταχυδρομικός Κώδικας..."/>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="county">Νομός:</label>
-                                    <select  class="county">
+                                    <label for="compcounty">Νομός:</label>
+                                    <select  class="county form-control" id="compcounty">
                                         <option selected id="countySpacer" value='SPACER'>Choose...</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 ">
-                                    <label for="city">Πόλη:</label>
-                                    <form:select path="cityId" class="city">
+                                    <label for="compcity">Πόλη:</label>
+                                    <form:select path="cityId" class="city form-control" id="compcity">
                                         <option selected id="citySpacer" value='SPACER'>Choose...</option>
                                     </form:select>
                                 </div>
@@ -147,31 +147,31 @@
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="email">Ε-mail:</label>
-                                    <form:input type="email" class="form-control" path="email" id="email"  placeholder="Ε-mail..."/>
+                                    <label for="compemail">Ε-mail:</label>
+                                    <form:input type="email" class="form-control" path="email" id="compemail"  placeholder="Ε-mail..."/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="username">Username:</label>
-                                    <form:input class="form-control" path="credentialsId.username" id="username"  placeholder="Enter your Username"/>
+                                    <label for="compusername">Username:</label>
+                                    <form:input class="form-control" path="credentialsId.username" id="compusername"  placeholder="Enter your Username"/>
                                     <form:errors class="form-control" path="credentialsId.username"  />
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
-                                    <label for="password">Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="password"  placeholder="Συνθηματικό..."/>
+                                    <label for="comppassword">Συνθηματικό:</label>
+                                    <form:password class="form-control" path="credentialsId.password" id="comppassword"  placeholder="Συνθηματικό..."/>
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="password"> Eπιβεβαίωση Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="password"  placeholder="Συνθηματικό..."/>
+                                    <label for="comppassword2"> Eπιβεβαίωση Συνθηματικό:</label>
+                                    <form:password class="form-control" path="credentialsId.password" id="comppassword2"  placeholder="Συνθηματικό..."/>
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                             </div>
                             <br>
                             <div class="col-lg-2">
-                                <button type="button" class="btn1 mt-3 mb-5">Εγγραφή</button>
+                                <input type="submit" value="Εγγραφή" class="btn1 mt-3 mb-5">
                             </div>
                         </form:form>
                     </div>
@@ -210,27 +210,23 @@
                 });
 
 
-                $(".county").each(function () {
-                    $(this).change(function () {
-                        if ($("#countySpacer").is(":selected")) {
-                            $(".city").each(function () {
-                                $(this).prop("disabled", true);
-                            });         
-                            $("#citySpacer").prop("selected", true);
-                        } else {
-                            var data = $(this).children("option:selected").val();
-                            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
-                            $.getJSON(urlCities, function (result) {
-                                $('.city').each(function () {
-                                    $(this).empty();
-                                    $(this).append('<option selected id="citySpacer" value="SPACER">Choose...</option>');
-                                    $(this).citiesByCounty(result);
-                                    $(this).prop("disabled", false);
-                                });
-                            });
-                        }
-                    });
+                $(".county").change(function () {
+                    var city = $(this).closest("form").find(".city");
+                    if ($(this).find(">:first-child").is(":selected")) {
+                        city.prop("disabled", true);
+                         city.find(">:first-child").prop("selected", true);
+                    } else {
+                        var data = $(this).children("option:selected").val();
+                        var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
+                        $.getJSON(urlCities, function (result) {
+                             city.empty();
+                             city.append('<option selected id="citySpacer" value="SPACER">Choose...</option>');
+                             city.citiesByCounty(result);
+                             city.prop("disabled", false);
+                        });
+                    }
                 });
+
 
                 (function ($) {
                     // Populates a select drop-down with options in a list 
@@ -253,8 +249,6 @@
                             })));
                     };
                 })(jQuery);
-
-
             });
         </script>
     </body>

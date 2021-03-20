@@ -6,6 +6,7 @@
 package teamProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.Credentials;
 
@@ -18,4 +19,5 @@ public interface CredentialsRepo extends JpaRepository<Credentials,Integer>{
     
     Credentials findByUsername(String username);
     
+    Credentials findByPasswordResetToken(String token);
 }
