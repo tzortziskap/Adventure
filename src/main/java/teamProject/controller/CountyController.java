@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import teamProject.entity.City;
+import teamProject.entity.County;
 import teamProject.service.CountyService;
 
 /**
@@ -27,6 +28,12 @@ public class CountyController {
     
     @Autowired
     CountyService countyService;
+    
+    @GetMapping()
+    @ResponseBody
+    public ResponseEntity<List<County>> getCountys(){
+        return new ResponseEntity(countyService.getCountys(), HttpStatus.OK);
+    }
     
     @GetMapping("/cities/{id}")
     @ResponseBody
