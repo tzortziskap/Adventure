@@ -42,4 +42,11 @@ img {
     width: 10%;
     height: 8%;
 }
-
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    
+}
+h4,h1, #forgotPassword, #formFooter{
+    text-align: center;
+}

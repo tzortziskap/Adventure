@@ -54,8 +54,8 @@ public class Credentials implements Serializable {
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 68)
+//    @NotNull
+//    @Size(min = 1, max = 68)
     @Column(name = "confirm_password")
     private String confirmPassword;
     @Column(name = "password_reset_token")

@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teamProject.entity.Credentials;
 import teamProject.entity.Roles;
+import teamProject.exceptions.CredentialsNotFoundException;
 import teamProject.repository.CredentialsRepo;
 import teamProject.service.CredentialsService;
 
@@ -79,18 +80,30 @@ public class CredentialsServiceImpl implements CredentialsService {
         return authorities;
     }
     
-    public void updateResetPassword(String token, String username){
+    @Override
+    public String updateResetPasswordToken(String token, String username) throws CredentialsNotFoundException{
         
         Credentials credentials = credentialRepo.findByUsername(username);
+        String email = null;
         if (credentials!=null) {
             credentials.setPasswordResetToken(token);
-        } 
+        }else{
+            throw new CredentialsNotFoundException("Δεν υπάρχει κάποιος χρήστης με αυτό το username: " + username);
+        }
+        if(credentials.getCustomer()!=null){
+            email = credentials.getCustomer().getEmail();
+        }else if(credentials.getCompany()!=null){
+            email = credentials.getCompany().getEmail();
+        }
+        return email;
     }
     
+    @Override
     public Credentials get(String resetPasswordToken){
         return credentialRepo.findByPasswordResetToken(resetPasswordToken);
     }
     
+    @Override
     public void updatePassword(Credentials credentials,String newPassword){
         String encodePassword = passwordEncoder.encode(newPassword);
         credentials.setPassword(encodePassword);

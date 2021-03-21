@@ -8,6 +8,7 @@ package teamProject.service;
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import teamProject.entity.Credentials;
+import teamProject.exceptions.CredentialsNotFoundException;
 
 /**
  *
@@ -28,4 +29,9 @@ public interface CredentialsService extends UserDetailsService{
     
     Credentials findByUsername(String username);
     
+    String updateResetPasswordToken(String token, String username) throws CredentialsNotFoundException;
+    
+    Credentials get(String resetPasswordToken);
+    
+    void updatePassword(Credentials credentials,String newPassword);
 }
