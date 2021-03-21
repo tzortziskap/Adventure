@@ -12,7 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import teamProject.entity.Customer;
+import teamProject.exceptions.EmailExistException;
+import teamProject.exceptions.UsernameExistException;
 import teamProject.repository.CustomerRepo;
+import teamProject.service.CredentialsService;
 import teamProject.service.CustomerService;
 import teamProject.service.RolesService;
 
@@ -26,7 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RolesService rolesService;
-    
+    @Autowired
+    private CredentialsService credentialsService;
+
 
     @Override
     public List<Customer> getCustomers() {
@@ -34,11 +39,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) throws EmailExistException, UsernameExistException{
         String plainPassword = customer.getCredentialsId().getPassword();
         String hashedPassword = passwordEncoder.encode(plainPassword);
         customer.getCredentialsId().setPassword(hashedPassword);
-        customer.getCredentialsId().setRolesId(rolesService.getRolesById(1)); 
+        customer.getCredentialsId().setRolesId(rolesService.getRolesById(1));
+        credentialsService.addCredentials(customer.getCredentialsId());
+        if(customerRepo.findByEmail(customer.getEmail())!=null){
+            throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
+        }
         customerRepo.save(customer);
         return customer;
     }
@@ -56,6 +65,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updateCustomer(Customer customer) {
         return customerRepo.save(customer);
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        return customerRepo.findByEmail(email);
     }
 
 }

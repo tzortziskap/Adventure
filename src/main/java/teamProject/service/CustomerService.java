@@ -7,6 +7,8 @@ package teamProject.service;
 
 import java.util.List;
 import teamProject.entity.Customer;
+import teamProject.exceptions.EmailExistException;
+import teamProject.exceptions.UsernameExistException;
 
 /**
  *
@@ -17,12 +19,14 @@ public interface CustomerService{
     
     List<Customer> getCustomers();
 
-    Customer addCustomer(Customer customer);
+    Customer addCustomer(Customer customer) throws EmailExistException, UsernameExistException;
 
     void deleteCustomer(int id);
 
     Customer getCustomerById(int id) ;
 
     Customer updateCustomer(Customer customer);
+
+    Customer getCustomerByEmail(String email);
     
 }

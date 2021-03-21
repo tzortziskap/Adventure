@@ -38,66 +38,75 @@
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="custfirstname">Όνομα:</label>
-                                    <form:input type="text" class="form-control" path="firstname" id="custfirstname"  placeholder="Όνομα..."/>
+                                    <input type="text" class="form-control" name="firstname" id="custfirstname"  placeholder="Όνομα..." required autofocus >
                                 </div>
                                 <div class="col-lg-6 ">
                                     <label for="custlastname">Επίθετο:</label>
-                                    <form:input type="text" class="form-control" path="lastname" id="custlastname"  placeholder="Επίθετο..."/>
+                                    <input type="text" class="form-control" name="lastname" id="custlastname"  placeholder="Επίθετο..." required >
                                 </div>
                             </div>
 
                             <div class="form-inline my-3">
                                 <div class="col-lg-6">
                                     <label for="custdateOfBirth">Ημερομηνία Γέννησης</label>
-                                    <form:input type="date" class="form-control" path="dateOfBirth" id="custdateOfBirth" />
+                                    <input type="date" class="form-control" name="dateOfBirth" id="custdateOfBirth" required >
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="custaddress">Διεύθυνση:</label>
-                                    <form:input type="text" class="form-control" path="address" id="custaddress"  placeholder="Διεύθυνση..."/>
+                                    <input type="text" class="form-control" name="address" id="custaddress"  placeholder="Διεύθυνση..." required >
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="custpostalCode">Ταχυδρομικός Κώδικας:</label>
-                                    <form:input type="text" class="form-control" path="postalCode" id="custpostalCode"  placeholder="Ταχυδρομικός Κώδικας..."/>
+                                    <input type="text" class="form-control" name="postalCode" id="custpostalCode"  placeholder="Ταχυδρομικός Κώδικας..." required >
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="custcounty">Νομός:</label>
-                                    <select  class="county form-control" id="custcountycounty">
-                                        <option selected id="countySpacer" value='SPACER'>Choose...</option>
+                                    <select  class="county form-control" id="custcountycounty" required>
+                                        <option  value=''>Choose...</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 ">
                                     <label for="custcity">Πόλη:</label>
-                                    <form:select path="cityId"  class="city form-control" id="custcity">
-                                        <option selected id="citySpacer" value='SPACER'>Choose...</option>
-                                    </form:select>
+                                    <select name="cityId"  class="city form-control" id="custcity" required>
+                                        <option value=''>Choose...</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="custemail">Ε-mail:</label>
-                                    <form:input type="email" class="form-control" path="email" id="custemail"  placeholder="Ε-mail..."/>
+                                    <c:if test="${custEmailExist != null}">
+                                        <i>${custEmailExist}</i>
+                                    </c:if>
+                                    <input type="email" class="form-control" name="email" id="custemail"  placeholder="Ε-mail..." required >
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="custusername">Username:</label>
-                                    <form:input class="form-control" path="credentialsId.username" id="custusername"  placeholder="Enter your Username"/>
-                                    <form:errors class="form-control" path="credentialsId.username"  />
+                                    <c:if test="${custUsernameExist != null}">
+                                        <i>${custUsernameExist}</i>
+                                    </c:if>
+                                    <input class="form-control" name="credentialsId.username" id="custusername"  placeholder="Enter your Username" required >
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="custpassword">Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="custpassword"  placeholder="Συνθηματικό..."/>
+                                    <input type="password" class="form-control password" name="credentialsId.password" id="custpassword"  placeholder="Συνθηματικό..." required >
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="custpassword2"> Eπιβεβαίωση Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="custpassword2"  placeholder="Συνθηματικό..."/>
-                                    <form:errors class="form-control" path="credentialsId.password"/>
+                                    <label for="custconfpassword"> Eπιβεβαίωση Συνθηματικό:</label>
+                                    <input type="password" class="form-control password" id="custconfpassword"  placeholder="Συνθηματικό..."  required >
+                                </div>
+                            </div>
+                            <div class="form-inline my-3 ">
+                                <div class="col-lg-6">
+                                    <input type="checkbox" class="mati" > Δες τον κωδικό
                                 </div>
                             </div>
                             <br>
@@ -111,62 +120,73 @@
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label name="compname">Όνομα Εταιρίας:</label>
-                                    <form:input type="text" path="name" id="compname" class=" form-control " placeholder="Όνομα Εταιρίας..." />
+                                    <input type="text" name="name" id="compname" class=" form-control " placeholder="Όνομα Εταιρίας..." required autofocus>
                                 </div>
                                 <div class=" col-lg-6 ">
                                     <label for="compafm">ΑΦΜ:</label>
-                                    <form:input type="text" class="form-control" path="afm" id="compafm"  placeholder="ΑΦΜ..."/>
+                                    <input type="text" class="form-control" name="afm" id="compafm"  placeholder="ΑΦΜ..." required>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3">
                                 <div class="col-lg-6">
                                     <label for="compaddress">Διεύθυνση:</label>
-                                    <form:input type="text" class="form-control" path="address" id="compaddress"  placeholder="Διεύθυνση..."/>
+                                    <input type="text" class="form-control" name="address" id="compaddress"  placeholder="Διεύθυνση..." required >
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="comppostalCode">Ταχυδρομικός Κώδικας:</label>
-                                    <form:input type="text" class="form-control" path="postalCode" id="comppostalCode"  placeholder="Ταχυδρομικός Κώδικας..."/>
+                                    <input type="text" class="form-control" name="postalCode" id="comppostalCode"  placeholder="Ταχυδρομικός Κώδικας..." required >
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="compcounty">Νομός:</label>
-                                    <select  class="county form-control" id="compcounty">
-                                        <option selected id="countySpacer" value='SPACER'>Choose...</option>
+                                    <select  class="county form-control" id="compcounty" required>
+                                        <option value=''>Choose...</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-6 ">
                                     <label for="compcity">Πόλη:</label>
-                                    <form:select path="cityId" class="city form-control" id="compcity">
-                                        <option selected id="citySpacer" value='SPACER'>Choose...</option>
-                                    </form:select>
+                                    <select name="cityId" class="city form-control" id="compcity" required>
+                                        <option value=''>Choose...</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="compemail">Ε-mail:</label>
-                                    <form:input type="email" class="form-control" path="email" id="compemail"  placeholder="Ε-mail..."/>
+                                    <c:if test="${compEmailExist != null}">
+                                        <i>${compEmailExist}</i>
+                                    </c:if>
+                                    <input type="email" class="form-control" name="email" id="compemail"  placeholder="Ε-mail..." required >
+                                    
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="compusername">Username:</label>
-                                    <form:input class="form-control" path="credentialsId.username" id="compusername"  placeholder="Enter your Username"/>
-                                    <form:errors class="form-control" path="credentialsId.username"  />
+                                    <c:if test="${compUsernameExist != null}">
+                                        <i>${compUsernameExist}</i>
+                                    </c:if>
+                                    <input class="form-control" name="credentialsId.username" id="compusername"  placeholder="Enter your Username" required >
+                                    
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
                                 <div class="col-lg-6">
                                     <label for="comppassword">Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="comppassword"  placeholder="Συνθηματικό..."/>
+                                    <input type="password" class="form-control password" name="credentialsId.password" id="comppassword"  placeholder="Συνθηματικό..." required >
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="comppassword2"> Eπιβεβαίωση Συνθηματικό:</label>
-                                    <form:password class="form-control" path="credentialsId.password" id="comppassword2"  placeholder="Συνθηματικό..."/>
-                                    <form:errors class="form-control" path="credentialsId.password"/>
+                                    <label for="compconfpassword"> Eπιβεβαίωση Συνθηματικό:</label>
+                                    <input type="password" class="form-control password" id="compconfpassword"  placeholder="Συνθηματικό..." required >
+                                </div>
+                            </div>
+                            <div class="form-inline my-3 ">
+                                <div class="col-lg-6">
+                                    <input type="checkbox" class="mati" > Δες τον κωδικό
                                 </div>
                             </div>
                             <br>
@@ -181,7 +201,6 @@
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-       
         <script src="js/registerjs.js"></script>
     </body>
 </html>

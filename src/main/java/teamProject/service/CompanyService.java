@@ -7,6 +7,8 @@ package teamProject.service;
 
 import java.util.List;
 import teamProject.entity.Company;
+import teamProject.exceptions.EmailExistException;
+import teamProject.exceptions.UsernameExistException;
 
 /**
  *
@@ -17,7 +19,7 @@ public interface CompanyService{
     
     List<Company> getCompanys();
 
-    Company addCompany(Company company);
+    Company addCompany(Company company) throws EmailExistException, UsernameExistException;
 
     void deleteCompany(int id);
 

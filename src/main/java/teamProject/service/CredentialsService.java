@@ -8,6 +8,7 @@ package teamProject.service;
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import teamProject.entity.Credentials;
+import teamProject.exceptions.UsernameExistException;
 import teamProject.exceptions.CredentialsNotFoundException;
 
 /**
@@ -19,7 +20,7 @@ public interface CredentialsService extends UserDetailsService{
     
     List<Credentials> getCredentials();
 
-    Credentials addCredentials(Credentials credentials);
+    Credentials addCredentials(Credentials credentials) throws UsernameExistException;
 
     void deleteCredentials(int id);
 

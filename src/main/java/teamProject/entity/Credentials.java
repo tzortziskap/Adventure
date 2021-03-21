@@ -46,18 +46,13 @@ public class Credentials implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 68)
     @Column(name = "password")
-    private String password;
-    @Basic(optional = false)
-//    @NotNull
-//    @Size(min = 1, max = 68)
-    @Column(name = "confirm_password")
-    private String confirmPassword;
+    private String password; 
     @Column(name = "password_reset_token")
     private String passwordResetToken;
     @JoinColumn(name = "rolesId", referencedColumnName = "id")
@@ -106,14 +101,7 @@ public class Credentials implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
+    
 
     public String getPasswordResetToken() {
         return passwordResetToken;

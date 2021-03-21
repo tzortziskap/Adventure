@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import teamProject.entity.Company;
 import teamProject.entity.Customer;
-import teamProject.service.CityService;
-import teamProject.service.CountyService;
+import teamProject.exceptions.EmailExistException;
+import teamProject.exceptions.UsernameExistException;
+import teamProject.service.CredentialsService;
 import teamProject.service.CustomerService;
-import teamProject.service.RolesService;
 
 /**
  *
@@ -34,20 +34,28 @@ public class CustomerController {
     
     @Autowired
     private CustomerService service;
+    @Autowired
+    private CredentialsService credentialsService;
+    
 
 
  @GetMapping("/register")
-    public String showForm(@ModelAttribute("customer") Customer customer, Model model){
-        return "customer-register-form";
+    public String showForm(@ModelAttribute("customer") Customer customer,@ModelAttribute("company") Company company, Model model){
+        return "registerPage";
     }
     
     @PostMapping("/register")
     public String create(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, RedirectAttributes attributes){
-        if(result.hasErrors()){
-            return "redirect:/customer/register";
-        }
-        service.addCustomer(customer);
-        attributes.addFlashAttribute("registered", "Successfully registered");
+        try {
+            service.addCustomer(customer);
+        }catch (UsernameExistException ex){
+            attributes.addAttribute("custUsernameExist", ex.getMessage());
+            return "redirect:/register";
+        } catch (EmailExistException ex) {
+            attributes.addAttribute("custEmailExist", ex.getMessage());
+            credentialsService.deleteCredentials(customer.getCredentialsId().getId());
+            return "redirect:/register";
+        } 
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
     }
     

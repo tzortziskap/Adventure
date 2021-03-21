@@ -8,6 +8,7 @@ package teamProject.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -60,7 +61,7 @@ public class Company implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Basic(optional = false)
     @NotNull

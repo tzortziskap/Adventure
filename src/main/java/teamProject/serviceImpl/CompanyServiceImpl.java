@@ -13,8 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teamProject.entity.Company;
 import teamProject.entity.Roles;
+import teamProject.exceptions.EmailExistException;
+import teamProject.exceptions.UsernameExistException;
 import teamProject.repository.CompanyRepo;
 import teamProject.service.CompanyService;
+import teamProject.service.CredentialsService;
 import teamProject.service.RolesService;
 
 @Service
@@ -27,20 +30,28 @@ public class CompanyServiceImpl implements CompanyService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RolesService rolesService;
-
+    @Autowired
+    private CredentialsService credentialsService;
+    
     @Override
     public List<Company> getCompanys() {
         return companyRepo.findAll();
     }
 
     @Override
-    public Company addCompany(Company company) {
+    public Company addCompany(Company company) throws EmailExistException, UsernameExistException{
         String plainPassword = company.getCredentialsId().getPassword();
         String hashedPassword = passwordEncoder.encode(plainPassword);
         company.getCredentialsId().setPassword(hashedPassword);
         company.getCredentialsId().setRolesId(rolesService.getRolesById(2)); 
-        return companyRepo.save(company);
+        credentialsService.addCredentials(company.getCredentialsId());
+        if(companyRepo.findByEmail(company.getEmail())!=null){
+            throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
+        }
+        companyRepo.save(company);
+        return company;
     }
+
 
     @Override
     public void deleteCompany(int id) {

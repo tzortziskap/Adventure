@@ -74,7 +74,7 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Basic(optional = false)
     @NotNull
@@ -92,7 +92,7 @@ public class Customer implements Serializable {
     @ManyToOne(optional = false)
     private City cityId;
     @JoinColumn(name = "credentials_id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(optional = false)
     private Credentials credentialsId;
 
     public Customer() {

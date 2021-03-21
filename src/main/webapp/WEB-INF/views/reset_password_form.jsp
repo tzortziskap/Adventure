@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : loginPage
     Created on : 19 Μαρ 2021, 6:19:39 μμ
     Author     : tzortziskapellas
@@ -17,7 +17,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-        <title>Forgot Password</title>
+        <title>Reset Password</title>
         <link rel="stylesheet" href="css/login.css">
     </head>
 
@@ -31,26 +31,26 @@
                 <div class="row no-gutters">
                     <div class="col-centered">
                         <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                        <h4>Υπενθύμηση το συνθηματικό</h4>
-                        <c:if test="${error != null}">
-                            <i>${error}</i>
-                        </c:if>
-                        <form:form action="${pageContext.request.contextPath}/forgotpassword" method="post">
-
-                            <c:if test="${successMessage != null}">
-                                <p>${successMessage}</p>
-                            </c:if>
-                            <c:if test="${successMessage == null}">
-                                <p>Θα σου στείλουμε ένα σύνδεσμο επανεκκίνησης κωδικού μέσω e-mail.</p>
-                            </c:if>
+                        <h4>Επανεκκίνηση κωδικού:</h4>
+                        <c:if test="${message != null}">
+                            <p>${message}</p>
+                        </c:if>   
+                        <form:form action="${pageContext.request.contextPath}/reset_password" method="post">
+                            <input type="hidden" name="token" value="${token}">
                             <div class="form-row">
                                 <div class="col-lg-9 col-centered">
-                                    <input type="text" placeholder="Δώσε το username σου..." name="username"  class="form-control my-3 p-4" required autofocus>
+                                    <input id="pass_log_id" type="password" name="password"  placeholder="Συνθηματικό..." class="form-control my-3 p-4 password" required autofocus>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-lg-9 col-centered">
-                                    <input type="submit" value="Υποβολή" class="btn1 mt-3 mb-5">
+                                    <input id="confpass_log_id" type="password" name="confirmPassword"  placeholder="Επιβεβαίωση συνθηματικού..." class="form-control my-3 p-4 password" required autofocus>
+                                     <div id="mati" toggle=" #password-field" class="fa fa-fw  fa-eye field_icon toggle-password fa-lg"></div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-9 col-centered">
+                                    <input type="submit" value="Αλλαγή κωδικού" class="btn1 mt-3 mb-5">
                                 </div>
                             </div>
                         </form:form>
@@ -59,6 +59,7 @@
                                 <a class="underlineHover" href="register">Κάνε εγγραφή τώρα</a>
                         </div>
                         </p>
+
                     </div>
                 </div>
             </div>
@@ -67,6 +68,6 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <script src="js/forgotPasswordJs.js"></script>
+        <script src="js/reset_passwordjs.js"></script>
     </body>
 </html>

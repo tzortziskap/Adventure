@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teamProject.entity.Credentials;
 import teamProject.entity.Roles;
+import teamProject.exceptions.UsernameExistException;
 import teamProject.exceptions.CredentialsNotFoundException;
 import teamProject.repository.CredentialsRepo;
 import teamProject.service.CredentialsService;
@@ -30,17 +31,20 @@ public class CredentialsServiceImpl implements CredentialsService {
     private CredentialsRepo credentialRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    
     @Override
     public List<Credentials> getCredentials() {
         return credentialRepo.findAll();
     }
 
     @Override
-    public Credentials addCredentials(Credentials credential) {
+    public Credentials addCredentials(Credentials credential) throws UsernameExistException{
         String plainPassword = credential.getPassword();
         String hashedPassword = passwordEncoder.encode(plainPassword);
         credential.setPassword(hashedPassword);
+        if (credentialRepo.findByUsername(credential.getUsername())!=null) {
+            throw new UsernameExistException("Υπάρχει ήδη λογαριασμός με αύτο το username.");
+        }
         return credentialRepo.save(credential);
     }
 

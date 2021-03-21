@@ -16,4 +16,5 @@ import teamProject.entity.Company;
 @Repository
 public interface CompanyRepo extends JpaRepository<Company,Integer>{
     
+         Company findByEmail(String email);
 }
