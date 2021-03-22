@@ -101,6 +101,7 @@ $(document).ready(function () {
             $(this)[0].setCustomValidity("");
         }
     });
+    
 
     $(".mati").on("click", function () {
         var input = $(this).closest("form").find(".password");

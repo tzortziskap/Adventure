@@ -50,3 +50,9 @@ img {
 h4,h1,p, #forgotPassword, #formFooter{
     text-align: center;
 }
+.success{
+    color: green;
+}
+.error{
+    color: red;
+}

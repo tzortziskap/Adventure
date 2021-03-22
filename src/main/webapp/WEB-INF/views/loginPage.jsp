@@ -35,14 +35,17 @@
                         <h4>Σύνδεση για:</h4>
 
                         <c:if test="${param.logout != null}">
-                            <p>You successfully logged out!!!</p>
+                            <p class="success">You successfully logged out!!!</p>
                         </c:if>
                         <c:if test="${param.error != null}">
-                            <p>Invalid username and password</p>
+                            <p class="error">Invalid username and/or password</p>
                         </c:if>   
                         <c:if test="${message != null}">
-                            <p>${message}</p>
-                        </c:if> 
+                            <p class="success">${message}</p>
+                        </c:if>
+                            <c:if test="${successMessage != null}">
+                                <p class="success">${successMessage}</p>
+                        </c:if>
                         <form:form action="${pageContext.request.contextPath}/authenticate" method="post">
                             <div class="form-row">
                                 <div class="col-lg-9 col-centered">

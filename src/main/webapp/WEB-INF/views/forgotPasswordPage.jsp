@@ -33,7 +33,7 @@
                         <h1 class="font-weight-bold py-3">Adventure Booking</h1>
                         <h4>Υπενθύμηση το συνθηματικό</h4>
                         <c:if test="${error != null}">
-                            <i>${error}</i>
+                            <p class="error">${error}</p>
                         </c:if>
                         <form:form action="${pageContext.request.contextPath}/forgotpassword" method="post">
 

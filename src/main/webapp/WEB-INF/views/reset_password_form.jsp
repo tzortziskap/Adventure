@@ -38,18 +38,18 @@
                         <form:form action="${pageContext.request.contextPath}/reset_password" method="post">
                             <input type="hidden" name="token" value="${token}">
                             <div class="form-row">
-                                <div class="col-lg-9 col-centered">
+                                <div class="col-lg-12 col-centered">
                                     <input id="pass_log_id" type="password" name="password"  placeholder="Συνθηματικό..." class="form-control my-3 p-4 password" required autofocus>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-lg-9 col-centered">
+                                <div class="col-lg-12 col-centered">
                                     <input id="confpass_log_id" type="password" name="confirmPassword"  placeholder="Επιβεβαίωση συνθηματικού..." class="form-control my-3 p-4 password" required autofocus>
                                      <div id="mati" toggle=" #password-field" class="fa fa-fw  fa-eye field_icon toggle-password fa-lg"></div>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-lg-9 col-centered">
+                                <div class="col-lg-12 col-centered">
                                     <input type="submit" value="Αλλαγή κωδικού" class="btn1 mt-3 mb-5">
                                 </div>
                             </div>
