@@ -5,7 +5,12 @@
  */
 package teamProject.controller;
 
+import com.sipios.springsearch.anotation.SearchSpec;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Event;
 import teamProject.service.EventService;
@@ -29,7 +35,7 @@ public class EventController {
     private EventService service;
 
 
- @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showForm(){
         return "index";
     }
@@ -58,6 +64,17 @@ public class EventController {
         service.updateEvent(event);
         return " ";
     }
+     @RequestMapping("/search")
+    public String get12() {
+        return "search";
+    }
+    
+    @GetMapping("search/results")
+    @ResponseBody
+    public ResponseEntity<List<Event>> searchForCars(@SearchSpec Specification<Event> specs) {
+        return new ResponseEntity<>(service.seachDynamically(specs), HttpStatus.OK);
+    }
+    
 }
 
 

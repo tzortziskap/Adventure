@@ -15,30 +15,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import teamProject.entity.City;
-import teamProject.entity.County;
-import teamProject.service.CountyService;
+import teamProject.entity.Categories;
+import teamProject.service.CategoriesService;
 
 /**
  *
  * @author tzortziskapellas
  */
 @Controller
-@RequestMapping("/county")
-public class CountyController {
-    
+@RequestMapping("/categories")
+public class CategoryController {
+        
     @Autowired
-    private CountyService countyService;
+    private CategoriesService categoryService;
     
     @GetMapping()
     @ResponseBody
-    public ResponseEntity<List<County>> getCountys(){
-        return new ResponseEntity(countyService.getCountys(), HttpStatus.OK);
-    }
-    
-    @GetMapping("/cities/{id}")
-    @ResponseBody
-    public ResponseEntity<List<City>> getCitiesByCountyId(@PathVariable(value = "id") int id) {
-        return new ResponseEntity(countyService.getCountyById(id).getCityList(), HttpStatus.OK);
+    public ResponseEntity<List<Categories>> getCategorys(){
+        return new ResponseEntity(categoryService.getCategoriess(), HttpStatus.OK);
     }
     
 }

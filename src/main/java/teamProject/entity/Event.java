@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "event")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Event.findAll", query = "SELECT e FROM Event e"),
     @NamedQuery(name = "Event.findById", query = "SELECT e FROM Event e WHERE e.id = :id"),
@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findByPositions", query = "SELECT e FROM Event e WHERE e.positions = :positions"),
     @NamedQuery(name = "Event.findByName", query = "SELECT e FROM Event e WHERE e.name = :name")})
 public class Event implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,8 +82,9 @@ public class Event implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "eventList")
-    private List<Categories> categoriesList;
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @ManyToOne
+    private Categories categoryId;
     @ManyToMany(mappedBy = "eventList")
     private List<Equipment> equipmentList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
@@ -101,11 +102,11 @@ public class Event implements Serializable {
     @ManyToOne
     private Organiser organiserId;
     @JoinColumn(name = "type_indoor_outdoor_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TypeIndoorOutdoor typeIndoorOutdoorId;
 
     public Event() {
-    }
+}
 
     public Event(Integer id) {
         this.id = id;
@@ -177,15 +178,15 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public List<Categories> getCategoriesList() {
-        return categoriesList;
+    public Categories getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoriesList(List<Categories> categoriesList) {
-        this.categoriesList = categoriesList;
+    public void setCategoryId(Categories categoryId) {
+        this.categoryId = categoryId;
     }
 
+    
     @XmlTransient
     public List<Equipment> getEquipmentList() {
         return equipmentList;

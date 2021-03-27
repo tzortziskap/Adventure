@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Company.findByAfm", query = "SELECT c FROM Company c WHERE c.afm = :afm"),
     @NamedQuery(name = "Company.findByPostalCode", query = "SELECT c FROM Company c WHERE c.postalCode = :postalCode")})
 public class Company implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,7 +81,7 @@ public class Company implements Serializable {
     private List<Event> eventList;
 
     public Company() {
-    }
+}
 
     public Company(Integer id) {
         this.id = id;

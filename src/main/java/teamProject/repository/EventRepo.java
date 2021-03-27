@@ -6,6 +6,7 @@
 package teamProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.Event;
 
@@ -14,6 +15,6 @@ import teamProject.entity.Event;
  * @author tzortziskapellas
  */
 @Repository
-public interface EventRepo extends JpaRepository<Event,Integer>{
+public interface EventRepo extends JpaRepository<Event,Integer>, JpaSpecificationExecutor<Event>{
     
 }

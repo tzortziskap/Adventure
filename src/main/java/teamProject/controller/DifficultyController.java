@@ -11,34 +11,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import teamProject.entity.City;
-import teamProject.entity.County;
-import teamProject.service.CountyService;
+import teamProject.entity.Difficulty;
+import teamProject.service.DifficultyService;
 
 /**
  *
  * @author tzortziskapellas
  */
 @Controller
-@RequestMapping("/county")
-public class CountyController {
-    
+@RequestMapping("/difficulty")
+public class DifficultyController {
+        
     @Autowired
-    private CountyService countyService;
+    private DifficultyService difficultyService;
     
     @GetMapping()
     @ResponseBody
-    public ResponseEntity<List<County>> getCountys(){
-        return new ResponseEntity(countyService.getCountys(), HttpStatus.OK);
-    }
-    
-    @GetMapping("/cities/{id}")
-    @ResponseBody
-    public ResponseEntity<List<City>> getCitiesByCountyId(@PathVariable(value = "id") int id) {
-        return new ResponseEntity(countyService.getCountyById(id).getCityList(), HttpStatus.OK);
+    public ResponseEntity<List<Difficulty>> getCountys(){
+        return new ResponseEntity(difficultyService.getDifficultys(), HttpStatus.OK);
     }
     
 }

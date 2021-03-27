@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CustomerBooksEvent.findByAmountPositions", query = "SELECT c FROM CustomerBooksEvent c WHERE c.amountPositions = :amountPositions"),
     @NamedQuery(name = "CustomerBooksEvent.findByTotalPrice", query = "SELECT c FROM CustomerBooksEvent c WHERE c.totalPrice = :totalPrice")})
 public class CustomerBooksEvent implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +56,7 @@ public class CustomerBooksEvent implements Serializable {
     private Event eventId;
 
     public CustomerBooksEvent() {
-    }
+}
 
     public CustomerBooksEvent(Integer id) {
         this.id = id;

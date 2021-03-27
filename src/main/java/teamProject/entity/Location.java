@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Location.findByCoordinateY", query = "SELECT l FROM Location l WHERE l.coordinateY = :coordinateY"),
     @NamedQuery(name = "Location.findByPostalCode", query = "SELECT l FROM Location l WHERE l.postalCode = :postalCode")})
 public class Location implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,7 +69,7 @@ public class Location implements Serializable {
     private List<Event> eventList;
 
     public Location() {
-    }
+}
 
     public Location(Integer id) {
         this.id = id;

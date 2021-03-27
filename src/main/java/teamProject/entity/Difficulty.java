@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Difficulty.findById", query = "SELECT d FROM Difficulty d WHERE d.id = :id"),
     @NamedQuery(name = "Difficulty.findByLevel", query = "SELECT d FROM Difficulty d WHERE d.level = :level")})
 public class Difficulty implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +51,7 @@ public class Difficulty implements Serializable {
     private List<Event> eventList;
 
     public Difficulty() {
-    }
+}
 
     public Difficulty(Integer id) {
         this.id = id;

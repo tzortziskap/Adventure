@@ -6,6 +6,7 @@
 package teamProject.service;
 
 import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
 import teamProject.entity.Event;
 
 /**
@@ -25,4 +26,5 @@ public interface EventService{
 
     Event updateEvent(Event event);
     
+    public List<Event> seachDynamically(Specification<Event> specs);
 }

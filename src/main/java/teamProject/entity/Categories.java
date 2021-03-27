@@ -8,6 +8,7 @@ package teamProject.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Categories.findById", query = "SELECT c FROM Categories c WHERE c.id = :id"),
     @NamedQuery(name = "Categories.findByCategoryName", query = "SELECT c FROM Categories c WHERE c.categoryName = :categoryName")})
 public class Categories implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,14 +50,11 @@ public class Categories implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "category_name")
     private String categoryName;
-    @JoinTable(name = "categories_has_event", joinColumns = {
-        @JoinColumn(name = "categories_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "event_id", referencedColumnName = "id")})
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private List<Event> eventList;
 
     public Categories() {
-    }
+}
 
     public Categories(Integer id) {
         this.id = id;

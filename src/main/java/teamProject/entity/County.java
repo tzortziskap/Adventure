@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "County.findById", query = "SELECT c FROM County c WHERE c.id = :id"),
     @NamedQuery(name = "County.findByName", query = "SELECT c FROM County c WHERE c.name = :name")})
 public class County implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +51,7 @@ public class County implements Serializable {
     private List<City> cityList;
 
     public County() {
-    }
+}
 
     public County(Integer id) {
         this.id = id;

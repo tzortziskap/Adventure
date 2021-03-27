@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TypeIndoorOutdoor.findById", query = "SELECT t FROM TypeIndoorOutdoor t WHERE t.id = :id"),
     @NamedQuery(name = "TypeIndoorOutdoor.findByTypeIndoorOutdoor", query = "SELECT t FROM TypeIndoorOutdoor t WHERE t.typeIndoorOutdoor = :typeIndoorOutdoor")})
 public class TypeIndoorOutdoor implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +51,7 @@ public class TypeIndoorOutdoor implements Serializable {
     private List<Event> eventList;
 
     public TypeIndoorOutdoor() {
-    }
+}
 
     public TypeIndoorOutdoor(Integer id) {
         this.id = id;

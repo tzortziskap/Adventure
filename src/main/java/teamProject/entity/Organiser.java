@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Organiser.findByAddress", query = "SELECT o FROM Organiser o WHERE o.address = :address"),
     @NamedQuery(name = "Organiser.findByPostalCode", query = "SELECT o FROM Organiser o WHERE o.postalCode = :postalCode")})
 public class Organiser implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,7 +93,7 @@ public class Organiser implements Serializable {
     private List<Event> eventList;
 
     public Organiser() {
-    }
+}
 
     public Organiser(Integer id) {
         this.id = id;

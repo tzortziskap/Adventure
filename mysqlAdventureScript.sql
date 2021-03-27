@@ -26,9 +26,9 @@ DROP TABLE IF EXISTS `categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(20) NOT NULL,
+  `category_name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,33 +37,8 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Πεζοπορία'),(2,'Τοξοβολία'),(3,'Ιππασία'),(4,'Τρέξιμο'),(5,'Εργαστήριο Φωτογραφίας'),(19,'Μαθήματα Μαγειρικής'),(20,'Κατάδυση'),(21,'Κανό Καγιάκ'),(22,'Bungee Jumping'),(23,'Mountain Bike'),(24,'Αναρρίχηση'),(25,'Ski');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `categories_has_event`
---
-
-DROP TABLE IF EXISTS `categories_has_event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categories_has_event` (
-  `categories_id` int NOT NULL,
-  `event_id` int NOT NULL,
-  PRIMARY KEY (`categories_id`,`event_id`),
-  KEY `fk_categories_has_event_event` (`event_id`),
-  CONSTRAINT `fk_categories_has_event_categories` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`),
-  CONSTRAINT `fk_categories_has_event_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categories_has_event`
---
-
-LOCK TABLES `categories_has_event` WRITE;
-/*!40000 ALTER TABLE `categories_has_event` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categories_has_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -116,7 +91,7 @@ CREATE TABLE `company` (
   KEY `fk_company_city` (`city_id`),
   CONSTRAINT `fk_company_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `fk_company_credentials` FOREIGN KEY (`credentials_id`) REFERENCES `credentials` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,11 +140,12 @@ CREATE TABLE `credentials` (
   `username` varchar(45) NOT NULL,
   `password` varchar(68) NOT NULL,
   `roles_id` int NOT NULL,
+  `password_reset_token` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_credentials_role_idx` (`roles_id`),
   CONSTRAINT `fk_credentials_role` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +154,7 @@ CREATE TABLE `credentials` (
 
 LOCK TABLES `credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES (1,'edaxhxho','$2a$10$PuvlSGILlZhG4C8kQ2u2gOMlK5ip9Po15ud.6YCrlpd/eS.Tf8N3e',1);
+INSERT INTO `credentials` VALUES (32,'tzortziskap','$2a$10$WHPqkRRHozp7UXmj2Scgi.VXIV2G9TIIWUxFv7OJpD.pEmLlPTCYK',1,NULL),(34,'edu','$2a$10$72bWFkqSCdJtSmDDEn8XPejclsDA3RKGc88j9xfhjJqqiagJUXmPy',1,NULL);
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +181,7 @@ CREATE TABLE `customer` (
   KEY `fk_customer_city` (`city_id`),
   CONSTRAINT `fk_customer_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `fk_customer_credentials` FOREIGN KEY (`credentials_id`) REFERENCES `credentials` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +190,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (25,'eda','xhixho','1991-09-26','edaxhixho@gmail.com','Neossoikon 77',26,'18537',1);
+INSERT INTO `customer` VALUES (32,'TZORTZIS','KAPELLAS','2021-03-03','tzortziskap@hotmail.com','Neossoikon 77',36,'18537',32),(33,'EDA','XHIXHO','1991-09-26','edaxhixho@gmail.com','Neossoikon 77',36,'18537',34);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +244,7 @@ CREATE TABLE `difficulty` (
 
 LOCK TABLES `difficulty` WRITE;
 /*!40000 ALTER TABLE `difficulty` DISABLE KEYS */;
-INSERT INTO `difficulty` VALUES (1,'VERY EASY'),(2,'EASY'),(3,'NORMAL'),(4,'DIFFICULT'),(5,'VERY DIFFICULT');
+INSERT INTO `difficulty` VALUES (1,'Πολύ Εύκολο'),(2,'Εύκολο'),(3,'Κανονικό'),(4,'Δύσκολο'),(5,'Πολύ Δύσκολο');
 /*!40000 ALTER TABLE `difficulty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,12 +317,15 @@ CREATE TABLE `event` (
   `organiser_id` int DEFAULT NULL,
   `company_id` int DEFAULT NULL,
   `name` varchar(20) NOT NULL,
+  `category_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_event_difficulty` (`difficulty_id`),
   KEY `fk_event_type_indoor_outdoor` (`type_indoor_outdoor_id`),
   KEY `fk_event_organiser_id` (`organiser_id`),
   KEY `fk_event_company` (`company_id`),
   KEY `fk_event_location` (`location_id`),
+  KEY `fk_event_category_idx` (`category_id`),
+  CONSTRAINT `fk_event_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   CONSTRAINT `fk_event_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
   CONSTRAINT `fk_event_difficulty` FOREIGN KEY (`difficulty_id`) REFERENCES `difficulty` (`id`),
   CONSTRAINT `fk_event_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
@@ -485,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-14 21:29:09
+-- Dump completed on 2021-03-27 21:49:05

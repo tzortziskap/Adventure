@@ -47,7 +47,7 @@ import org.springframework.format.annotation.DateTimeFormat;
     @NamedQuery(name = "Customer.findByAddress", query = "SELECT c FROM Customer c WHERE c.address = :address"),
     @NamedQuery(name = "Customer.findByPostalCode", query = "SELECT c FROM Customer c WHERE c.postalCode = :postalCode")})
 public class Customer implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,7 +96,7 @@ public class Customer implements Serializable {
     private Credentials credentialsId;
 
     public Customer() {
-    }
+}
 
     public Customer(Integer id) {
         this.id = id;

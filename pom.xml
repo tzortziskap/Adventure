@@ -73,7 +73,7 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>5.2.2.RELEASE</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
@@ -86,6 +86,11 @@
             <groupId>org.passay</groupId>
             <artifactId>passay</artifactId>
             <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sipios</groupId>
+            <artifactId>spring-search</artifactId>
+            <version>0.2.0</version>
         </dependency>
     </dependencies>
 
