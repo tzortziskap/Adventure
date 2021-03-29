@@ -5,7 +5,11 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -25,10 +29,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -56,12 +62,14 @@ public class Event implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ending_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endingDate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "starting_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private Date startingDate;
     @Basic(optional = false)
     @NotNull
@@ -96,7 +104,7 @@ public class Event implements Serializable {
     @ManyToOne(optional = false)
     private Difficulty difficultyId;
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Location locationId;
     @JoinColumn(name = "organiser_id", referencedColumnName = "id")
     @ManyToOne
@@ -104,7 +112,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "type_indoor_outdoor_id", referencedColumnName = "id")
     @ManyToOne
     private TypeIndoorOutdoor typeIndoorOutdoorId;
-
+   
     public Event() {
 }
 

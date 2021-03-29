@@ -50,6 +50,12 @@ public class EventServiceImpl implements EventService {
 @Override
     public List<Event> seachDynamically(Specification<Event> specs){
         return eventRepo.findAll(Specification.where(specs));
+        
+    }
+
+    @Override
+    public List<Event> findEventsBycompanyId(int id) {
+        return eventRepo.findBycompanyId(id);
     }
     
 }

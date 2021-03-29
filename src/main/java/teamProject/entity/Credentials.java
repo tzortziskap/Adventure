@@ -56,7 +56,7 @@ public class Credentials implements Serializable {
     @Column(name = "password_reset_token")
     private String passwordResetToken;
     @JoinColumn(name = "rolesId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     private Roles rolesId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "credentialsId")
     private Organiser organiser;

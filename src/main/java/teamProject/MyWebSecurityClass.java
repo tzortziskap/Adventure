@@ -33,7 +33,8 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/event/register").authenticated()
+                .antMatchers("/event/create").hasAuthority("COMPANY")
+                .antMatchers("/event/register").hasAuthority("CUSTOMER")
                 .and()
                 .formLogin()
                 .loginPage("/loginPage")
@@ -41,7 +42,11 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied")
+             
+                ;
     }
 
     @Override

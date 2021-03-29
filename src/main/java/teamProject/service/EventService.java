@@ -27,4 +27,6 @@ public interface EventService{
     Event updateEvent(Event event);
     
     public List<Event> seachDynamically(Specification<Event> specs);
+    
+    List<Event> findEventsBycompanyId(int id);
 }

@@ -6,7 +6,9 @@
 package teamProject.controller;
 
 import com.sipios.springsearch.anotation.SearchSpec;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,15 +38,21 @@ public class EventController {
     private EventService service;
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showForm(){
-        return "index";
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String showForm(@ModelAttribute("event") Event event, Model model){
+        return "event_form";
     }
     
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Event event, RedirectAttributes attributes){
         service.addEvent(event);
-        return " ";//Redirect instructs client to sent a new GET request to /event
+        return "company_index";//Redirect instructs client to sent a new GET request to /event
+    }
+    
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Event> GetmyEvents(@PathVariable("id") int id) {
+        return new ResponseEntity(service.findEventsBycompanyId(id), HttpStatus.OK);
     }
     
     @GetMapping("/delete")

@@ -46,5 +46,8 @@ public class AdventureController {
         return new ResponseEntity(countyService.getCountyById(id).getCityList(), HttpStatus.OK);
     }
     
-    
+    @GetMapping("/access-denied")
+    public String showAccessDenied(){
+        return "access-denied";
+    }
 }

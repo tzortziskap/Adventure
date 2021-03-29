@@ -1,0 +1,130 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(209, 209, 214);
+}
+
+.row {
+    background-color: white;
+    border-radius: 30px;
+}
+
+img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: white;
+    border: 1px solid;
+    color: black;
+}
+
+footer {
+    text-align: center;
+    color: whitesmoke;
+    line-height: 50px;
+    position: sticky;
+    bottom: 0;
+    background-color: aqua;
+    width: 100%;
+}
+
+footer a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+
+input {}
+#mapid { height: 180px; }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+
+}
+h3,h6,h4,h1,p, .form-control{
+    text-align: center;
+}
+label {
+  text-align: center;
+  width: 100%;
+  margin: 5px;
+  text-decoration: underline;
+ font-style: italic;
+}
+#form{
+    margin-top: 75px;
+}
+
+select{
+    text-align-last: center;
+}
+.dropdown-check-list {
+  display: inline-block;
+}
+
+.dropdown-check-list .anchor {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 50px 5px 10px;
+  border: 1px solid #ccc;
+}
+
+.dropdown-check-list .anchor:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  -moz-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.dropdown-check-list .anchor:active:after {
+  right: 8px;
+  top: 21%;
+}
+
+.dropdown-check-list ul.items {
+  padding: 2px;
+  display: none;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.dropdown-check-list ul.items li {
+  list-style: none;
+}
+
+.dropdown-check-list.visible .anchor {
+  color: #0094ff;
+}
+
+.dropdown-check-list.visible .items {
+  display: block;
+}

@@ -1,8 +1,15 @@
-
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 #map{
     margin-top: 100px;
 }
 #mapid { 
     height: 600px; 
 
+}
+main{
+    margin-top: 150px;
 }

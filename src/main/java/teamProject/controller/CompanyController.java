@@ -5,8 +5,12 @@
  */
 package teamProject.controller;
 
+import java.security.Principal;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Company;
+import teamProject.entity.Credentials;
 import teamProject.entity.Customer;
+import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 import teamProject.service.CompanyService;
@@ -35,20 +41,27 @@ public class CompanyController {
     @Autowired
     private CompanyService service;
 
+    @GetMapping()
+    public String show(@ModelAttribute("event") Event event,Principal principal,HttpSession session) {
+        Credentials loginedUser = (Credentials) ((Authentication) principal).getPrincipal();
+        session.setAttribute("loginedUser", loginedUser);
+        return "company_index";
+    }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("company") Company company, BindingResult result, RedirectAttributes attributes) {
         try {
             service.addCompany(company);
-        }catch (UsernameExistException ex){
+        } catch (UsernameExistException ex) {
             attributes.addAttribute("compUsernameExist", ex.getMessage());
             return "redirect:/register";
         } catch (EmailExistException ex) {
             attributes.addAttribute("compEmailExist", ex.getMessage());
             return "redirect:/register";
-        } 
+        }
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
     }
+
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int id, RedirectAttributes attributes) {
         service.deleteCompany(id);
