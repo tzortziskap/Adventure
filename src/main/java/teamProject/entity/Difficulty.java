@@ -5,6 +5,7 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -48,6 +49,7 @@ public class Difficulty implements Serializable {
     @Column(name = "level")
     private String level;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "difficultyId")
+    @JsonIgnore
     private List<Event> eventList;
 
     public Difficulty() {

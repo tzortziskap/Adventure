@@ -99,6 +99,7 @@ public class Event implements Serializable {
     private List<CustomerBooksEvent> customerBooksEventList;
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Company companyId;
     @JoinColumn(name = "difficulty_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -108,6 +109,7 @@ public class Event implements Serializable {
     private Location locationId;
     @JoinColumn(name = "organiser_id", referencedColumnName = "id")
     @ManyToOne
+    @JsonIgnore
     private Organiser organiserId;
     @JoinColumn(name = "type_indoor_outdoor_id", referencedColumnName = "id")
     @ManyToOne

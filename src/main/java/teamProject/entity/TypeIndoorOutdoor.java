@@ -5,6 +5,7 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,6 +48,7 @@ public class TypeIndoorOutdoor implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "type_indoor_outdoor")
     private String typeIndoorOutdoor;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeIndoorOutdoorId")
     private List<Event> eventList;
 

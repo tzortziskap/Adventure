@@ -6,10 +6,13 @@
 package teamProject.controller;
 
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Company;
 import teamProject.entity.Credentials;
@@ -29,6 +33,7 @@ import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 import teamProject.service.CompanyService;
+import teamProject.service.CredentialsService;
 
 /**
  *
@@ -40,13 +45,27 @@ public class CompanyController {
 
     @Autowired
     private CompanyService service;
+    @Autowired
+    private CredentialsService credentialsService;
 
     @GetMapping()
-    public String show(@ModelAttribute("event") Event event,Principal principal,HttpSession session) {
-        Credentials loginedUser = (Credentials) ((Authentication) principal).getPrincipal();
-        session.setAttribute("loginedUser", loginedUser);
+    public String show(@ModelAttribute("event") Event event,Model model, HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if(principal!=null){
+            Credentials loginedUser = credentialsService.findByUsername(principal.getName());
+            List<Event> companysEvents = loginedUser.getCompany().getEventList();
+            model.addAttribute("loginedUser", loginedUser);
+            model.addAttribute("companysEvents", companysEvents);
+        }
         return "company_index";
     }
+    
+    @GetMapping("/eventsByCompany/{id}")
+    @ResponseBody
+    public ResponseEntity<List<Event>> getEventsByCompany(@PathVariable(value = "id") int id) {
+        return new ResponseEntity(service.getCompanyById(id).getEventList(), HttpStatus.OK);
+    }
+    
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("company") Company company, BindingResult result, RedirectAttributes attributes) {

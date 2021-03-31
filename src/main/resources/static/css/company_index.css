@@ -54,6 +54,7 @@ footer a {
     color: whitesmoke;
 }
 
-
-input {}
-#mapid { height: 180px; }
+main{
+    margin-top: 20px;
+}
+#mapid { height: 200px; }

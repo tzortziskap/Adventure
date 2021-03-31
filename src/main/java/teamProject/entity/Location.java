@@ -5,6 +5,7 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -66,6 +67,7 @@ public class Location implements Serializable {
     @ManyToOne(optional = false)
     private City cityId;
     @OneToMany(mappedBy = "locationId")
+    @JsonIgnore
     private List<Event> eventList;
 
     public Location() {

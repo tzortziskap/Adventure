@@ -19,7 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-                crossorigin=""></script>
+        crossorigin=""></script>
         <script src="http://maps.google.com/maps/api/js?libraries=places&region=uk&language=en&sensor=true"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -27,9 +27,9 @@
               crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-                crossorigin=""></script>
+        crossorigin=""></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/company_index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -72,38 +72,53 @@
         </nav>
     </div>
     <main>
-        <br><!-- comment -->
-        <br><!-- comment -->
-        <br><!-- comment -->
-        <br><!-- comment -->
-        
-            <h3>Το προφίλ μου</h3>
-            <p>Ονόμα εταιρίας<br>${loginedUser.company.name}</p>
-            <p>Διευθυνση εταιρίας</p>
+        <h3>Το προφίλ μου</h3>
+        <p>Ονόμα εταιρία: ${loginedUser.company.name}</p>
+        <p>Διευθυνση εταιρίας: ${loginedUser.company.address}</p>
+        <div hidden id="companyid">${loginedUser.company.id}</div>
+
+        <table id="eventstable" class="table">
+            <h3 id="number"></h3>
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Starting Date</th>
+                    <th scope="col">Ending Date</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Diff</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Positions</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <c:forEach items="${companysEvents}" var = "event">
+                <tr>
+                    <td>${event.name}</td>
+                    <td>${event.description}</td>
+                    <td>${event.startingDate}</td>
+                    <td>${event.endingDate}</td>
+                    <td>${event.price}</td>
+                    <td>${event.difficultyId.level}</td>
+                    <td>${event.typeIndoorOutdoorId.typeIndoorOutdoor}</td>
+                    <td>${event.categoryId.categoryName}</td>
+                    <td>${event.positions}</td>
+                    <td>      
+                        <a href="${pageContext.request.contextPath}/product/update/${product.pcode}">Update</a>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/product/delete?id=${product.pcode}">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            <tbody>
+            </tbody>
+        </table>
         <div class="col-sm" id="map">
         </div>
-    </div>
-</div>
-<table id="eventstable" class="table">
-    <h3 id="number"></h3>
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Starting Date</th>
-            <th scope="col">Ending Date</th>
-            <th scope="col">Price</th>
-            <th scope="col">Diff</th>
-            <th scope="col">Type</th>
-            <th scope="col">Category</th>
-            <th scope="col">Equipment</th>
-            <th scope="col">Positions</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-</main>
+    </main>
+    <script src="js/company_index.js"></script>
 </body>
 </html>

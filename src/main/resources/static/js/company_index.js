@@ -6,18 +6,15 @@
 
 
 $(document).ready(function () {
-    let id = document.getElementById("companyid").value;
-    console.log(id)
+    let id = document.getElementById("companyid").innerHTML;
     $.ajax({
         type: "GET",
-        url: "${pageContext.request.contextPath}/event/view/" + id,
+        url: "http://localhost:8080/Adventure/company/eventsByCompany/" + id,
         dataType: 'json'
     }).done(function (results) {
         var my_obj = JSON.parse((JSON.stringify(results)));
-        let nym = results.event.length;
+        let nym = results.length;
         document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + nym;
-        $('#eventstable tbody').html('');
-        $("#map").html("");
         $("#map").append("<h3>Χάρτης</h3>");
         $("#map").html('<div id="mapid" >></div>');
         createpoints(results);
@@ -26,24 +23,12 @@ $(document).ready(function () {
 
 function createpoints(results) {
     let points = [];
-    for (var i = 0; i < results.event.length; i++) {
-        var row = $('<tr ><td>' + results.event[i].name + '</td>' +
-                '<td>' + results.event[i].startingDate + '</td>' +
-                '<td>' + results.event[i].endingDate + '</td>' +
-                '<td>' + results.event[i].price + '</td>' +
-                '<td>' + results.event[i].difficultyId.level + '</td>' +
-                '<td>' + results.event[i].typeIndoorOutdoorId.typeIndoorOutdoor + '</td>' +
-                '<td>' + JSON.stringify(results.event[i].categoriesList) + '</td>' +
-                '<td>' + JSON.stringify(results.event[i].equipmentList) + '</td>' +
-                '<td>' + JSON.stringify(results.event[i].positions) + '</td>' +
-                '<td> <a href="' + "${pageContext.request.contextPath}" + "/event/delete/" + results.event[i].id + '"> delete Event</a></td>' +
-                "</tr>");
-        points.push({name: results.event[i].name, x: results.event[i].locationId.coordinateX,
-            y: results.event[i].locationId.coordinateY,
-            start: results.event[i].startingDate,
-            end: results.event[i].endingDate,
-            type: results.event[i].typeIndoorOutdoorId.typeIndoorOutdoor});
-        $('#eventstable tbody').append(row);
+    for (var i = 0; i < results.length; i++) {
+        points.push({name: results[i].name, x: results[i].locationId.coordinateX,
+            y: results[i].locationId.coordinateY,
+            start: results[i].startingDate,
+            end: results[i].endingDate,
+            type: results[i].typeIndoorOutdoorId.typeIndoorOutdoor});
     }
     createmap(points, map);
 }
@@ -51,7 +36,7 @@ function createpoints(results) {
 function createmap(result, map) {
     map = L.map('mapid').setView([38.25, 25.07], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 6,
+        maxZoom: 20,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                 'Imagery Β© <a href="https://www.mapbox.com/">Mapbox</a>',
         id: 'mapbox/streets-v11',
