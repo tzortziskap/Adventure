@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-    
+
     var urlCategories = "http://localhost:8080/Adventure/categories";
 
     $.getJSON(urlCategories, function (result) {
@@ -77,8 +77,8 @@ $(document).ready(function () {
                 }
             }
         });
-        $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (result) {
-            createpoints(result);
+        $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (results) {
+            createpoints(results);
         });
     }
 
@@ -109,19 +109,19 @@ $(document).ready(function () {
             createpoints(results);
         });
     });
-    
+
     $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
-        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.length;
-        var my_obj = JSON.parse((JSON.stringify(results)));
         createpoints(results);
     });
-    
+
     function createpoints(results) {
-         $('#eventstable tbody').html('');
+        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.length;
+        $('#eventstable tbody').html('');
         $("#map").html("");
         $("#map").append("<h3>Χάρτης</h3>");
         $("#map").html('<div id="mapid" ></div>');
         let points = [];
+
         for (var i = 0; i < results.length; i++) {
             let book;
             let link;
@@ -133,7 +133,7 @@ $(document).ready(function () {
                     '<td>' + results[i].categoryId.categoryName + '</td>' +
                     '<td>' + results[i].typeIndoorOutdoorId.typeIndoorOutdoor + '</td>' +
                     '<td>' + JSON.stringify(results[i].positions) + '</td>' +
-                    '<td><a href="' + link + '">' + book + '</a></td>' +
+//                    '<td><a href="' + link + '">' + book + '</a></td>' +
                     //'<td>' + results.event[i].locationId.coordinateX + '</td>' +
                     //'<td>' + results.event[i].locationId.coordinateY + '</td>' +
                     "</tr>");
@@ -144,11 +144,13 @@ $(document).ready(function () {
                 type: results[i].categoryId.categoryName});
             $('#eventstable tbody').append(row);
         }
-        createmap(points, map);
+
+        createmap(points);
+
     }
 
-    function createmap(result, map) {
-        map = L.map('mapid').setView([38.25, 25.07], 13);
+    function createmap(result) {
+        var map = L.map('mapid').setView([38.25, 25.07], 13);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -158,15 +160,17 @@ $(document).ready(function () {
             zoomOffset: -1
         }).addTo(map);
         var bounds = new L.LatLngBounds();
-        for (var i = 0; i < result.length; i++) {
-            var marker = L.marker([result[i].x, result[i].y]).addTo(map);
-            marker.bindPopup("<b>" + result[i].name + "</b><br/>" +
-                    "Ημερομηνία Ενάρξης Δραστηριότητας: " + result[i].start + "<br/>" +
-                    "Ημερομηνία Τέλους Δραστηριότητας: " + result[i].end + "<br/>" +
-                    "Είδος: " + result[i].type);
-            bounds.extend(marker.getLatLng());
+        if (result.length !== 0) {
+            for (var i = 0; i < result.length; i++) {
+                var marker = L.marker([result[i].x, result[i].y]).addTo(map);
+                marker.bindPopup("<b>" + result[i].name + "</b><br/>" +
+                        "Ημερομηνία Ενάρξης Δραστηριότητας: " + result[i].start + "<br/>" +
+                        "Ημερομηνία Τέλους Δραστηριότητας: " + result[i].end + "<br/>" +
+                        "Είδος: " + result[i].type);
+                bounds.extend(marker.getLatLng());
+            }
+            map.fitBounds(bounds);
         }
-        map.fitBounds(bounds);
     }
 
     (function ($) {

@@ -102,7 +102,7 @@
                                     <div class="col-md-6">
                                         <label for="county">Νομός</label>
                                         <select  name="locationId.cityId.countyId.id" id="county" class="form-control county searching selectSearching">
-                                            <option  value=''>Choose...</option>
+                                            <option value=''>Choose...</option>
                                         </select>
                                     </div>
                                 </div>
