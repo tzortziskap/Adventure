@@ -74,13 +74,17 @@ public class EventController {
         return " ";
     }
      @RequestMapping("/search")
-    public String get12() {
+    public String showSearchPage() {
         return "search";
     }
-    
+    @GetMapping("search/all")
+    @ResponseBody
+    public ResponseEntity<List<Event>> AllEvents() {
+        return new ResponseEntity<>(service.getEvents(), HttpStatus.OK);
+    }
     @GetMapping("search/results")
     @ResponseBody
-    public ResponseEntity<List<Event>> searchForCars(@SearchSpec Specification<Event> specs) {
+    public ResponseEntity<List<Event>> searchForEvents(@SearchSpec Specification<Event> specs) {
         return new ResponseEntity<>(service.seachDynamically(specs), HttpStatus.OK);
     }
     

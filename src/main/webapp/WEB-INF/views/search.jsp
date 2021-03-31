@@ -150,7 +150,6 @@
                             <th scope="col">Diff</th>
                             <th scope="col">Type</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Equipment</th>
                             <th scope="col">Positions</th>
                             <th scope="col">Book</th>
                         </tr>

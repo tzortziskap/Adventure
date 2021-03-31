@@ -5,16 +5,7 @@
  */
 
 $(document).ready(function () {
-    $.getJSON("${pageContext.request.contextPath}/event/search", function (results) {
-        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.event.length;
-        var my_obj = JSON.parse((JSON.stringify(results)));
-        $('#eventstable tbody').html('');
-        $("#map").html("");
-        $("#map").append("<h3>Χάρτης</h3>");
-        $("#map").html('<div id="mapid" >></div>');
-        createpoints(results);
-    });
-
+    
     var urlCategories = "http://localhost:8080/Adventure/categories";
 
     $.getJSON(urlCategories, function (result) {
@@ -87,6 +78,7 @@ $(document).ready(function () {
             }
         });
         $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (result) {
+            createpoints(result);
         });
     }
 
@@ -117,36 +109,39 @@ $(document).ready(function () {
             createpoints(results);
         });
     });
-
+    
+    $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
+        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.length;
+        var my_obj = JSON.parse((JSON.stringify(results)));
+        createpoints(results);
+    });
+    
     function createpoints(results) {
+         $('#eventstable tbody').html('');
+        $("#map").html("");
+        $("#map").append("<h3>Χάρτης</h3>");
+        $("#map").html('<div id="mapid" ></div>');
         let points = [];
-        for (var i = 0; i < results.event.length; i++) {
+        for (var i = 0; i < results.length; i++) {
             let book;
             let link;
-            if (JSON.stringify(results.pos[i]) === 0) {
-                book = "Not avaliable";
-            } else {
-                book = "Book it";
-                link = "${pageContext.request.contextPath}/event/get/" + results.event[i].id;
-            }
-            var row = $('<tr ><td>' + results.event[i].name + '</td>' +
-                    '<td>' + results.event[i].startingDate + '</td>' +
-                    '<td>' + results.event[i].endingDate + '</td>' +
-                    '<td>' + results.event[i].price + '</td>' +
-                    '<td>' + results.event[i].difficultyId.level + '</td>' +
-                    '<td>' + results.event[i].typeIndoorOutdoorId.typeIndoorOutdoor + '</td>' +
-                    '<td>' + JSON.stringify(results.event[i].categoriesList) + '</td>' +
-                    '<td>' + JSON.stringify(results.event[i].equipmentList) + '</td>' +
-                    '<td>' + JSON.stringify(results.event[i].positions) + '</td>' +
+            var row = $('<tr ><td>' + results[i].name + '</td>' +
+                    '<td>' + results[i].startingDate + '</td>' +
+                    '<td>' + results[i].endingDate + '</td>' +
+                    '<td>' + results[i].price + '</td>' +
+                    '<td>' + results[i].difficultyId.level + '</td>' +
+                    '<td>' + results[i].categoryId.categoryName + '</td>' +
+                    '<td>' + results[i].typeIndoorOutdoorId.typeIndoorOutdoor + '</td>' +
+                    '<td>' + JSON.stringify(results[i].positions) + '</td>' +
                     '<td><a href="' + link + '">' + book + '</a></td>' +
                     //'<td>' + results.event[i].locationId.coordinateX + '</td>' +
                     //'<td>' + results.event[i].locationId.coordinateY + '</td>' +
                     "</tr>");
-            points.push({name: results.event[i].name, x: results.event[i].locationId.coordinateX,
-                y: results.event[i].locationId.coordinateY,
-                start: results.event[i].startingDate,
-                end: results.event[i].endingDate,
-                type: results.event[i].typeIndoorOutdoorId.typeIndoorOutdoor});
+            points.push({name: results[i].name, x: results[i].locationId.coordinateX,
+                y: results[i].locationId.coordinateY,
+                start: results[i].startingDate,
+                end: results[i].endingDate,
+                type: results[i].categoryId.categoryName});
             $('#eventstable tbody').append(row);
         }
         createmap(points, map);
@@ -155,7 +150,7 @@ $(document).ready(function () {
     function createmap(result, map) {
         map = L.map('mapid').setView([38.25, 25.07], 13);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            maxZoom: 6,
+            maxZoom: 18,
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
                     'Imagery Β© <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
@@ -168,7 +163,7 @@ $(document).ready(function () {
             marker.bindPopup("<b>" + result[i].name + "</b><br/>" +
                     "Ημερομηνία Ενάρξης Δραστηριότητας: " + result[i].start + "<br/>" +
                     "Ημερομηνία Τέλους Δραστηριότητας: " + result[i].end + "<br/>" +
-                    "Είδος:" + result[i].type);
+                    "Είδος: " + result[i].type);
             bounds.extend(marker.getLatLng());
         }
         map.fitBounds(bounds);
