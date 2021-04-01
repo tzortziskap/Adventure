@@ -72,7 +72,6 @@
                                 <a class="underlineHover" href="register">Κάνε εγγραφή τώρα</a>
                         </div>
                         </p>
-
                     </div>
                 </div>
             </div>

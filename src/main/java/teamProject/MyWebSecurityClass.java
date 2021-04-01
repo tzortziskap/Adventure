@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import teamProject.security.MySimpleUrlAuthenticationSuccessHandler;
 import teamProject.service.CredentialsService;
 
 /**
@@ -27,6 +29,7 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CredentialsService user;
+   
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,6 +43,7 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/loginPage")
                 .loginProcessingUrl("/authenticate")
+                .successHandler(myAuthenticationSuccessHandler())
                 .permitAll()
                 .and()
                 .logout()
@@ -67,4 +71,8 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+    return new MySimpleUrlAuthenticationSuccessHandler();
+}
 }

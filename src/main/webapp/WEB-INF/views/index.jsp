@@ -10,16 +10,22 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
         <!-- Bootstrap core CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -41,24 +47,24 @@
                                 <a class="nav-link" href="#">Πληροφορίες</a>
                             </li>
                         </ul>
-                        <div id="loginregister">
-                            <a class="nav-link active"  href="#">Σύνδεση</a>
-                            <a class="nav-link active" href="#">Εγγραφή</a>        
-                        </div>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Αναζήτηση</button>
-                        </form>
+                    </div>
+                    <div id="loginregister">
+                        <c:if test="${loggedInUser == null}">
+                            <a class="nav-link"  href="#">Σύνδεση</a>
+                            <a class="nav-link" href="#">Εγγραφή</a>
+                        </c:if>
+                        <c:if test="${loggedInUser != null}">
+                            <form:form class="d-flex" action="${pageContext.request.contextPath}/logout" method="POST">
+                                <input type="submit" value="Logout" class="form-control me-2">
+                            </form:form>
+                        </c:if>
                     </div>
                 </div>
             </nav>
         </div>
         <div class="container">
             <main>
-               <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                    <input type="submit" value="Logout">
-                </form:form>
-                    <form id="form">
+                <form id="form">
                     <h2>Search for an Event</h2>
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -66,8 +72,8 @@
                             <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="category">Κατηγορία</label>
-                            <select id="category" class="form-control category">
+                            <label for="categories">Κατηγορία</label>
+                            <select id="categories" class="form-control categories">
                                 <option value=''>Choose...</option>
                             </select>
                         </div>
@@ -89,68 +95,107 @@
                     <button type="submit" class="btn btn-primary searcheve">Search for evants</button>
                 </form>
                 <h3>Our main events by Category</h3>
-                <div class="row mx-auto my-auto">
-                    <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-                        <div class="carousel-inner w-100" role="listbox">
-                            <div class="carousel-item active" >
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <img
-                                            src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
-                                            class="img-fluid"
-                                            alt="..."
-                                            />
-                                        <div class="card-body">
-                                            <h5 class="card-title">Hking</h5>
-                                            <p class="card-text"> Συνολικός αριθμός δραστηριοτήτων: 
-                                            </p>
-                                            <a href="#!" class="btn btn-primary">View</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-4">
-                                    <img src="https://mdbootstrap.com/img/new/standard/nature/181.jpg" class="card-img-top" alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="card-title">rafting</h5>
-                                        <p class="card-text"> Συνολικός αριθμός δραστηριοτήτων: 
-                                        </p>
-                                        <a href="#!" class="btn btn-primary">View</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <img
-                                            src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
-                                            class="img-fluid"
-                                            alt="..."
-                                            />
-                                        <div class="card-body">
-                                            <h5 class="card-title">Other</h5>
-                                            <p class="card-text"> Συνολικός αριθμός δραστηριοτήτων: 
-                                            </p>
-                                            <a href="#!" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                                <span class="sr-only"></span>
-                            </a>
-                            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                                <span class="sr-only"></span>
-                            </a>
-                        </div>
+                <!--Carousel Wrapper-->
+                <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+                    <!--Controls-->
+                    <div class="controls-top">
+                        <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+                        <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                                class="fas fa-chevron-right"></i></a>
                     </div>
-                </div>
+                    <!--/.Controls-->
+                    <!--Indicators-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                        <li data-target="#multi-item-example" data-slide-to="1"></li>
+                    </ol>
+                    <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner" role="listbox">
+                        <!--First slide-->
+                        <div class="carousel-item active">
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/pezoporia.jpeg" alt="Πεζοπορία">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Πεζοπορία</h4>
+                                        <p class="card-text">Η Πεζοπορία απευθύνεται σε όλους του ανθρώπους ανεξαρτήτου ηλικίας 
+                                            και ειδικά σε όσους αγαπούν το περπάτημα και την περιπλάνηση στη φύση!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/toxovolia.jpeg" alt="Τοξοβολία">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Τοξοβολία</h4>
+                                        <p class="card-text">Οι τοξότες αποκτούν πνευματική δύναμη. 
+                                            Με την προπόνηση αναπτύσσουν ικανότητες συγκέντρωσης, 
+                                            ακρίβειας και υπομονής!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/ippasia.jpeg" alt="Ιππασία">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Ιππασία</h4>
+                                        <p class="card-text">Η ιππασία λοιπόν, είναι μία δραστηριότητα που δεν κάνει διακρίσεις, απευθύνεται σε μικρούς και μεγάλους!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.First slide-->
+                        <!--Second slide-->
+                        <div class="carousel-item">
+
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/mageiriki.jpeg" alt="Μαγειρική">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Μαγειρική</h4>
+                                        <p class="card-text">Μαθήματα Μαγειρικής και Ζαχαροπλαστικής για ερασιτέχνες και επαγγελματίες. Απόλυτα πρακτικά!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/katadisi.jpeg" alt="Κατάδυση">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Κατάδυση</h4>
+                                        <p class="card-text">Ανακάλυψε τον συναρπαστικό κόσμο που βρίσκεται κάτω από την θάλασσα!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="float:left">
+                                <div class="card mb-2">
+                                    <img class="card-img-top"
+                                         src="${pageContext.request.contextPath}/img/anarixisi.jpeg" alt="Αναρρίχηση">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Αναρρίχηση</h4>
+                                        <p class="card-text">Το σκαρφάλωμα είναι μέσα στο DNA μας οπότε μας ταιριάζει. 
+                                            Θυμάσαι που σαν παιδί σκαρφάλωνες στα δέντρα και στις ξερολιθιές!</p>
+                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Second slide-->
+                    </div>
+                    <!--/.Slides-->
+                    <!--/.Carousel Wrapper-->
             </main>
         </div>
-        <script src="js/searchjs.js"></script>
+        <script src="js/indexjs.js"></script>
     </body>
 </html>
