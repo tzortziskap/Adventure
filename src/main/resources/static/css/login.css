@@ -50,9 +50,42 @@ img {
 h4,h1,p, #forgotPassword, #formFooter{
     text-align: center;
 }
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
 .success{
     color: green;
 }
 .error{
     color: red;
+}
+
+#loginregister ul{
+	text-decoration: none;
+}
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
+}
+#loginregister a:hover{
+    color: rgba(255,255,255,.75);
+}
+.container{
+   
+   margin-top: 100px;
+   
+   
 }

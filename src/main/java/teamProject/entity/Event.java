@@ -87,7 +87,7 @@ public class Event implements Serializable {
     private int positions;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
     @JoinColumn(name = "category_id", referencedColumnName = "id")

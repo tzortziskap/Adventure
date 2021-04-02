@@ -8,6 +8,21 @@ body {
     background-color: rgb(209, 209, 214);
 }
 
+h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
 .row {
     background-color: white;
     border-radius: 30px;
@@ -39,22 +54,23 @@ label {
     color: black;
 }
 
-footer {
-    text-align: center;
-    color: whitesmoke;
-    line-height: 50px;
-    position: sticky;
-    bottom: 0;
-    background-color: aqua;
-    width: 100%;
+#loginregister ul{
+	text-decoration: none;
 }
-
-footer a {
-    text-decoration: none;
-    color: whitesmoke;
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
+}
+#loginregister a:hover{
+    color: rgba(255,255,255,.75);
 }
 
 main{
-    margin-top: 20px;
+    margin-top: 100px;
 }
 #mapid { height: 200px; }
