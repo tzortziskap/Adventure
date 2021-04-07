@@ -5,18 +5,17 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,7 +31,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "categories")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Categories.findAll", query = "SELECT c FROM Categories c"),
     @NamedQuery(name = "Categories.findById", query = "SELECT c FROM Categories c WHERE c.id = :id"),
@@ -50,7 +48,13 @@ public class Categories implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "category_name")
     private String categoryName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "imgurl")
+    private String imgurl;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
     private List<Event> eventList;
 
     public Categories() {
@@ -81,7 +85,16 @@ public class Categories implements Serializable {
         this.categoryName = categoryName;
     }
 
-    @XmlTransient
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+    
+
+
     public List<Event> getEventList() {
         return eventList;
     }

@@ -1,17 +1,17 @@
-<%--
-    Document   : loginPage
-    Created on : 19 Μαρ 2021, 6:19:39 μμ
-    Author     : tzortziskapellas
+<%-- 
+    Document   : Search
+    Created on : Mar 10, 2021, 7:14:29 PM
+    Author     : user
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
-<html>
+<html >
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Δραστηριότητες</title>
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <!-- Google Fonts -->
@@ -28,10 +28,17 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
-        <title>Forgot Password</title>
-        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+              crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                crossorigin=""
+        ></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="http://localhost:8080/Adventure/css/event_by_category_name.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
     </head>
-
     <body>
         <div class="container-fluid">   
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -82,43 +89,66 @@
                 </div>
             </nav>
         </div>
-        <section class="Form my-4 mx-5">
-            <div class="container">
-                <div class="row no-gutters">
-                    <div class="col-centered">
-                        <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                        <h4>Υπενθύμηση το συνθηματικό</h4>
-                        <c:if test="${error != null}">
-                            <p class="error">${error}</p>
-                        </c:if>
-                        <form:form action="${pageContext.request.contextPath}/forgotpassword" method="post">
+    </div>
+    <main>
+        <h1 class="font-weight-bold py-3">Adventure Booking</h1>
+        <h3 class='category'>${category}</h3>
+        <div id="numberWithLeftButton">
+            <h3 id="number"></h3>
+            <a href="${pageContext.request.contextPath}/event/search" class="btn btn-primary leftbutton">Δες τα όλα!</a>
+        </div>
 
-                            <c:if test="${successMessage != null}">
-                                <p>${successMessage}</p>
-                            </c:if>
-                            <c:if test="${successMessage == null}">
-                                <p>Θα σου στείλουμε ένα σύνδεσμο επανεκκίνησης κωδικού μέσω e-mail.</p>
-                            </c:if>
-                            <div class="form-row">
-                                <div class="col-lg-9 col-centered">
-                                    <input type="text" placeholder="Δώσε το username σου..." name="username"  class="form-control my-3 p-4" required autofocus>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-lg-9 col-centered">
-                                    <input type="submit" value="Υποβολή" class="btn1 mt-3 mb-5">
-                                </div>
-                            </div>
-                        </form:form>
-                        <div id="formFooter">
-                            <p>Δεν έχεις λογαριασμό;
-                                <a class="underlineHover" href="register">Κάνε εγγραφή τώρα</a>
-                        </div>
-                        </p>
-                    </div>
-                </div>
+        <div class="row row-cols-1 row-cols-md-4 g-4" id='events'>
+
+        </div>
+        <div class="col-sm" id="map">
+        </div>
+
+    </main>
+    <footer class="footer" id="footer">
+        <div class="inner_footer">
+            <div class="logo_container">
+
             </div>
-        </section>
-        <script src="js/forgotPasswordJs.js"></script>
-    </body>
+
+            <div class="footer_third">
+                <h1>Χρειάζεστε βοήθεια;</h1>
+                <a href="#">Όροι &amp; Προϋποθέσεις</a>
+                <a href="#">Πολιτική απορρήτου</a>
+            </div>
+            <div class="footer_third">
+                <h1>Περισσότερα</h1>
+                <a href="#">Φυλλάδια</a>
+                <a href="#">Δωρεά</a>
+                <a href="#">Διακυβέρνηση</a>
+                <a href="#">Αναφορές αντικτύπου</a>
+            </div>
+            <div class="footer_third">
+                <h1>Ακολουθησέ μας</h1>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus-official"></i></a></li>
+
+                <span>
+                    © 2021 Adventure Booking<br>
+                    Greece, Athens<br>
+                    77 Ermou Street 18537<br>
+                    Monday - Saturday 09:00 - 18:00<br>
+                    2106000018, 6983333347<br>
+                    adventurebookinggroupproject@gmail.com
+                </span>
+            </div>
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12580.106256748013!2d23.718013433025146!3d37.97650937556948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd2327d1bb15%3A0xa3501c4310ecdfb8!2zzpXPgc68zr_PjSA3NywgzpHOuM6uzr3OsSAxMDUgNTU!5e0!3m2!1sel!2sgr!4v1609183451261!5m2!1sel!2sgr"
+                    width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                    tabindex="0"></iframe>
+            </div>
+        </div>
+    </footer>
+    <script src="${pageContext.request.contextPath}/js/event_by_category_namejs.js"></script>
+</body>
 </html>

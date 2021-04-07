@@ -29,4 +29,8 @@ public interface EventService{
     public List<Event> seachDynamically(Specification<Event> specs);
     
     List<Event> findEventsBycompanyId(int id);
+
+    public List<Event> getEventsByCategoryName(String category);
+
+    public List<Event> getEventsByCategoryId(int category);
 }

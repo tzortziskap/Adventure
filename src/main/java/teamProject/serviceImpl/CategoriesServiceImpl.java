@@ -45,5 +45,10 @@ public class CategoriesServiceImpl implements CategoriesService {
     public Categories updateCategories(Categories categories) {
         return categoriesRepo.save(categories);
     }
+
+    @Override
+    public Categories findBycategoryName(String category) {
+        return categoriesRepo.findBycategoryName(category);
+    }
     
 }

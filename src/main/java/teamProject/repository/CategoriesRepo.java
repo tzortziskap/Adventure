@@ -6,6 +6,7 @@
 package teamProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.Categories;
 
@@ -15,5 +16,7 @@ import teamProject.entity.Categories;
  */
 @Repository
 public interface CategoriesRepo extends JpaRepository<Categories,Integer>{
+
+    public Categories findBycategoryName(String category);
     
 }

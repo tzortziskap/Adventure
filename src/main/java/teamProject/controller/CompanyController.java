@@ -49,14 +49,9 @@ public class CompanyController {
     private CredentialsService credentialsService;
 
     @GetMapping()
-    public String show(@ModelAttribute("event") Event event,Model model, HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if(principal!=null){
-            Credentials loginedUser = credentialsService.findByUsername(principal.getName());
-            List<Event> companysEvents = loginedUser.getCompany().getEventList();
-            model.addAttribute("loginedUser", loginedUser);
-            model.addAttribute("companysEvents", companysEvents);
-        }
+    public String show(@ModelAttribute("event") Event event, Model model, HttpServletRequest request) {
+        Credentials credentials = credentialsService.findByUsername(request.getUserPrincipal().getName());
+        model.addAttribute("companysEvents", credentials.getCompany().getEventList());
         return "company_index";
     }
     
@@ -67,7 +62,7 @@ public class CompanyController {
     }
     
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/register")
     public String create(@Valid @ModelAttribute("company") Company company, BindingResult result, RedirectAttributes attributes) {
         try {
             service.addCompany(company);
@@ -78,6 +73,7 @@ public class CompanyController {
             attributes.addAttribute("compEmailExist", ex.getMessage());
             return "redirect:/register";
         }
+        System.out.println(company.toString());
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
     }
 

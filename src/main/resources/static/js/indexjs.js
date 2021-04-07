@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 $(document).ready(function () {
-    
+
     var urlCounties = "http://localhost:8080/Adventure/county";
     $(".city").prop("disabled", true);
 
     $.getJSON(urlCounties, function (result) {
         $(".county").county(result);
     });
-    
+
     var urlCategories = "http://localhost:8080/Adventure/categories";
 
     $.getJSON(urlCategories, function (result) {
         $(".categories").categories(result);
     });
+
+    var urlTypeIndoorOutdoor = "http://localhost:8080/Adventure/typeIndoorOutdoor";
+
+    $.getJSON(urlTypeIndoorOutdoor, function (result) {
+        $(".typeIndoorOutdoor").typeIndoorOutdoor(result);
+    });
+
 
     $(".county").on("change", function () {
         var city = $("#form").find(".city");
@@ -43,11 +50,11 @@ $(document).ready(function () {
             return this.append(list.map(item => $('<option>', {
                     text: item.name,
                     value: item.id,
-                    name: "locationId.cityId.id"
+                    name: "locationId.cityId"
                 })));
         };
     })(jQuery);
-    
+
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.county = function (list) {
@@ -58,17 +65,28 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
-    
+
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.categories = function (list) {
             return this.append(list.map(item => $('<option>', {
                     text: item.categoryName,
                     value: item.id,
-                    name: "categoryId.id"
+                    name: "categoryId"
                 })));
         };
     })(jQuery);
-   
+
+    (function ($) {
+        // Populates a select drop-down with options in a list 
+        $.fn.typeIndoorOutdoor = function (list) {
+            return this.append(list.map(item => $('<option>', {
+                    text: item.typeIndoorOutdoor,
+                    value: item.id,
+                    name: "typeIndoorOutdoorId"
+                })));
+        };
+    })(jQuery);
+
 
 });

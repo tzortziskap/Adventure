@@ -40,9 +40,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer addCustomer(Customer customer) throws EmailExistException, UsernameExistException{
-        String plainPassword = customer.getCredentialsId().getPassword();
-        String hashedPassword = passwordEncoder.encode(plainPassword);
-        customer.getCredentialsId().setPassword(hashedPassword);
         customer.getCredentialsId().setRolesId(rolesService.getRolesById(1));
         credentialsService.addCredentials(customer.getCredentialsId());
         if(customerRepo.findByEmail(customer.getEmail())!=null){

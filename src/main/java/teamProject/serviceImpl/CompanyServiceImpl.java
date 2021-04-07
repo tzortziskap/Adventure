@@ -27,8 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private RolesService rolesService;
     @Autowired
     private CredentialsService credentialsService;
@@ -40,15 +38,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company addCompany(Company company) throws EmailExistException, UsernameExistException{
-        String plainPassword = company.getCredentialsId().getPassword();
-        String hashedPassword = passwordEncoder.encode(plainPassword);
-        company.getCredentialsId().setPassword(hashedPassword);
         company.getCredentialsId().setRolesId(rolesService.getRolesById(2)); 
         credentialsService.addCredentials(company.getCredentialsId());
         if(companyRepo.findByEmail(company.getEmail())!=null){
             throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
         }
         companyRepo.save(company);
+        
         return company;
     }
 

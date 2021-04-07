@@ -23,5 +23,7 @@ public interface CategoriesService {
     Categories getCategoriesById(int id) ;
 
     Categories updateCategories(Categories categories);
+
+    Categories findBycategoryName(String category);
     
 }

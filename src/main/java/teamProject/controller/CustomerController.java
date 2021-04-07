@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import teamProject.entity.Company;
 import teamProject.entity.Customer;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
@@ -37,12 +36,6 @@ public class CustomerController {
     @Autowired
     private CredentialsService credentialsService;
     
-
-
- @GetMapping("/register")
-    public String showForm(@ModelAttribute("customer") Customer customer,@ModelAttribute("company") Company company, Model model){
-        return "registerPage";
-    }
     
     @PostMapping("/register")
     public String create(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, RedirectAttributes attributes){

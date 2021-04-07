@@ -4,9 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: rgb(209, 209, 214);
-}
 
 h1{
     text-align: center;
@@ -22,10 +19,6 @@ h1:after{
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 0px;
-}
-.row {
-    background-color: white;
-    border-radius: 30px;
 }
 
 img {
@@ -57,6 +50,7 @@ label {
 #loginregister ul{
 	text-decoration: none;
 }
+
 #loginregister a{
 	float: left;
 	display: block;
@@ -66,6 +60,7 @@ label {
         padding-right: .5rem;
         margin-right: .5rem;
 }
+
 #loginregister a:hover{
     color: rgba(255,255,255,.75);
 }
@@ -73,4 +68,22 @@ label {
 main{
     margin-top: 100px;
 }
-#mapid { height: 200px; }
+
+#map{
+    margin-top: 100px;
+    width: 50%;
+    margin: 100px auto 0 auto;
+}
+
+#mapid { 
+    height: 600px; 
+
+}
+
+.col{
+    margin-top: 30px;
+}
+
+.card-main{
+    height: 150px;
+}

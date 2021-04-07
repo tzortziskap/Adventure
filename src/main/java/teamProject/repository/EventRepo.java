@@ -19,5 +19,9 @@ import teamProject.entity.Event;
 public interface EventRepo extends JpaRepository<Event,Integer>, JpaSpecificationExecutor<Event>{
 
     public List<Event> findBycompanyId(int id);
+
+    public List<Event> findBycategoryIdCategoryName(String category);
+
+    public List<Event> findBycategoryId(int category);
     
 }

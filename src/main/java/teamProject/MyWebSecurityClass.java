@@ -36,7 +36,10 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/company/register").permitAll()
                 .antMatchers("/company/**").hasAuthority("COMPANY")
+                .antMatchers("/customer/register").permitAll()
+                .antMatchers("/customer/**").hasAuthority("CUSTOMER")
                 .antMatchers("/event/create").hasAuthority("COMPANY")
                 .antMatchers("/event/register").hasAuthority("CUSTOMER")
                 .and()

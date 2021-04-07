@@ -57,5 +57,16 @@ public class EventServiceImpl implements EventService {
     public List<Event> findEventsBycompanyId(int id) {
         return eventRepo.findBycompanyId(id);
     }
+
+    @Override
+    public List<Event> getEventsByCategoryName(String category) {
+        return eventRepo.findBycategoryIdCategoryName(category);
+    }
+
+    @Override
+    public List<Event> getEventsByCategoryId(int category) {
+        return eventRepo.findBycategoryId(category);
+    }
+    
     
 }

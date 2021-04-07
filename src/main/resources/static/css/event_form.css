@@ -51,22 +51,6 @@ img {
     color: black;
 }
 
-footer {
-    text-align: center;
-    color: whitesmoke;
-    line-height: 50px;
-    position: sticky;
-    bottom: 0;
-    background-color: aqua;
-    width: 100%;
-}
-
-footer a {
-    text-decoration: none;
-    color: whitesmoke;
-}
-
-
 input {}
 #mapid { height: 180px; }
 
@@ -144,4 +128,16 @@ select{
 
 .container{
     margin-top: 100px;
+}
+#loginregister ul{
+	text-decoration: none;
+}
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
 }

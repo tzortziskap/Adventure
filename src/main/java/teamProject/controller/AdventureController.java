@@ -27,23 +27,10 @@ import teamProject.service.TypeIndoorOutdoorService;
 @RequestMapping("/")
 @Controller
 public class AdventureController {
-    
-    @Autowired
-    private CountyService countyService;
-    @Autowired
-    private TypeIndoorOutdoorService indoorOutdoorService;
-    
+
     @GetMapping()
     public String showHome(Model model){
-        model.addAttribute("counties", countyService.getCountys());
-        model.addAttribute("indoorOutdoors", indoorOutdoorService.getTypeIndoorOutdoors());
         return "index";
-    }
-    
-    @ResponseBody
-    @GetMapping("/{id}")
-    public ResponseEntity<City> returnCities(@PathVariable("id") int id, Model model){
-        return new ResponseEntity(countyService.getCountyById(id).getCityList(), HttpStatus.OK);
     }
     
     @GetMapping("/access-denied")

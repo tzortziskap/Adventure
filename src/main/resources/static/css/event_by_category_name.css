@@ -8,15 +8,27 @@ body {
     background-color: rgb(209, 209, 214);
 }
 
-.row {
-    background-color: white;
-    border-radius: 30px;
+h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
 }
 
 img {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
+
 label {
     justify-content: left !important;
 }
@@ -37,32 +49,11 @@ label {
     border: 1px solid;
     color: black;
 }
-.mati{
-    margin-left: 5px;
-}
-.error{
-    color: red;
-}
-h1{
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-h1:after{
-    display: block;
-    height: 2px;
-    background-color: black;
-    content: " ";
-    width: 200px;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 0px;
-}
-
 
 #loginregister ul{
 	text-decoration: none;
 }
+
 #loginregister a{
 	float: left;
 	display: block;
@@ -72,6 +63,35 @@ h1:after{
         padding-right: .5rem;
         margin-right: .5rem;
 }
+
 #loginregister a:hover{
     color: rgba(255,255,255,.75);
+}
+
+main{
+    margin-top: 100px;
+}
+
+#map{
+    margin-top: 100px;
+    width: 50%;
+    margin: 100px auto 0 auto;
+}
+
+#mapid { 
+    height: 600px; 
+
+}
+
+.col{
+    margin-top: 30px;
+}
+
+.card-main{
+    height: 150px;
+}
+
+#numberWithLeftButton {
+  display: flex;
+  justify-content: space-between;
 }

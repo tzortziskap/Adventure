@@ -20,8 +20,12 @@
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>        <title>Registration</title>
-        <link rel="stylesheet" href="css/register.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>  
+        <title>Εγγραφή</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/register.css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+
     </head>
     <body>
         <div class="container-fluid">   
@@ -59,6 +63,12 @@
                             <a class="nav-link" href="http://localhost:8080/Adventure/register">Εγγραφή</a>
                         </c:if>
                         <c:if test="${loggedInUser != null}">
+                            <security:authorize access="hasAuthority('CUSTOMER')">
+                                <a class="nav-link"  href="http://localhost:8080/Adventure/customer">Το προφίλ μου</a>
+                            </security:authorize>
+                            <security:authorize access="hasAuthority('COMPANY')">
+                                <a class="nav-link"  href="http://localhost:8080/Adventure/company">Το προφίλ μου</a>
+                            </security:authorize>
                             <form:form class="d-flex" action="${pageContext.request.contextPath}/logout" method="POST">
                                 <input type="submit" value="Logout" class="form-control me-2">
                             </form:form>
@@ -134,14 +144,14 @@
                                 <div class="col-lg-4">
                                     <label for="custemail">Ε-mail:</label>
                                     <c:if test="${custEmailExist != null}">
-                                        <i>${custEmailExist}</i>
+                                        <i class="error">${custEmailExist}</i>
                                     </c:if>
                                     <input type="email" class="form-control" name="email" id="custemail"  placeholder="Ε-mail..." required >
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="custusername">Username:</label>
                                     <c:if test="${custUsernameExist != null}">
-                                        <i>${custUsernameExist}</i>
+                                        <i class="error">${custUsernameExist}</i>
                                     </c:if>
                                     <input class="form-control" name="credentialsId.username" id="custusername"  placeholder="Enter your Username" required >
                                 </div>
@@ -212,7 +222,7 @@
                                 <div class="col-lg-6">
                                     <label for="compemail">Ε-mail:</label>
                                     <c:if test="${compEmailExist != null}">
-                                        <i>${compEmailExist}</i>
+                                        <i class="error">${compEmailExist}</i>
                                     </c:if>
                                     <input type="email" class="form-control" name="email" id="compemail"  placeholder="Ε-mail..." required >
 
@@ -220,7 +230,7 @@
                                 <div class="col-lg-6">
                                     <label for="compusername">Username:</label>
                                     <c:if test="${compUsernameExist != null}">
-                                        <i>${compUsernameExist}</i>
+                                        <i class="error">${compUsernameExist}</i>
                                     </c:if>
                                     <input class="form-control" name="credentialsId.username" id="compusername"  placeholder="Enter your Username" required >
 
@@ -252,6 +262,50 @@
                 </div>
             </div>
         </section>
+        <footer class="footer" id="footer">
+            <div class="inner_footer">
+                <div class="logo_container">
+
+                </div>
+
+                <div class="footer_third">
+                    <h1>Χρειάζεστε βοήθεια;</h1>
+                    <a href="#">Όροι &amp; Προϋποθέσεις</a>
+                    <a href="#">Πολιτική απορρήτου</a>
+                </div>
+                <div class="footer_third">
+                    <h1>Περισσότερα</h1>
+                    <a href="#">Φυλλάδια</a>
+                    <a href="#">Δωρεά</a>
+                    <a href="#">Διακυβέρνηση</a>
+                    <a href="#">Αναφορές αντικτύπου</a>
+                </div>
+                <div class="footer_third">
+                    <h1>Ακολουθησέ μας</h1>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus-official"></i></a></li>
+
+                    <span>
+                        © 2021 Adventure Booking<br>
+                        Greece, Athens<br>
+                        77 Ermou Street 18537<br>
+                        Monday - Saturday 09:00 - 18:00<br>
+                        2106000018, 6983333347<br>
+                        adventurebookinggroupproject@gmail.com
+                    </span>
+                </div>
+                <div class="map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12580.106256748013!2d23.718013433025146!3d37.97650937556948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd2327d1bb15%3A0xa3501c4310ecdfb8!2zzpXPgc68zr_PjSA3NywgzpHOuM6uzr3OsSAxMDUgNTU!5e0!3m2!1sel!2sgr!4v1609183451261!5m2!1sel!2sgr"
+                        width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                        tabindex="0"></iframe>
+                </div>
+            </div>
+        </footer>
         <script src="js/registerjs.js"></script>
     </body>
 </html>

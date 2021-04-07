@@ -6,50 +6,94 @@
 
 $(document).ready(function () {
 
-    var urlCategories = "http://localhost:8080/Adventure/categories";
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const values = urlParams.values();
+    const keys = urlParams.keys();
+    const entries = urlParams.entries();
+    firstloads();
+    function firstloads() {
 
+        var checknullvalues = true;
+        var query = '';
+        var varia = '';
+        for (const entry of entries) {
+
+            if (entry[1] !== '') {
+                checknullvalues = false;
+                varia = `${entry[0]}: ${entry[1]}`;
+            }
+            if (query === '' && varia !== '') {
+                query = varia;
+            } else if (query !== '' && varia !== '') {
+                query = query + " AND " + varia;
+            }
+        }
+
+        if (checknullvalues === true) {
+            $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
+                createpoints(results);
+            });
+        } else {
+            $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (results) {
+                createpoints(results);
+            });
+        }
+    }
+
+    var urlCategories = "http://localhost:8080/Adventure/categories";
     $.getJSON(urlCategories, function (result) {
         $(".categories").categories(result);
+        if (urlParams.get("categoryId.id") !== '') {
+            $(".categories").val(urlParams.get("categoryId.id"));
+        }
     });
 
     var urlDifficulty = "http://localhost:8080/Adventure/difficulty";
-
     $.getJSON(urlDifficulty, function (result) {
         $(".difficulty").difficulty(result);
     });
 
     var urlTypeIndoorOutdoor = "http://localhost:8080/Adventure/typeIndoorOutdoor";
-
     $.getJSON(urlTypeIndoorOutdoor, function (result) {
         $(".typeIndoorOutdoor").typeIndoorOutdoor(result);
+        if (urlParams.get("typeIndoorOutdoorId.id") !== '') {
+            $(".typeIndoorOutdoor").val(urlParams.get("typeIndoorOutdoorId.id"));
+        }
     });
 
     var urlCounties = "http://localhost:8080/Adventure/county";
     $(".city").prop("disabled", true);
-
     $.getJSON(urlCounties, function (result) {
         $(".county").county(result);
+        if (urlParams.get("locationId.cityId.countyId.id") !== '') {
+            $(".county").val(urlParams.get("locationId.cityId.countyId.id"));
+            cityselector();
+        }
     });
 
-
-    $(".county").on("change", function () {
+    $(".county").on("change", cityselector);
+    function cityselector() {
         var city = $("#form").find(".city");
         city.val('');
-        if ($(this).find(">:first-child").is(":selected")) {
+        if ($(".county").find(">:first-child").is(":selected")) {
             city.prop("disabled", true);
             city.find(">:first-child").prop("selected", true);
             city.val(city.find(">:first-child").val());
         } else {
-            var data = $(this).children("option:selected").val();
+            var data = $(".county").children("option:selected").val();
             var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
                 city.append('<option value="">Choose...</option>');
                 city.citiesByCounty(result);
                 city.prop("disabled", false);
+                if (urlParams.get("locationId.cityId.id") !== '') {
+                    city.val(urlParams.get("locationId.cityId.id"));
+                }
             });
         }
-    });
+    }
 
     $("#form").find(".inputSearching").on("keyup", sendRequest);
     $("#form").find(".selectSearching").on("change", sendRequest);
@@ -82,71 +126,45 @@ $(document).ready(function () {
         });
     }
 
-    $("form").submit(function () {
-        $("form").children().each(function (index, obj) {
-            if ($(obj).val() == "") {
-                $(obj).remove();
-            }
-        });
-    });
-
-    $("#form").submit(function (event) {
-        event.preventDefault();
-        var form = $(this);
-        $.ajax({
-            type: "GET",
-            url: "/Adventure/event/search/results",
-            dataType: 'json',
-            data: form.serialize()
-        }).done(function (results) {
-            let points = [];
-            var my_obj = JSON.parse((JSON.stringify(results)));
-            //alert(results);
-            $('#eventstable tbody').html('');
-            $("#map").html("");
-            $("#map").append("<h3>Χάρτης</h3>");
-            $("#map").html('<div id="mapid" >></div>');
-            createpoints(results);
-        });
-    });
-
-    $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
-        createpoints(results);
-    });
-
     function createpoints(results) {
         document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.length;
-        $('#eventstable tbody').html('');
+        $('#events').html('');
         $("#map").html("");
-        $("#map").append("<h3>Χάρτης</h3>");
         $("#map").html('<div id="mapid" ></div>');
         let points = [];
-
         for (var i = 0; i < results.length; i++) {
-            let book;
-            let link;
-            var row = $('<tr ><td>' + results[i].name + '</td>' +
-                    '<td>' + results[i].startingDate + '</td>' +
-                    '<td>' + results[i].endingDate + '</td>' +
-                    '<td>' + results[i].price + '</td>' +
-                    '<td>' + results[i].difficultyId.level + '</td>' +
-                    '<td>' + results[i].categoryId.categoryName + '</td>' +
-                    '<td>' + results[i].typeIndoorOutdoorId.typeIndoorOutdoor + '</td>' +
-                    '<td>' + JSON.stringify(results[i].positions) + '</td>' +
-//                    '<td><a href="' + link + '">' + book + '</a></td>' +
-                    //'<td>' + results.event[i].locationId.coordinateX + '</td>' +
-                    //'<td>' + results.event[i].locationId.coordinateY + '</td>' +
-                    "</tr>");
+            var row = "<div class='col'> " +
+                    "<div class='card h-100'> " +
+                    "<img " +
+                    "src='/Adventure/img/" + results[i].categoryId.imgurl + "' " +
+                    "class='card-img-top' " +
+                    "alt='" + results[i].categoryId.categoryName + "' " +
+                    "style='height: 200px' " +
+                    "/> " +
+                    "<div class='card-body card-main'> " +
+                    "<h5 class='card-title'>" + results[i].name + "</h5> " +
+                    "<p class='card-text'>" + results[i].description + "</p> " +
+                    "</div> " +
+                    "<ul class='list-group list-group-flush'> " +
+                    "<li class='list-group-item'></li> " +
+                    "<li class='list-group-item'></li> " +
+                    "<li class='list-group-item'></li> " +
+                    "</ul> " +
+                    "<div class='card-body'> " +
+                    "<a href='/Adventure' class='btn btn-primary btn-md'>Κράτηση</a> " +
+                    "<a href='/Adventure' class='btn btn-primary btn-md'>Περισσότερα</a> " +
+                    "</div> " +
+                    "</div> " +
+                    "</div>";
             points.push({name: results[i].name, x: results[i].locationId.coordinateX,
                 y: results[i].locationId.coordinateY,
                 start: results[i].startingDate,
                 end: results[i].endingDate,
                 type: results[i].categoryId.categoryName});
-            $('#eventstable tbody').append(row);
+            $('#events').append(row);
         }
 
         createmap(points);
-
     }
 
     function createmap(result) {
@@ -174,7 +192,7 @@ $(document).ready(function () {
     }
 
     (function ($) {
-        // Populates a select drop-down with options in a list 
+// Populates a select drop-down with options in a list 
         $.fn.citiesByCounty = function (list) {
             return this.append(list.map(item => $('<option>', {
                     text: item.name,
@@ -183,7 +201,6 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
-
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.county = function (list) {
@@ -194,7 +211,6 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
-
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.categories = function (list) {
@@ -205,7 +221,6 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
-
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.difficulty = function (list) {
@@ -216,7 +231,6 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
-
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.typeIndoorOutdoor = function (list) {

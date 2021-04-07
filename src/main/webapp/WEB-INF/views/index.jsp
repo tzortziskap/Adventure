@@ -27,7 +27,8 @@
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="css/index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
         <title>Adventure Booking</title>
     </head>
     <body>
@@ -53,7 +54,7 @@
                                 </li>
                             </security:authorize>
                             <li class="nav-item">
-                                <a class="nav-link" href="http:/localhost:8080/Adventure/#aboutus">Σχετικά με εμάς</a>
+                                <a class="nav-link" href="http:/localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#footer">Πληροφορίες</a>
@@ -66,6 +67,12 @@
                             <a class="nav-link" href="http://localhost:8080/Adventure/register">Εγγραφή</a>
                         </c:if>
                         <c:if test="${loggedInUser != null}">
+                            <security:authorize access="hasAuthority('CUSTOMER')">
+                                <a class="nav-link"  href="http://localhost:8080/Adventure/customer">Το προφίλ μου</a>
+                            </security:authorize>
+                            <security:authorize access="hasAuthority('COMPANY')">
+                                <a class="nav-link"  href="http://localhost:8080/Adventure/company">Το προφίλ μου</a>
+                            </security:authorize>
                             <form:form class="d-flex" action="${pageContext.request.contextPath}/logout" method="POST">
                                 <input type="submit" value="Logout" class="form-control me-2">
                             </form:form>
@@ -77,7 +84,7 @@
         <div class="container">
             <main>
                 <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                <h3>Our main events by Category</h3>
+                <h3>Βασικές Κατηγορίες Δραστηριοτήτων</h3>
                 <!--Carousel Wrapper-->
                 <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
                     <!--Controls-->
@@ -106,7 +113,7 @@
                                         <h4 class="card-title">Πεζοπορία</h4>
                                         <p class="card-text">Η Πεζοπορία απευθύνεται σε όλους του ανθρώπους ανεξαρτήτου ηλικίας 
                                             και ειδικά σε όσους αγαπούν το περπάτημα και την περιπλάνηση στη φύση!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Πεζοπορία" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +126,7 @@
                                         <p class="card-text">Οι τοξότες αποκτούν πνευματική δύναμη. 
                                             Με την προπόνηση αναπτύσσουν ικανότητες συγκέντρωσης, 
                                             ακρίβειας και υπομονής!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Τοξοβολία" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +137,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Ιππασία</h4>
                                         <p class="card-text">Η ιππασία λοιπόν, είναι μία δραστηριότητα που δεν κάνει διακρίσεις, απευθύνεται σε μικρούς και μεγάλους!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Ιππασία" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +153,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Μαγειρική</h4>
                                         <p class="card-text">Μαθήματα Μαγειρικής και Ζαχαροπλαστικής για ερασιτέχνες και επαγγελματίες. Απόλυτα πρακτικά!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Μαγειρική" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +164,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Κατάδυση</h4>
                                         <p class="card-text">Ανακάλυψε τον συναρπαστικό κόσμο που βρίσκεται κάτω από την θάλασσα!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Κατάδυση" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +176,7 @@
                                         <h4 class="card-title">Αναρρίχηση</h4>
                                         <p class="card-text">Το σκαρφάλωμα είναι μέσα στο DNA μας οπότε μας ταιριάζει. 
                                             Θυμάσαι που σαν παιδί σκαρφάλωνες στα δέντρα και στις ξερολιθιές!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Αναρρίχηση" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +194,7 @@
                                         <p class="card-text">Μέσα σε ένα κανό καγιάκ, μερικά μόλις εκατοστά πάνω από το νερό, 
                                             βρισκόμαστε στο ιδανικό σημείο για να απολαύσουμε το ποτάμι και την φύση 
                                             και να χαλαρώσουμε εντελώς. </p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Κανό Καγιάκ" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +205,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Ski</h4>
                                         <p class="card-text">Ααααχ, φύση, καθαρός αέρας, χιονισμένα τοπία, λευκές βουνοκορφές, πανύψηλα πεύκα, μαγικά χρώματα, η αίσθηση των ζεστών ακτίνων του ήλιου στο πρόσωπο. Μαγεία!</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Ski" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +218,7 @@
                                         <p class="card-text">Η ορεινή ποδηλασία οδηγεί σε απομακρυσμένες περιοχές, 
                                             όπου μπορεί αυτόματα να βοηθήσει στη χαλάρωση, ιδιαίτερα τα άτομα που ζουν, 
                                             σε μια μεγάλη και θορυβώδη πόλη.</p>
-                                        <a class="btn btn-primary">Μάθε περισσότερα</a>
+                                        <a href="${pageContext.request.contextPath}/event/categoryName/Ορεινή ποδηλασία" class="btn btn-primary">Μάθε περισσότερα</a>
                                     </div>
                                 </div>
                             </div>
@@ -221,36 +228,38 @@
                     <!--/.Slides-->
                     <!--/.Carousel Wrapper-->
                 </div>
-                <form id="form">
+                <form:form action="/Adventure/event/search" id="form" method="GET">
                     <h2>Search for an Event</h2>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="categories">Κατηγορία</label>
-                            <select id="categories" class="form-control categories">
+                            <select name="categoryId.id" id="categories" class="form-control categories">
                                 <option value=''>Choose...</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="county">Νομός</label>
-                            <select  id="county" class="form-control county">
+                            <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
                                 <option value=''>Choose...</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4">Starting date</label>
-                            <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+                            <label for="type">Τύπος</label>
+                            <select name="typeIndoorOutdoorId.id" id="type" class="form-control typeIndoorOutdoor searching selectSearching">
+                                <option  value=''>Choose...</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="city">Πόλη</label>
-                            <select id="city" class="form-control city">
+                            <select name="locationId.cityId.id" id="city" class="form-control city">
                                 <option value=''>Choose...</option>
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary searcheve">Search for evants</button>
-                </form>
+                    <button type="submit" class="btn btn-primary searcheve">Αναζήτηση Δραστηριοτήτων</button>
+                </form:form>
             </main>
         </div>
         <footer class="footer" id="footer">
@@ -260,19 +269,19 @@
                 </div>
 
                 <div class="footer_third">
-                    <h1>Need Help?</h1>
-                    <a href="#">Terms &amp; Conditions</a>
-                    <a href="#">Privacy Policy</a>
+                    <h1>Χρειάζεστε βοήθεια;</h1>
+                    <a href="#">Όροι &amp; Προϋποθέσεις</a>
+                    <a href="#">Πολιτική απορρήτου</a>
                 </div>
                 <div class="footer_third">
-                    <h1>More</h1>
-                    <a href="#">Brounchures</a>
-                    <a href="#">Donate</a>
-                    <a href="#">Governance</a>
-                    <a href="#">Impact Reports</a>
+                    <h1>Περισσότερα</h1>
+                    <a href="#">Φυλλάδια</a>
+                    <a href="#">Δωρεά</a>
+                    <a href="#">Διακυβέρνηση</a>
+                    <a href="#">Αναφορές αντικτύπου</a>
                 </div>
                 <div class="footer_third">
-                    <h1>Follow us</h1>
+                    <h1>Ακολουθησέ μας</h1>
                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
@@ -281,12 +290,12 @@
                     <li><a href="#"><i class="fa fa-google-plus-official"></i></a></li>
 
                     <span>
-                        © 2020 University of Kapellas Tzortzis<br>
+                        © 2021 Adventure Booking<br>
                         Greece, Athens<br>
                         77 Ermou Street 18537<br>
                         Monday - Saturday 09:00 - 18:00<br>
                         2106000018, 6983333347<br>
-                        privateschool@info.com
+                        adventurebookinggroupproject@gmail.com
                     </span>
                 </div>
                 <div class="map">

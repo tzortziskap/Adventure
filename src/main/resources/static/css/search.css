@@ -43,3 +43,16 @@ h1:after{
 #loginregister a:hover{
     color: rgba(255,255,255,.75);
 }
+
+.card-main{
+    height: 150px;
+}
+
+.col{
+    margin-top: 30px;
+}
+
+h3{
+    margin-top: 30px;
+}
+
