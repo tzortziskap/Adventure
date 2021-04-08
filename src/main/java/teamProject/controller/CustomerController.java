@@ -5,8 +5,14 @@
  */
 package teamProject.controller;
 
+import java.security.Principal;
+import java.text.ParseException;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import teamProject.entity.Credentials;
 import teamProject.entity.Customer;
+import teamProject.entity.CustomerBooksEvent;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 import teamProject.service.CredentialsService;
@@ -36,6 +45,10 @@ public class CustomerController {
     @Autowired
     private CredentialsService credentialsService;
     
+    @GetMapping()
+    public String show() {
+        return "customer_index";
+    }
     
     @PostMapping("/register")
     public String create(@Valid @ModelAttribute("customer") Customer customer, BindingResult result, RedirectAttributes attributes){
@@ -70,5 +83,13 @@ public class CustomerController {
         service.updateCustomer(customer);
         return " ";
     }
+    
+    @GetMapping("/getmybookings/{id}")
+    @ResponseBody
+    public ResponseEntity getAvaliableEvents(@PathVariable("id") int id) throws ParseException {
+         Customer customer = service.getCustomerById(id);
+         List<CustomerBooksEvent> events = customer.getCustomerBooksEventList();
+         return new ResponseEntity<>(events, HttpStatus.OK);
+     }
 }
 

@@ -5,6 +5,7 @@
  */
 package teamProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -86,15 +87,19 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "postal_code")
     private String postalCode;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
     private List<CustomerBooksEvent> customerBooksEventList;
     @JoinColumn(name = "city_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private City cityId;
+    @JsonIgnore
     @JoinColumn(name = "credentials_id", referencedColumnName = "id")
     @OneToOne(optional = false)
     private Credentials credentialsId;
-
+    @JoinColumn(name = "gender_id", referencedColumnName = "id")
+    @ManyToOne
+    private Gender genderId;
     public Customer() {
 }
 
@@ -193,6 +198,14 @@ public class Customer implements Serializable {
         this.credentialsId = credentialsId;
     }
 
+    public Gender getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(Gender genderId) {
+        this.genderId = genderId;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

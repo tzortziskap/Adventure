@@ -57,13 +57,9 @@ img{
 .searcheve{
     margin-top: 10px
 }
-#loginregister ul{
-	text-decoration: none;
-}
+
 #loginregister a{
 	float: left;
-	display: block;
-        justify-content: space-between;
 	color: #fff;
         padding-left: .5rem;
         padding-right: .5rem;

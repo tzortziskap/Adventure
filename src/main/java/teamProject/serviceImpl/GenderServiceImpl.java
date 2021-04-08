@@ -9,40 +9,40 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import teamProject.entity.City;
-import teamProject.repository.CityRepo;
-import teamProject.service.CityService;
+import teamProject.entity.Gender;
+import teamProject.repository.GenderRepo;
+import teamProject.service.GenderService;
 
 @Transactional
 @Service
-public class CityServiceImpl implements CityService {
+public class GenderServiceImpl implements GenderService {
     
 @Autowired
-    private CityRepo cityRepo;
+    private GenderRepo genderRepo;
 
     @Override
-    public List<City> getCitys() {
-        return cityRepo.findAll();
+    public List<Gender> getGenders() {
+        return genderRepo.findAll();
     }
 
     @Override
-    public void addCity(City city) {
-        cityRepo.save(city);
+    public void addGender(Gender gender) {
+        genderRepo.save(gender);
     }
 
     @Override
-    public void deleteCity(int id) {
-        cityRepo.deleteById(id);
+    public void deleteGender(int id) {
+        genderRepo.deleteById(id);
     }
 
     @Override
-    public City getCityById(int id) {
-        return cityRepo.findById(id).get();
+    public Gender getGenderById(int id) {
+        return genderRepo.findById(id).get();
     }
 
     @Override
-    public City updateCity(City city) {
-        return cityRepo.save(city);
+    public Gender updateGender(Gender gender) {
+        return genderRepo.save(gender);
     }
     
 }

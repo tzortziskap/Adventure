@@ -8,12 +8,13 @@ package teamProject.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.Equipment;
+import teamProject.entity.Gender;
 
 /**
  *
  * @author tzortziskapellas
  */
 @Repository
-public interface EquipmentRepo extends JpaRepository<Equipment,Integer>{
+public interface GenderRepo extends JpaRepository<Gender,Integer>{
     
 }

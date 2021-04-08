@@ -95,6 +95,7 @@ public class Event implements Serializable {
     private Categories categoryId;
     @ManyToMany(mappedBy = "eventList")
     private List<Equipment> equipmentList;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
     private List<CustomerBooksEvent> customerBooksEventList;
     @JoinColumn(name = "company_id", referencedColumnName = "id")
@@ -196,7 +197,6 @@ public class Event implements Serializable {
         this.categoryId = categoryId;
     }
 
-    
     @XmlTransient
     public List<Equipment> getEquipmentList() {
         return equipmentList;

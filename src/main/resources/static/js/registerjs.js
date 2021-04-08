@@ -62,6 +62,13 @@ $(document).ready(function () {
             });
         }
     });
+    var urlGender = "http://localhost:8080/Adventure/gender";
+    
+    $.getJSON(urlGender, function (result) {
+        $(".gender").each(function () {
+            $(this).gender(result);
+        });
+    });
 
 
     (function ($) {
@@ -82,6 +89,17 @@ $(document).ready(function () {
                     text: item.name,
                     value: item.id,
                     name: "county"
+                })));
+        };
+    })(jQuery);
+    
+    (function ($) {
+        // Populates a select drop-down with options in a list 
+        $.fn.gender = function (list) {
+            return this.append(list.map(item => $('<option>', {
+                    text: item.name,
+                    value: item.id,
+                    name: "genderId"
                 })));
         };
     })(jQuery);

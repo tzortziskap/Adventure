@@ -112,7 +112,7 @@
                         </form:form>
                         <div id="formFooter">
                             <p>Δεν έχεις λογαριασμό;
-                                <a class="underlineHover" href="register">Κάνε εγγραφή τώρα</a>
+                                <a class="underlineHover" href="${pageContext.request.contextPath}/register">Κάνε εγγραφή τώρα</a>
                         </div>
                         </p>
                     </div>

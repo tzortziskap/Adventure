@@ -6,22 +6,22 @@
 package teamProject.service;
 
 import java.util.List;
-import teamProject.entity.Equipment;
+import teamProject.entity.Gender;
 
 /**
  *
  * @author tzortziskapellas
  */
 
-public interface EquipmentService{
+public interface GenderService{
     
-    List<Equipment> getEquipments();
+    List<Gender> getGenders();
 
-    void addEquipment(Equipment equipment);
+    void addGender(Gender gender);
 
-    void deleteEquipment(int id);
+    void deleteGender(int id);
 
-    Equipment getEquipmentById(int id) ;
+    Gender getGenderById(int id) ;
 
-    Equipment updateEquipment(Equipment equipment);
+    Gender updateGender(Gender gender);
 }

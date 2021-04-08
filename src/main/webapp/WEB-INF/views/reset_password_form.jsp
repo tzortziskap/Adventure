@@ -85,6 +85,7 @@
                     <h1>Χρειάζεστε βοήθεια;</h1>
                     <a href="#">Όροι &amp; Προϋποθέσεις</a>
                     <a href="#">Πολιτική απορρήτου</a>
+                    <a href="${pageContext.request.contextPath}/chat">Online Βοήθεια</a>
                 </div>
                 <div class="footer_third">
                     <h1>Περισσότερα</h1>

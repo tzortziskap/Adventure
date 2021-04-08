@@ -13,24 +13,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import teamProject.entity.Difficulty;
-import teamProject.service.DifficultyService;
+import teamProject.entity.Gender;
+import teamProject.service.GenderService;
 
 /**
  *
  * @author tzortziskapellas
  */
 @Controller
-@RequestMapping("/difficulty")
-public class DifficultyController {
+@RequestMapping("/gender")
+public class GenderController {
         
     @Autowired
-    private DifficultyService difficultyService;
+    private GenderService genderService;
     
     @GetMapping()
     @ResponseBody
-    public ResponseEntity<List<Difficulty>> getCountys(){
-        return new ResponseEntity(difficultyService.getDifficultys(), HttpStatus.OK);
+    public ResponseEntity<List<Gender>> getCountys(){
+        return new ResponseEntity(genderService.getGenders(), HttpStatus.OK);
     }
     
 }

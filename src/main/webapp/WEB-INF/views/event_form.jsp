@@ -94,7 +94,6 @@
                 </div>
             </nav>
         </div>
-    </div>
     <main>
 
         <section class="Form my-4 mx-5">
@@ -245,6 +244,7 @@
                 <h1>Χρειάζεστε βοήθεια;</h1>
                 <a href="#">Όροι &amp; Προϋποθέσεις</a>
                 <a href="#">Πολιτική απορρήτου</a>
+                <a href="${pageContext.request.contextPath}/chat">Online Βοήθεια</a>
             </div>
             <div class="footer_third">
                 <h1>Περισσότερα</h1>
@@ -279,6 +279,6 @@
             </div>
         </div>
     </footer>
-    <script src="${pageContext.request.contextPath}/js/event_form.js"></script>
+    <script src="http://localhost:8080/Adventure/js/event_form.js"></script>
 </body>
 </html>

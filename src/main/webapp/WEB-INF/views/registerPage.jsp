@@ -100,39 +100,48 @@
                         <form:form id="guestForm" method="post" action="${pageContext.request.contextPath}/customer/register" modelAttribute="customer">
 
                             <div class="form-inline my-3 ">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custfirstname">Όνομα:</label>
                                     <input type="text" class="form-control" name="firstname" id="custfirstname"  placeholder="Όνομα..." required autofocus >
                                 </div>
-                                <div class="col-lg-4 ">
+                                <div class="col-lg-6 ">
                                     <label for="custlastname">Επίθετο:</label>
                                     <input type="text" class="form-control" name="lastname" id="custlastname"  placeholder="Επίθετο..." required >
                                 </div>
-                                <div class="col-lg-4">
+                            </div>
+
+                            <div class="form-inline my-3 ">
+                                <div class="col-lg-6">
                                     <label for="custdateOfBirth">Ημερομηνία Γέννησης</label>
                                     <input type="date" class="form-control" name="dateOfBirth" id="custdateOfBirth" required >
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="custgender">Φύλο</label>
+                                    <select name="genderId" class="gender form-control" id="custgender" required>
+                                        <option  value=''>Choose...</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-inline my-3">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custaddress">Διεύθυνση:</label>
                                     <input type="text" class="form-control" name="address" id="custaddress"  placeholder="Διεύθυνση..." required >
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custpostalCode">Ταχυδρομικός Κώδικας:</label>
                                     <input type="text" class="form-control" name="postalCode" id="custpostalCode"  placeholder="Ταχυδρομικός Κώδικας..." required >
                                 </div>
                             </div>
 
                             <div class="form-inline my-3 ">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custcounty">Νομός:</label>
                                     <select  class="county form-control" id="custcountycounty" required>
                                         <option  value=''>Choose...</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-4 ">
+                                <div class="col-lg-6 ">
                                     <label for="custcity">Πόλη:</label>
                                     <select name="cityId"  class="city form-control" id="custcity" required>
                                         <option value=''>Choose...</option>
@@ -141,14 +150,14 @@
                             </div>
 
                             <div class="form-inline my-3 ">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custemail">Ε-mail:</label>
                                     <c:if test="${custEmailExist != null}">
                                         <i class="error">${custEmailExist}</i>
                                     </c:if>
                                     <input type="email" class="form-control" name="email" id="custemail"  placeholder="Ε-mail..." required >
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custusername">Username:</label>
                                     <c:if test="${custUsernameExist != null}">
                                         <i class="error">${custUsernameExist}</i>
@@ -158,23 +167,23 @@
                             </div>
 
                             <div class="form-inline my-3 ">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custpassword">Συνθηματικό:</label>
                                     <input type="password" class="form-control password" name="credentialsId.password" id="custpassword"  placeholder="Συνθηματικό..." required >
                                     <form:errors class="form-control" path="credentialsId.password"/>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="custconfpassword"> Eπιβεβαίωση Συνθηματικό:</label>
                                     <input type="password" class="form-control password" id="custconfpassword"  placeholder="Συνθηματικό..."  required >
                                 </div>
                             </div>
                             <div class="form-inline my-3 ">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <input type="checkbox" class="mati" > Δες τον κωδικό
                                 </div>
                             </div>
                             <br>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <input type="submit" value="Εγγραφή" class="btn1 mt-3 mb-5">
                             </div>
 
@@ -272,6 +281,7 @@
                     <h1>Χρειάζεστε βοήθεια;</h1>
                     <a href="#">Όροι &amp; Προϋποθέσεις</a>
                     <a href="#">Πολιτική απορρήτου</a>
+                    <a href="${pageContext.request.contextPath}/chat">Online Βοήθεια</a>
                 </div>
                 <div class="footer_third">
                     <h1>Περισσότερα</h1>

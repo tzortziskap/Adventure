@@ -16,6 +16,7 @@
     <class>teamProject.entity.Difficulty</class>
     <class>teamProject.entity.TypeIndoorOutdoor</class>
     <class>teamProject.entity.County</class>
+    <class>teamProject.entity.Gender</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/adventure?serverTimeZone=Europe/Athens"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
