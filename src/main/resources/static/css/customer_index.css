@@ -90,7 +90,6 @@ main{
 .body {
     color: #797979;
     background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
     font-size: 13px;
@@ -207,10 +206,6 @@ main{
     -webkit-border-radius: 4px 4px 0 0;
     font-size: 16px;
     font-weight: 300;
-}
-
-.bio-graph-info {
-    color: #89817e;
 }
 
 .bio-graph-info h1 {
@@ -462,4 +457,16 @@ ul.summary-list > li:last-child  {
 
 .activity-desk .album a:last-child{
     margin-right: 0px;
+}
+
+#number{
+    margin-top: 50px;
+}
+
+.bookings{
+    margin-top: 50px;
+}
+
+.suggestions{
+    margin-top: 50px;
 }

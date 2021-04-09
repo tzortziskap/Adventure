@@ -28,8 +28,17 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+        <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+        <!-- Maps -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+              crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                crossorigin=""
+        ></script>
         <link href="http://localhost:8080/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
         <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -92,14 +101,14 @@
                             <div class="panel">
                                 <div class="user-heading round">
                                     <c:if test="${loggedInUser.customer.genderId.id == 1}">
-                                    <a href="#">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
-                                    </a>
+                                        <a href="#">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                                        </a>
                                     </c:if>
-                                     <c:if test="${loggedInUser.customer.genderId.id == 2}">
-                                    <a href="#">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-                                    </a>
+                                    <c:if test="${loggedInUser.customer.genderId.id == 2}">
+                                        <a href="#">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                                        </a>
                                     </c:if>
                                     <h1>${loggedInUser.customer.firstname} ${loggedInUser.customer.lastname}</h1>
                                     <p>${loggedInUser.customer.email}</p>
@@ -107,7 +116,7 @@
 
                                 <ul class="nav nav-pills nav-stacked">
                                     <li class="active"><a href="http://localhost:8080/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
-                                    <li><a href="#"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
+                                    <li><a href="http://localhost:8080/Adventure/customer/update/${loggedInUser.customer.id}"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -115,7 +124,7 @@
                             <div class="panel">
                                 <div class="panel-body bio-graph-info">
                                     <h1>Πληροφορίες</h1>
-                                    <div class="row">
+                                    <div class="row profile-info">
                                         <div class="bio-row">
                                             <p><span>Όνομα </span>: ${loggedInUser.customer.firstname}</p>
                                         </div>
@@ -143,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="customerid">${loggedInUser.customer.id}</div>
+                <div hidden id="customerid">${loggedInUser.customer.id}</div>
                 <h3 id="number">Οι δραστηριοτήτες μου</h3>
                 <div class="form-check form-check-inline">
                     <input id="guestRadio" class="form-check-input" type="radio" name="type" 
@@ -156,122 +165,48 @@
                 </div>
                 <div id="table">
                     <table id="eventstable" class="table" width="100%">
-
                         <thead>
                             <tr>
                                 <th scope="col">id</th>
                                 <th scope="col">x</th>
                                 <th scope="col">y</th>
-                                <th scope="col">Name</th>
-
-                                <th scope="col">Starting Date</th>
-                                <th scope="col">Ending Date</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">level</th>
-                                <th scope="col">Τυπος</th>
-
-                                <th scope="col">Category</th>
-                                <th scope="col">Equip</th>
+                                <th scope="col">Όνομα</th>
+                                <th scope="col">Ημερομηνία</th>
+                                <th scope="col">Τιμή</th>
+                                <th scope="col">Πόλη</th>
+                                <th scope="col">Κατηγορία</th>
                                 <th scope="col">Περισσότερες Πληροφορίες</th>
-
-
-
-
                             </tr>
                         </thead>
                         <tbody>
-
-
                         </tbody>
-
                     </table>
-
                 </div>
                 <div class="col-sm" id="map">
                 </div>
-                <h3>Οι κρατήσεις μου</h3>
-                <div>
-                    <table id="bookings" class="table" width="100%">
-                        <thead>
-                            <tr>
-                                <th scope="col">Ονόμα δραστηριότητας</th>
-                                <th scope="col">Πόσο που πληρώθηκε</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-
-                    </table>
-                </div>
-
-
-
-
-                <h3>Δραστηριότητες που θα μπορουσάτε να συμμετασχέτε......</h3>
-                <div id="table1">
+                <div class="suggestions" id="table1">
+                <h3>Δραστηριότητες που θα μπορουσάτε να συμμετασχέτε</h3>
                     <table id="eventstobook" class="table">
-
                         <thead>
                             <tr>
                                 <th scope="col">id</th>
                                 <th scope="col">x</th>
                                 <th scope="col">y</th>
-                                <th scope="col">Name</th>
-
-                                <th scope="col">Starting Date</th>
-                                <th scope="col">Ending Date</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">level</th>
-                                <th scope="col">Τυπος</th>
-
-                                <th scope="col">Category</th>
-                                <th scope="col">Equip</th>
+                                <th scope="col">Όνομα</th>
+                                <th scope="col">Ημερομηνία</th>
+                                <th scope="col">Τιμή</th>
+                                <th scope="col">Πόλη</th>
+                                <th scope="col">Κατηγορία</th>
                                 <th scope="col">Περισσότερες Πληροφορίες</th>
                                 <th scope="col">Κράτηση</th>
-
-
-
-
                             </tr>
                         </thead>
                         <tbody>
-
-
                         </tbody>
-
                     </table>
-
                 </div>
-                <div id="mapbook">
-                    <h3>Χάρτης με δραστηριότητες που θα μπορουσάτε να συμμετασχέτε......</h3>
-                    <div class="col-sm" id="map1">
-
-
-                    </div>
-                </div>
-                <br/>
-                <br/>
-
-                <button id="button3" class="btn btn-primary" >Κλείσιμο/Εμφάνιση Χάρτη</button>
-                <br/>
-                <br/>
-
-
-                <div>
-
-                    <h3>Αλλαγή στοιχείών λογαριασμού</h3>
-                    <br/>
-                    <br/>
-                    <a href="${pageContext.request.contextPath}/update/${loginedUser.id}" class="btn btn-primary"  >Αλλαγή username/password</a>
-                    <a href="${pageContext.request.contextPath}/delete/customer/${loginedUser.customer.id}"   class="btn btn-primary" >Διαγραφή λογαριασμού<a/>
-                        <a href="${pageContext.request.contextPath}/disable/customer/${loginedUser.customer.id}"   class="btn btn-primary" >Απενεργοποιήση λογαριασμού<a/>
-
-                            </div>
-
-                            </main>
-                            </div>
-                            <script src="http://localhost:8080/Adventure/js/customer_index.js"></script>
-                            </body>
-                            </html>
+            </main>
+        </div>
+        <script src="http://localhost:8080/Adventure/js/customer_index.js"></script>
+    </body>
+</html>

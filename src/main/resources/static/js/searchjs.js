@@ -146,9 +146,9 @@ $(document).ready(function () {
                     "<p class='card-text'>" + results[i].description + "</p> " +
                     "</div> " +
                     "<ul class='list-group list-group-flush'> " +
-                    "<li class='list-group-item'></li> " +
-                    "<li class='list-group-item'></li> " +
-                    "<li class='list-group-item'></li> " +
+                    "<li class='list-group-item'>" + results[i].categoryId.categoryName + "</li> " +
+                    "<li class='list-group-item'>" + dateformat(results[i].startingDate) + "</li> " +
+                    "<li class='list-group-item'>" + results[i].locationId.cityId.name + "</li> " +
                     "</ul> " +
                     "<div class='card-body'> " +
                     "<a href='/Adventure' class='btn btn-primary btn-md'>Κράτηση</a> " +
@@ -241,6 +241,17 @@ $(document).ready(function () {
                 })));
         };
     })(jQuery);
+    function dateformat(date) {
+        var date = new Date(date);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+    }
 });
 
 

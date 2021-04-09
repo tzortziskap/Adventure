@@ -19,18 +19,14 @@ $(document).ready(function () {
         document.getElementById("y").setAttribute('value', lng);
     });
     
-    var checkList = document.getElementById('list1');
-    checkList.getElementsByClassName('anchor')[0].onclick = function (evt) {
-        if (checkList.classList.contains('visible'))
-            checkList.classList.remove('visible');
-        else
-            checkList.classList.add('visible');
-    };
 
     var urlEquipment = "http://localhost:8080/Adventure/equipment";
 
     $.getJSON(urlEquipment, function (result) {
         $(".equipment").equipment(result);
+        $(".chosen-select").chosen({
+  no_results_text: "Oops, nothing found!"
+});
     });
 
     var urlCategories = "http://localhost:8080/Adventure/categories";
@@ -135,12 +131,12 @@ $(document).ready(function () {
     (function ($) {
         // Populates a select drop-down with options in a list 
         $.fn.equipment = function (list) {
-            return this.append(list.map(item => $('<li>', {
-                    text: item.name
-                    
-                   
-                   
+            return this.append(list.map(item => $('<option>',{
+                    text: item.name,
+                    value: item.id,
+                    name: "equipmentList"
                 })));
         };
     })(jQuery);
+   
 });

@@ -229,7 +229,7 @@
                     <!--/.Carousel Wrapper-->
                 </div>
                 <form:form action="/Adventure/event/search" id="form" method="GET">
-                    <h2>Search for an Event</h2>
+                    <h2>Αναζήτηση Δραστηριοτήτων</h2>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="categories">Κατηγορία</label>

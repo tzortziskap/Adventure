@@ -38,9 +38,20 @@ $(document).ready(function () {
             next.children(':first-child').clone().appendTo($(this));
         }
     });
-
-
-
-
+     $(".date").each(function (){
+        var date= $(this).text();
+        $(this).html(dateformat(date));
+    });
+ function dateformat(date) {
+        var date = new Date(date);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + "  " + strTime;
+    }
 });
 

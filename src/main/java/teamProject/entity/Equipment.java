@@ -48,10 +48,8 @@ public class Equipment implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @JoinTable(name = "equipment_has_event", joinColumns = {
-        @JoinColumn(name = "equipment_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "event_id", referencedColumnName = "id")})
-    @ManyToMany
+    
+    @ManyToMany(mappedBy = "equipmentList")
     private List<Event> eventList;
 
     public Equipment() {

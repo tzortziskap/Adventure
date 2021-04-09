@@ -89,7 +89,7 @@
                 </div>
             </nav>
         </div>
-    <div class="container">
+    <div class="container-fluid">
         <main>
             <h1 class="font-weight-bold py-3">Adventure Booking</h1>
             <h3>Το προφίλ μου</h3>
@@ -114,9 +114,9 @@
                                 <p class="card-text">${event.description}</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                <li class="list-group-item">${event.categoryId.categoryName}</li>
+                                <li class="list-group-item date">${event.startingDate}</li>
+                                <li class="list-group-item">${event.locationId.cityId.name}</li>
                             </ul>
                             <div class="card-body">
                                 <a href="${pageContext.request.contextPath}/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>

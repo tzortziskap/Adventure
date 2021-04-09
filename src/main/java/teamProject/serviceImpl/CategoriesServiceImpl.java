@@ -48,7 +48,7 @@ public class CategoriesServiceImpl implements CategoriesService {
 
     @Override
     public Categories findBycategoryName(String category) {
-        return categoriesRepo.findBycategoryName(category);
+        return categoriesRepo.findBycategoryNameContainingIgnoreCase(category);
     }
     
 }

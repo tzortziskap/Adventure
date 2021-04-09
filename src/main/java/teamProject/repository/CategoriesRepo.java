@@ -17,6 +17,6 @@ import teamProject.entity.Categories;
 @Repository
 public interface CategoriesRepo extends JpaRepository<Categories,Integer>{
 
-    public Categories findBycategoryName(String category);
+    public Categories findBycategoryNameContainingIgnoreCase(String category);
     
 }

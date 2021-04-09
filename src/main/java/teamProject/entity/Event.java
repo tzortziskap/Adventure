@@ -20,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -93,7 +94,10 @@ public class Event implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne
     private Categories categoryId;
-    @ManyToMany(mappedBy = "eventList")
+    @JoinTable(name = "equipment_has_event", joinColumns = {
+        @JoinColumn(name = "event_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "equipment_id", referencedColumnName = "id")})
+    @ManyToMany
     private List<Equipment> equipmentList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")

@@ -84,9 +84,9 @@ public class CustomerController {
         return " ";
     }
     
-    @GetMapping("/getmybookings/{id}")
+    @GetMapping("/myevents/{id}")
     @ResponseBody
-    public ResponseEntity getAvaliableEvents(@PathVariable("id") int id) throws ParseException {
+    public ResponseEntity getAvaliableEvents(@PathVariable("id") int id){
          Customer customer = service.getCustomerById(id);
          List<CustomerBooksEvent> events = customer.getCustomerBooksEventList();
          return new ResponseEntity<>(events, HttpStatus.OK);

@@ -142,15 +142,15 @@
                             </tr>
                             <tr>
                                 <th scoe="col">Κόστος</th>
-                                <td>${event.price}</td>
+                                <td>${event.price} $</td>
                             </tr>
                             <tr>
                                 <th scope="col">Ημερομηνία Ενάρξης</th>
-                                <td>${event.startingDate}</td>
+                                <td class="date">${event.startingDate}</td>
                             </tr>
                             <tr>
                                 <th scope="col">Ημερομηνία Τελους</th>
-                                <td>${event.endingDate}</td>
+                                <td class="date">${event.endingDate}</td>
                             </tr>
                             <tr>
                                 <th scoe="col">Κατηγορία</th>
@@ -181,16 +181,6 @@
                                 <c:forEach items="${event.equipmentList}" var = "equipment">
                                     <li>${equipment.name}</li>
                                     </c:forEach>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
-                                <li class="list-group-item">podilato</li>
                             </ul>
                         </div>
                     </div>
