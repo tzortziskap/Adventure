@@ -85,45 +85,45 @@
             <main>
                 <h1 class="font-weight-bold py-3">Adventure Booking</h1>
                 <div id="aboutus">
-                
-                <form:form action="/Adventure/event/search" id="form" method="GET">
-                    <h3>Αναζήτηση Δραστηριοτήτων</h3>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="categories">Κατηγορία</label>
-                            <select name="categoryId.id" id="categories" class="form-control categories">
-                                <option value=''>Choose...</option>
-                            </select>
+
+                    <form:form action="/Adventure/event/search" id="form" method="GET">
+                        <h3>Αναζήτηση Δραστηριοτήτων</h3>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="categories">Κατηγορία</label>
+                                <select name="categoryId.id" id="categories" class="form-control categories">
+                                    <option value=''>Choose...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="county">Νομός</label>
+                                <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
+                                    <option value=''>Choose...</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="county">Νομός</label>
-                            <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
-                                <option value=''>Choose...</option>
-                            </select>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="type">Τύπος</label>
+                                <select name="typeIndoorOutdoorId.id" id="type" class="form-control typeIndoorOutdoor searching selectSearching">
+                                    <option  value=''>Choose...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="city">Πόλη</label>
+                                <select name="locationId.cityId.id" id="city" class="form-control city">
+                                    <option value=''>Choose...</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="type">Τύπος</label>
-                            <select name="typeIndoorOutdoorId.id" id="type" class="form-control typeIndoorOutdoor searching selectSearching">
-                                <option  value=''>Choose...</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="city">Πόλη</label>
-                            <select name="locationId.cityId.id" id="city" class="form-control city">
-                                <option value=''>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary searcheve">Αναζήτηση Δραστηριοτήτων</button>
-                </form:form>
+                        <button type="submit" class="btn btn-primary searcheve">Αναζήτηση Δραστηριοτήτων</button>
+                    </form:form>
                     <h3>Ποιοι Ειμαστε</h3>
-                <p>
-                    Πιστεύουμε στη δημιουργικότητα. Κάθε δημιουργική διαδικασία απαιτεί έναν ορισμένο βαθμό φαντασίας και μια πραγματική όρεξη για περιπέτεια. Περιπέτεια για εμάς σημαίνει έκθεση στο νέο, έκθεση στην έκπληξη. Ανακαλύπτοντας νέες εικόνες, μέρη, μυρωδιές, ομοιόμορφα άτομα και ελπίζουμε, ακόμη και έναν μακρύ κρυφό θησαυρό μέσα στον εαυτό μας.
-                    Το σπίτι μας είναι η Ελλάδα, μια χώρα με μοναδικό πολιτισμό και γλώσσα, ένα τοπίο που είναι από τα λιγότερο εξερευνημένα στην Ευρώπη και μερικούς από τους πιο φιλόξενους ανθρώπους στον κόσμο. Στόχος μας είναι να σας παρουσιάσουμε τα πράγματα που αγαπάμε περισσότερο, τα ταξίδια και την περιπέτεια. Συχνά φτάνουμε σε μια κατάσταση δημιουργικής ροής, ενώ σχεδιάζουμε τα δρομολόγια για εσάς, αλλά δεν συγκρίνεται καν με τη συγκίνηση να σας συναντήσουμε και να συνδυάσετε μαζί σας σε μια νέα περιπέτεια. Με την σταθερή εταιρική μας υποδομή, την εκπαιδευμένη ομάδα εξειδικευμένων οδηγών και την πολυετή εμπειρία, εγγυόμαστε ότι είμαστε οι κατάλληλοι άνθρωποι για να μοιραστούμε μαζί σας τι μπορεί να είναι η περιπέτεια μιας ζωής. Ας σας εκπλήξουμε! Αυτό που θα χρειαστεί να φέρετε μαζί με την τσάντα σας είναι καλή χαρά και θέληση, παρά οποιαδήποτε συγκεκριμένη ικανότητα.
-                    Ας φανταστούμε ... και μείνετε συντονισμένοι.
-                </p>
+                    <p>
+                        Πιστεύουμε στη δημιουργικότητα. Κάθε δημιουργική διαδικασία απαιτεί έναν ορισμένο βαθμό φαντασίας και μια πραγματική όρεξη για περιπέτεια. Περιπέτεια για εμάς σημαίνει έκθεση στο νέο, έκθεση στην έκπληξη. Ανακαλύπτοντας νέες εικόνες, μέρη, μυρωδιές, ομοιόμορφα άτομα και ελπίζουμε, ακόμη και έναν μακρύ κρυφό θησαυρό μέσα στον εαυτό μας.
+                        Το σπίτι μας είναι η Ελλάδα, μια χώρα με μοναδικό πολιτισμό και γλώσσα, ένα τοπίο που είναι από τα λιγότερο εξερευνημένα στην Ευρώπη και μερικούς από τους πιο φιλόξενους ανθρώπους στον κόσμο. Στόχος μας είναι να σας παρουσιάσουμε τα πράγματα που αγαπάμε περισσότερο, τα ταξίδια και την περιπέτεια. Συχνά φτάνουμε σε μια κατάσταση δημιουργικής ροής, ενώ σχεδιάζουμε τα δρομολόγια για εσάς, αλλά δεν συγκρίνεται καν με τη συγκίνηση να σας συναντήσουμε και να συνδυάσετε μαζί σας σε μια νέα περιπέτεια. Με την σταθερή εταιρική μας υποδομή, την εκπαιδευμένη ομάδα εξειδικευμένων οδηγών και την πολυετή εμπειρία, εγγυόμαστε ότι είμαστε οι κατάλληλοι άνθρωποι για να μοιραστούμε μαζί σας τι μπορεί να είναι η περιπέτεια μιας ζωής. Ας σας εκπλήξουμε! Αυτό που θα χρειαστεί να φέρετε μαζί με την τσάντα σας είναι καλή χαρά και θέληση, παρά οποιαδήποτε συγκεκριμένη ικανότητα.
+                        Ας φανταστούμε ... και μείνετε συντονισμένοι.
+                    </p>
                 </div>
                 <h3>Βασικές Κατηγορίες Δραστηριοτήτων</h3>
                 <!--Carousel Wrapper-->
@@ -274,21 +274,16 @@
         <footer class="footer" id="footer">
             <div class="inner_footer">
                 <div class="logo_container">
-
                 </div>
-
                 <div class="footer_third">
                     <h1>Χρειάζεστε βοήθεια;</h1>
-                    <a href="#">Όροι &amp; Προϋποθέσεις</a>
-                    <a href="#">Πολιτική απορρήτου</a>
-                    <a href="${pageContext.request.contextPath}/chat">Online Βοήθεια</a>
+                    <h5><a href="${pageContext.request.contextPath}/chat" class="btn btn-primary">Online βΟήθεια</a></h5>
                 </div>
                 <div class="footer_third">
-                    <h1>Περισσότερα</h1>
-                    <a href="#">Φυλλάδια</a>
-                    <a href="#">Δωρεά</a>
-                    <a href="#">Διακυβέρνηση</a>
-                    <a href="#">Αναφορές αντικτύπου</a>
+                    <h1>Υδρίτες</h1>
+                    <h5>Γιάννης Μουτζούρης-Σιδηρής</h5>
+                    <h5>Ζεύλη Ευαγγελία</h5>
+                    <h5>Τζώρτζης Καπέλλας</h5>
                 </div>
                 <div class="footer_third">
                     <h1>Ακολουθησέ μας</h1>
@@ -298,7 +293,6 @@
                     <li><a href="#"><i class="fa fa-youtube"></i></a></li>
                     <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
                     <li><a href="#"><i class="fa fa-google-plus-official"></i></a></li>
-
                     <span>
                         © 2021 Adventure Booking<br>
                         Greece, Athens<br>

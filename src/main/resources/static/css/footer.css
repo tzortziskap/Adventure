@@ -85,3 +85,8 @@
 .inner_footer .footer_third a:hover, .inner_footer .footer_third li:hover {
     color: #ff9933;
 }
+h5{
+    color:whitesmoke;
+    text-align: center;
+    font-size: 12px;
+}

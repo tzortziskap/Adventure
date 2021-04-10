@@ -6,6 +6,7 @@
 package teamProject.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Credentials;
 import teamProject.entity.Customer;
 import teamProject.entity.CustomerBooksEvent;
+import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 import teamProject.service.CredentialsService;
@@ -109,7 +111,11 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity myEvents(@PathVariable("id") int id){
          Customer customer = service.getCustomerById(id);
-         List<CustomerBooksEvent> events = customer.getCustomerBooksEventList();
+         List<CustomerBooksEvent> CustomerBooksEvents = customer.getCustomerBooksEventList();
+         List<Event> events = new ArrayList();
+         for (CustomerBooksEvent CustomerBooksEvent : CustomerBooksEvents){
+             events.add(CustomerBooksEvent.getEventId());
+         }
          return new ResponseEntity<>(events, HttpStatus.OK);
      }
 }

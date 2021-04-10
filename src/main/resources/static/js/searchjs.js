@@ -29,6 +29,7 @@ $(document).ready(function () {
                 query = query + " AND " + varia;
             }
         }
+        query = query + " AND remainingPositions>0";
 
         if (checknullvalues === true) {
             $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
@@ -121,6 +122,7 @@ $(document).ready(function () {
                 }
             }
         });
+        query = query + " AND remainingPositions>0";
         $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (results) {
             createpoints(results);
         });

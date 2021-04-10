@@ -6,11 +6,14 @@
 package teamProject.controller;
 
 import com.sipios.springsearch.anotation.SearchSpec;
-import java.util.HashSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
+import teamProject.service.CustomerService;
 import teamProject.service.EventService;
 
 /**
@@ -37,6 +42,8 @@ public class EventController {
 
     @Autowired
     private EventService service;
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showForm(@ModelAttribute("event") Event event, Model model) {
@@ -45,6 +52,7 @@ public class EventController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Event event, RedirectAttributes attributes) {
+        event.setRemainingPositions(event.getPositions());
         service.addEvent(event);
         return "redirect:/company";//Redirect instructs client to sent a new GET request to /event
     }
@@ -82,7 +90,7 @@ public class EventController {
     @GetMapping("/search/all")
     @ResponseBody
     public ResponseEntity<List<Event>> AllEvents() {
-        return new ResponseEntity<>(service.getEvents(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getEventsWhichHaveAvailablePositions(0), HttpStatus.OK);
     }
 
     @GetMapping("/search/results")
@@ -103,5 +111,25 @@ public class EventController {
         model.addAttribute("bookings", "0");
         return "event_info";
 
+    }
+    
+    @GetMapping("/otherevents/{id}/{date}")
+    @ResponseBody
+    public ResponseEntity<List<Event>> getAvaliableEvents(@PathVariable("id") int id,
+            @PathVariable("date") String date) throws ParseException {
+        Date st1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        List<CustomerBooksEvent> bookings = customerService.getCustomerById(id).getCustomerBooksEventList();
+        List<Event> events;
+        if (!bookings.isEmpty()) {
+            List<Integer> eventids = new ArrayList();
+            for (int i = 0; i < bookings.size(); i++) {
+                eventids.add(bookings.get(i).getEventId().getId());
+            }
+            events = service.getAvailableEventsAccordingDateAndEventIds(eventids, st1,0);
+        } else {
+            events = service.getAvailableEventsAccordingDate(st1,0);
+        }
+
+        return new ResponseEntity<>(events, HttpStatus.OK);
     }
 }

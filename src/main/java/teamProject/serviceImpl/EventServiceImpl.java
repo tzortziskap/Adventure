@@ -73,13 +73,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getAvailableEventsAccordingDateAndEventIds(List<Integer> ids, Date date) {
-         return eventRepo.findByIdNotInAndStartingDateGreaterThan(ids,date);
+    public List<Event> getAvailableEventsAccordingDateAndEventIds(List<Integer> ids, Date date,int positions) {
+         return eventRepo.findByIdNotInAndStartingDateGreaterThanAndRemainingPositionsGreaterThan(ids,date,positions);
     }
     
     @Override
-    public List<Event> getAvailableEventsAccordingDate(Date date) {
-         return eventRepo.findByStartingDateAfter(date);
+    public List<Event> getAvailableEventsAccordingDate(Date date,int positions) {
+         return eventRepo.findByStartingDateAfterAndRemainingPositionsGreaterThan(date,positions);
+    }
+
+    @Override
+    public List<Event> getEventsWhichHaveAvailablePositions(int positions) {
+        return eventRepo.findByRemainingPositionsGreaterThan(positions);
     }
     
 }

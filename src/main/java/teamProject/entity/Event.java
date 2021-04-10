@@ -7,9 +7,6 @@ package teamProject.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -30,10 +27,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -88,6 +83,10 @@ public class Event implements Serializable {
     private int positions;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "remaining_positions")
+    private int remainingPositions;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
@@ -128,7 +127,7 @@ public class Event implements Serializable {
         this.id = id;
     }
 
-    public Event(Integer id, Date endingDate, Date startingDate, double price, String description, int positions, String name) {
+    public Event(Integer id, Date endingDate, Date startingDate, double price, String description, int positions, int remainingPositions, String name) {
         this.id = id;
         this.endingDate = endingDate;
         this.startingDate = startingDate;
@@ -136,6 +135,7 @@ public class Event implements Serializable {
         this.description = description;
         this.positions = positions;
         this.name = name;
+        this.remainingPositions = remainingPositions;
     }
 
     public Integer getId() {
@@ -186,6 +186,15 @@ public class Event implements Serializable {
         this.positions = positions;
     }
 
+    public int getRemainingPositions() {
+        return remainingPositions;
+    }
+
+    public void setRemainingPositions(int remainingPositions) {
+        this.remainingPositions = remainingPositions;
+    }
+
+    
     public String getName() {
         return name;
     }

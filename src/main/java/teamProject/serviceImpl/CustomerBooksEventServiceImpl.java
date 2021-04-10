@@ -46,10 +46,5 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
     public CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent) {
         return customerBooksEventRepo.save(customerBooksEvent);
     }
-
-    @Override
-    public Integer getRemainingPositionsOfAnEvent(int id) {
-        return customerBooksEventRepo.countBookingById(id);
-    }
     
 }

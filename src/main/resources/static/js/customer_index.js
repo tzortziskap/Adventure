@@ -23,7 +23,7 @@ $(document).ready(function () {
     function fetchrestofevent(id) {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/Adventure/booking/otherevents/" + id + "/" + today,
+            url: "http://localhost:8080/Adventure/event/otherevents/" + id + "/" + today,
             dataType: 'json'
         }).done(function (results) {
             createpoints(results, "");
@@ -37,16 +37,16 @@ $(document).ready(function () {
         let link1;
         let equip = "";
         for (var i = 0; i < results.length; i++) {
-            points.push({id: results[i].eventId.id,
-                name: results[i].eventId.name,
-                x: results[i].eventId.locationId.coordinateX,
-                y: results[i].eventId.locationId.coordinateY,
-                start: dateformat(results[i].eventId.startingDate),
-                end: dateformat(results[i].eventId.endingDate),
-                price: results[i].eventId.price,
-                level: results[i].eventId.difficultyId.level,
-                location: results[i].eventId.locationId.cityId.name,
-                cat: results[i].eventId.categoryId.categoryName,
+            points.push({id: results[i].id,
+                name: results[i].name,
+                x: results[i].locationId.coordinateX,
+                y: results[i].locationId.coordinateY,
+                start: dateformat(results[i].startingDate),
+                end: dateformat(results[i].endingDate),
+                price: results[i].price,
+                level: results[i].difficultyId.level,
+                location: results[i].locationId.cityId.name,
+                cat: results[i].categoryId.categoryName,
             });
             if (tablename === "eventstable") {
                 bookings.push({

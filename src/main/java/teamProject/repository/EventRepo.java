@@ -26,9 +26,10 @@ public interface EventRepo extends JpaRepository<Event,Integer>, JpaSpecificatio
 
     public List<Event> findBycategoryId(int category);
 
-    @Query ("SELECT e FROM Event e WHERE e.id not in ?1 and e.startingDate >= ?2")
-    public List<Event> findByIdNotInAndStartingDateGreaterThan(List<Integer> ids, Date date);
-
-    public List<Event> findByStartingDateAfter(Date date);
+    @Query ("SELECT e FROM Event e WHERE e.id not in ?1 and e.startingDate >= ?2 and e.remainingPositions >?3")
+    public List<Event> findByIdNotInAndStartingDateGreaterThanAndRemainingPositionsGreaterThan(List<Integer> ids, Date date, int id);
     
+    public List<Event> findByStartingDateAfterAndRemainingPositionsGreaterThan(Date date,int id);
+    
+    List<Event> findByRemainingPositionsGreaterThan(int positions);
 }
