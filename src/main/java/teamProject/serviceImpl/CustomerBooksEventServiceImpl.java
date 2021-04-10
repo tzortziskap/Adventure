@@ -48,7 +48,7 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
     }
 
     @Override
-    public int getRemainingPositionsOfAnEvent(int id) {
+    public Integer getRemainingPositionsOfAnEvent(int id) {
         return customerBooksEventRepo.countBookingById(id);
     }
     

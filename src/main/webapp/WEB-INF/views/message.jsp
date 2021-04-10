@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <!-- saved from url=(0052)https://getbootstrap.com/docs/5.0/examples/carousel/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -83,11 +83,9 @@
         </div>
         <div class="container">
             <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-            <c:if test="${message != null}">
                 <h3>${message}</h3>
-            </c:if>   
         </div>
-        <footer class="footer" id="footer">
+        <footer class="footer" id="footer" style="margin-top: 100px">
             <div class="inner_footer">
                 <div class="logo_container">
 

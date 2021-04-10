@@ -5,6 +5,7 @@
  */
 package teamProject.controller;
 
+import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,23 +78,31 @@ public class CustomerController {
     }
     
     @PostMapping("/update/{id}")
-    public String update(@PathVariable("id") int id, Customer customer, RedirectAttributes attributes, HttpServletRequest request){
-        customer.setId(id);
-        try {
-            Customer newCustomer = service.updateCustomer(customer);
-            HttpSession session = request.getSession();
-             Credentials loggedInUser = credentialsService.findByUsername(newCustomer.getCredentialsId().getUsername());
-            loggedInUser.setPassword(null);
-            loggedInUser.setPasswordResetToken(null);
-            session.setAttribute("loggedInUser", loggedInUser);
-        }catch (UsernameExistException ex){
-            attributes.addAttribute("custUsernameExist", ex.getMessage());
-            return "redirect:/customer/update";
-        } catch (EmailExistException ex) {
-            attributes.addAttribute("custEmailExist", ex.getMessage());
-            return "redirect:/customer/update";
-        } 
-        return "customer_index";
+    public String update(@PathVariable("id") int id, Customer customer,Model model, RedirectAttributes attributes, HttpServletRequest request,Principal principal){
+        Credentials checkCredentials = (Credentials)request.getSession().getAttribute("loggedInUser");
+        int sessionId = checkCredentials.getId();
+        int customerId = service.getCustomerById(id).getCredentialsId().getId();
+        if(sessionId!=customerId){
+            model.addAttribute("message", "Δεν έχετε δικαίωμα σε αυτό το λογαριασμό");
+            return "message";
+        }else{
+            customer.setId(id);
+            try {
+                Customer newCustomer = service.updateCustomer(customer);
+                HttpSession session = request.getSession();
+                Credentials loggedInUser = credentialsService.findByUsername(newCustomer.getCredentialsId().getUsername());
+                loggedInUser.setPassword(null);
+                loggedInUser.setPasswordResetToken(null);
+                session.setAttribute("loggedInUser", loggedInUser);
+            }catch (UsernameExistException ex){
+                attributes.addAttribute("custUsernameExist", ex.getMessage());
+                return "redirect:/customer/update";
+            } catch (EmailExistException ex) {
+                attributes.addAttribute("custEmailExist", ex.getMessage());
+                return "redirect:/customer/update";
+            }
+            return "customer_index";
+    }
     }
     
     @GetMapping("/myevents/{id}")

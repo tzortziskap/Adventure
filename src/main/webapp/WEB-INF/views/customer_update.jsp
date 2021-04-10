@@ -140,7 +140,7 @@
                                         <div class="form-inline my-3 ">
                                             <div class="col-lg-6">
                                                 <label for="custdateOfBirth">Ημερομηνία Γέννησης</label>
-                                                <input type="date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${loggedInUser.customer.dateOfBirth}" />" name="dateOfBirth" id="custdateOfBirth" required >
+                                                <input type="date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${loggedInUser.customer.dateOfBirth}"/>" name="dateOfBirth" id="custdateOfBirth" required >
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="custgender">Φύλο</label>
@@ -182,16 +182,12 @@
                                         <div class="form-inline my-3 ">
                                             <div class="col-lg-6">
                                                 <label for="custemail">Ε-mail:</label>
-                                                <c:if test="${custEmailExist != null}">
                                                     <i class="error">${custEmailExist}</i>
-                                                </c:if>
                                                 <input type="email" class="form-control" value="${loggedInUser.customer.email}" name="email" id="custemail"  placeholder="Ε-mail..." required >
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="custusername">Username:</label>
-                                                <c:if test="${custUsernameExist != null}">
                                                     <i class="error">${custUsernameExist}</i>
-                                                </c:if>
                                                 <input class="form-control" value="${loggedInUser.customer.credentialsId.username}" name="credentialsId.username" id="custusername"  placeholder="Enter your Username" required >
                                             </div>
                                         </div>

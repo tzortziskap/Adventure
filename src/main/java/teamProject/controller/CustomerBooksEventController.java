@@ -68,30 +68,41 @@ public class CustomerBooksEventController {
 
         return " ";
     }
-    
+
     @GetMapping("/otherevents/{id}/{date}")
     @ResponseBody
     public ResponseEntity getAvaliableEvents(@PathVariable("id") int id,
             @PathVariable("date") String date) throws ParseException {
-        
         Date st1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         Customer customer = customerService.getCustomerById(id);
         List<CustomerBooksEvent> bookings = customer.getCustomerBooksEventList();
-        List<Integer> eventids = new ArrayList();
-        for (int i = 0; i < bookings.size(); i++) {
-            eventids.add(bookings.get(i).getEventId().getId());
+        List<Event> events;
+        if (!bookings.isEmpty()) {
+            List<Integer> eventids = new ArrayList();
+            for (int i = 0; i < bookings.size(); i++) {
+                eventids.add(bookings.get(i).getEventId().getId());
+            }
+            events = eventService.getAvailableEventsAccordingDateAndEventIds(eventids, st1);
+        } else {
+            events = eventService.getAvailableEventsAccordingDate(st1);
         }
-        List<Event> events = eventService.getAvailableEventsAccordingDateAndCustomerId(eventids, st1);
         List<EventPosDTO> eventPosDTO = getRemainingPositions(events);
 
         return new ResponseEntity<>(eventPosDTO, HttpStatus.OK);
     }
-    
+
     private List<EventPosDTO> getRemainingPositions(List<Event> events) {
         List<EventPosDTO> eventPosDTOs = new ArrayList();
         for (Event e : events) {
             EventPosDTO eventPosDTO = new EventPosDTO();
-            int remaining = e.getPositions() - customerBooksEventService.getRemainingPositionsOfAnEvent(e.getId());
+            Integer totalBookingPositions = customerBooksEventService.getRemainingPositionsOfAnEvent(e.getId());
+            int totalPositions = e.getPositions();
+            int remaining;
+            if (totalBookingPositions != null) {
+                remaining = totalPositions - totalBookingPositions;
+            } else{
+                remaining = totalPositions;
+            }
             if (remaining > 0) {
                 eventPosDTO.setPos(remaining);
                 eventPosDTO.setBookings(customerBooksEventService.getRemainingPositionsOfAnEvent(e.getId()));
@@ -100,6 +111,5 @@ public class CustomerBooksEventController {
             }
         }
         return eventPosDTOs;
-
     }
 }

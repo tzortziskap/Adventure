@@ -35,5 +35,7 @@ public interface EventService{
 
     public List<Event> getEventsByCategoryId(int category);
     
-    public List<Event> getAvailableEventsAccordingDateAndCustomerId(List<Integer> ids,Date date);
+    public List<Event> getAvailableEventsAccordingDateAndEventIds(List<Integer> ids,Date date);
+    
+    public List<Event> getAvailableEventsAccordingDate(Date date);
 }

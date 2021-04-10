@@ -18,5 +18,5 @@ import teamProject.entity.CustomerBooksEvent;
 public interface CustomerBooksEventRepo extends JpaRepository<CustomerBooksEvent, Integer> {
     
     @Query ("select sum(amountPositions) from CustomerBooksEvent cbe where cbe.eventId.id=?1")
-    int countBookingById(int id);
+    Integer countBookingById(int id);
 }

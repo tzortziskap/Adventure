@@ -190,9 +190,13 @@
                             <div id="mapid" ></div>
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
                     <div class="col-md-3">
-                         <a href="/" class="btn btn-primary btn-lg">Κάνε Κράτηση</a>
+                        <c:if test="${loggedInUser.company.id == event.companyId.id}">
+                        <a href="/" class="btn btn-primary btn-lg">Επεξεργασία</a>
+                        </c:if>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/" class="btn btn-primary btn-lg">Κάνε Κράτηση</a>
                     </div>
                 </div>
             </div>

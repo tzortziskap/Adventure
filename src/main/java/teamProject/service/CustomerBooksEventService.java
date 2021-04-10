@@ -24,5 +24,5 @@ public interface CustomerBooksEventService{
 
     CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent);
     
-    int getRemainingPositionsOfAnEvent(int id);
+    Integer getRemainingPositionsOfAnEvent(int id);
 }
