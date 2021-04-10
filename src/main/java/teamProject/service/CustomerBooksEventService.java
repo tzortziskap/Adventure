@@ -6,6 +6,8 @@
 package teamProject.service;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import teamProject.dto.Order;
 import teamProject.entity.CustomerBooksEvent;
 
 /**
@@ -23,4 +25,6 @@ public interface CustomerBooksEventService{
     CustomerBooksEvent getCustomerBooksEventById(int id) ;
 
     CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent);
+    
+    public CustomerBooksEvent create(HttpServletRequest request, String total, Order order);
 }
