@@ -116,90 +116,97 @@
                                 </div>
 
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="http://localhost:8080/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
-                                    <li><a href="http://localhost:8080/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
+                                    <li><a href="http://localhost:8080/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
+                                    <li class="active"><a href="http://localhost:8080/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="profile-info col-md-9">
                             <div class="panel">
                                 <div class="panel-body bio-graph-info">
-                                    <h1>Πληροφορίες</h1>
-                                    <div class="row profile-info">
-                                        <div class="bio-row">
-                                            <p><span>Όνομα </span>: ${loggedInUser.customer.firstname}</p>
+                                    <h1>Επεξεργασία</h1>
+                                    <form:form id="guestForm" method="post" action="http://localhost:8080/Adventure/customer/update/${loggedInUser.customer.id}" modelAttribute="customerToEdit">
+                                        <div class="form-inline my-3 ">
+                                            <div class="col-lg-6">
+                                                <label for="custfirstname">Όνομα:</label>
+                                                <input type="text" class="form-control" value="${loggedInUser.customer.firstname}" name="firstname" id="custfirstname"  placeholder="Όνομα..." required autofocus >
+                                            </div>
+                                            <div class="col-lg-6 ">
+                                                <label for="custlastname">Επίθετο:</label>
+                                                <input type="text" class="form-control" value="${loggedInUser.customer.lastname}" name="lastname" id="custlastname"  placeholder="Επίθετο..." required >
+                                            </div>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Επίθετο </span>: ${loggedInUser.customer.lastname}</p>
+
+                                        <div class="form-inline my-3 ">
+                                            <div class="col-lg-6">
+                                                <label for="custdateOfBirth">Ημερομηνία Γέννησης</label>
+                                                <input type="date" class="form-control" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${loggedInUser.customer.dateOfBirth}" />" name="dateOfBirth" id="custdateOfBirth" required >
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="custgender">Φύλο</label>
+                                                <select name="genderId" class="gender form-control" id="custgender" required>
+                                                    <option value=''>Choose...</option>
+                                                    <option hidden selected value="${loggedInUser.customer.genderId.id}">${loggedInUser.customer.genderId.name}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Username </span>: ${loggedInUser.username}</p>
+
+                                        <div class="form-inline my-3">
+                                            <div class="col-lg-6">
+                                                <label for="custaddress">Διεύθυνση:</label>
+                                                <input type="text" class="form-control" value="${loggedInUser.customer.address}" name="address" id="custaddress"  placeholder="Διεύθυνση..." required >
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="custpostalCode">Ταχυδρομικός Κώδικας:</label>
+                                                <input type="text" class="form-control" value="${loggedInUser.customer.postalCode}" name="postalCode" id="custpostalCode"  placeholder="Ταχυδρομικός Κώδικας..." required >
+                                            </div>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Email </span>: ${loggedInUser.customer.email}</p>
+
+                                        <div class="form-inline my-3 ">
+                                            <div class="col-lg-6">
+                                                <label for="custcounty">Νομός:</label>
+                                                <select  class="county form-control" id="custcountycounty" required>
+                                                    <option  value=''>Choose...</option>
+                                                    <option hidden selected value="${loggedInUser.customer.cityId.countyId.id}">${loggedInUser.customer.cityId.countyId.name}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 ">
+                                                <label for="custcity">Πόλη:</label>
+                                                <select name="cityId"  class="city form-control" id="custcity" required>
+                                                    <option value=''>Choose...</option>
+                                                    <option hidden selected value="${loggedInUser.customer.cityId.id}">${loggedInUser.customer.cityId.name}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Ηλικία</span>: <span class="age"><fmt:formatDate pattern="yyyy-MM-dd" value="${loggedInUser.customer.dateOfBirth}" /></span></p>
+
+                                        <div class="form-inline my-3 ">
+                                            <div class="col-lg-6">
+                                                <label for="custemail">Ε-mail:</label>
+                                                <c:if test="${custEmailExist != null}">
+                                                    <i class="error">${custEmailExist}</i>
+                                                </c:if>
+                                                <input type="email" class="form-control" value="${loggedInUser.customer.email}" name="email" id="custemail"  placeholder="Ε-mail..." required >
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label for="custusername">Username:</label>
+                                                <c:if test="${custUsernameExist != null}">
+                                                    <i class="error">${custUsernameExist}</i>
+                                                </c:if>
+                                                <input class="form-control" value="${loggedInUser.customer.credentialsId.username}" name="credentialsId.username" id="custusername"  placeholder="Enter your Username" required >
+                                            </div>
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Νομός </span>: ${loggedInUser.customer.cityId.countyId.name}</p>
+                                        <div class="col-lg-6">
+                                            <input type="submit" value="Ενημέρωση" class="btn1 mt-3 mb-5">
                                         </div>
-                                        <div class="bio-row">
-                                            <p><span>Πόλη </span>: ${loggedInUser.customer.cityId.name}</p>
-                                        </div>
-                                    </div>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div hidden id="customerid">${loggedInUser.customer.id}</div>
-                <h3 id="number">Οι δραστηριοτήτες μου</h3>
-                <div id="table">
-                    <table id="eventstable" class="table" width="100%">
-                        <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">x</th>
-                                <th scope="col">y</th>
-                                <th scope="col">Όνομα</th>
-                                <th scope="col">Ημερομηνία</th>
-                                <th scope="col">Τιμή</th>
-                                <th scope="col">Πόλη</th>
-                                <th scope="col">Κατηγορία</th>
-                                <th scope="col">Περισσότερες Πληροφορίες</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm" id="map">
-                </div>
-                <div class="suggestions" id="table1">
-                <h3>Δραστηριότητες που θα μπορουσάτε να συμμετασχέτε</h3>
-                    <table id="eventstobook" class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">x</th>
-                                <th scope="col">y</th>
-                                <th scope="col">Όνομα</th>
-                                <th scope="col">Ημερομηνία</th>
-                                <th scope="col">Τιμή</th>
-                                <th scope="col">Πόλη</th>
-                                <th scope="col">Κατηγορία</th>
-                                <th scope="col">Περισσότερες Πληροφορίες</th>
-                                <th scope="col">Κράτηση</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
             </main>
         </div>
-                        <footer class="footer" id="footer">
+        <footer class="footer" id="footer">
             <div class="inner_footer">
                 <div class="logo_container">
 
@@ -244,6 +251,6 @@
                 </div>
             </div>
         </footer>
-        <script src="http://localhost:8080/Adventure/js/customer_index.js"></script>
+        <script src="http://localhost:8080/Adventure/js/customer_update.js"></script>
     </body>
 </html>

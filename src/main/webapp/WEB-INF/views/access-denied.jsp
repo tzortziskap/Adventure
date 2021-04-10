@@ -56,7 +56,7 @@
                                 </li>
                             </security:authorize>
                             <li class="nav-item">
-                                <a class="nav-link" href="http:/localhost:8080/Adventure/#aboutus">Σχετικά με εμάς</a>
+                                <a class="nav-link" href="http://localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#footer">Πληροφορίες</a>
@@ -83,10 +83,10 @@
                 </div>
             </nav>
         </div>
-                            <div class="container">
-                                <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                                <h3>Δεν εχέτε προσβασιμότητα σε αυτή την σελίδα ως <security:authentication property="principal.authorities"/></h3>
-                            </div>
+        <div class="container">
+            <h1 class="font-weight-bold py-3">Adventure Booking</h1>
+            <h3>Δεν εχέτε προσβασιμότητα σε αυτή την σελίδα ως <security:authentication property="principal.authorities"/></h3>
+        </div>
         <footer class="footer" id="footer">
             <div class="inner_footer">
                 <div class="logo_container">

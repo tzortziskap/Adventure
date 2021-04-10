@@ -54,7 +54,7 @@
                                 </li>
                             </security:authorize>
                             <li class="nav-item">
-                                <a class="nav-link" href="http:/localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
+                                <a class="nav-link" href="http://localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#footer">Πληροφορίες</a>
@@ -84,6 +84,47 @@
         <div class="container">
             <main>
                 <h1 class="font-weight-bold py-3">Adventure Booking</h1>
+                <div id="aboutus">
+                
+                <form:form action="/Adventure/event/search" id="form" method="GET">
+                    <h3>Αναζήτηση Δραστηριοτήτων</h3>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="categories">Κατηγορία</label>
+                            <select name="categoryId.id" id="categories" class="form-control categories">
+                                <option value=''>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="county">Νομός</label>
+                            <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
+                                <option value=''>Choose...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="type">Τύπος</label>
+                            <select name="typeIndoorOutdoorId.id" id="type" class="form-control typeIndoorOutdoor searching selectSearching">
+                                <option  value=''>Choose...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="city">Πόλη</label>
+                            <select name="locationId.cityId.id" id="city" class="form-control city">
+                                <option value=''>Choose...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary searcheve">Αναζήτηση Δραστηριοτήτων</button>
+                </form:form>
+                    <h3>Ποιοι Ειμαστε</h3>
+                <p>
+                    Πιστεύουμε στη δημιουργικότητα. Κάθε δημιουργική διαδικασία απαιτεί έναν ορισμένο βαθμό φαντασίας και μια πραγματική όρεξη για περιπέτεια. Περιπέτεια για εμάς σημαίνει έκθεση στο νέο, έκθεση στην έκπληξη. Ανακαλύπτοντας νέες εικόνες, μέρη, μυρωδιές, ομοιόμορφα άτομα και ελπίζουμε, ακόμη και έναν μακρύ κρυφό θησαυρό μέσα στον εαυτό μας.
+                    Το σπίτι μας είναι η Ελλάδα, μια χώρα με μοναδικό πολιτισμό και γλώσσα, ένα τοπίο που είναι από τα λιγότερο εξερευνημένα στην Ευρώπη και μερικούς από τους πιο φιλόξενους ανθρώπους στον κόσμο. Στόχος μας είναι να σας παρουσιάσουμε τα πράγματα που αγαπάμε περισσότερο, τα ταξίδια και την περιπέτεια. Συχνά φτάνουμε σε μια κατάσταση δημιουργικής ροής, ενώ σχεδιάζουμε τα δρομολόγια για εσάς, αλλά δεν συγκρίνεται καν με τη συγκίνηση να σας συναντήσουμε και να συνδυάσετε μαζί σας σε μια νέα περιπέτεια. Με την σταθερή εταιρική μας υποδομή, την εκπαιδευμένη ομάδα εξειδικευμένων οδηγών και την πολυετή εμπειρία, εγγυόμαστε ότι είμαστε οι κατάλληλοι άνθρωποι για να μοιραστούμε μαζί σας τι μπορεί να είναι η περιπέτεια μιας ζωής. Ας σας εκπλήξουμε! Αυτό που θα χρειαστεί να φέρετε μαζί με την τσάντα σας είναι καλή χαρά και θέληση, παρά οποιαδήποτε συγκεκριμένη ικανότητα.
+                    Ας φανταστούμε ... και μείνετε συντονισμένοι.
+                </p>
+                </div>
                 <h3>Βασικές Κατηγορίες Δραστηριοτήτων</h3>
                 <!--Carousel Wrapper-->
                 <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -228,38 +269,6 @@
                     <!--/.Slides-->
                     <!--/.Carousel Wrapper-->
                 </div>
-                <form:form action="/Adventure/event/search" id="form" method="GET">
-                    <h2>Αναζήτηση Δραστηριοτήτων</h2>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="categories">Κατηγορία</label>
-                            <select name="categoryId.id" id="categories" class="form-control categories">
-                                <option value=''>Choose...</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="county">Νομός</label>
-                            <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
-                                <option value=''>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="type">Τύπος</label>
-                            <select name="typeIndoorOutdoorId.id" id="type" class="form-control typeIndoorOutdoor searching selectSearching">
-                                <option  value=''>Choose...</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="city">Πόλη</label>
-                            <select name="locationId.cityId.id" id="city" class="form-control city">
-                                <option value=''>Choose...</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary searcheve">Αναζήτηση Δραστηριοτήτων</button>
-                </form:form>
             </main>
         </div>
         <footer class="footer" id="footer">

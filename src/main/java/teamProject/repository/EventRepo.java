@@ -5,9 +5,11 @@
  */
 package teamProject.repository;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.Event;
 
@@ -23,5 +25,8 @@ public interface EventRepo extends JpaRepository<Event,Integer>, JpaSpecificatio
     public List<Event> findBycategoryIdCategoryName(String category);
 
     public List<Event> findBycategoryId(int category);
+
+    @Query ("SELECT e FROM Event e WHERE e.id not in ?1 and e.startingDate >= ?2")
+    public List<Event> findByIdNotInAndStartingDateGreaterThan(List<Integer> ids, Date date);
     
 }

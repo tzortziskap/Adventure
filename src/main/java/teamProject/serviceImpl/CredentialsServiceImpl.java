@@ -39,11 +39,12 @@ public class CredentialsServiceImpl implements CredentialsService {
 
     @Override
     public Credentials addCredentials(Credentials credential) throws UsernameExistException{
+        if (credentialRepo.findByUsername(credential.getUsername())!=null) {
+            throw new UsernameExistException("Υπάρχει ήδη λογαριασμός με αύτο το username.");
+        }else{
         String plainPassword = credential.getPassword();
         String hashedPassword = passwordEncoder.encode(plainPassword);
         credential.setPassword(hashedPassword);
-        if (credentialRepo.findByUsername(credential.getUsername())!=null) {
-            throw new UsernameExistException("Υπάρχει ήδη λογαριασμός με αύτο το username.");
         }
         return credentialRepo.save(credential);
     }
@@ -59,8 +60,14 @@ public class CredentialsServiceImpl implements CredentialsService {
     }
 
     @Override
-    public Credentials updateCredentials(Credentials credential) {
-        return credentialRepo.save(credential);
+    public Credentials updateCredentials(Credentials credential) throws UsernameExistException {
+        Credentials newCredentials = credentialRepo.findById(credential.getId()).get();
+        if (credentialRepo.findByUsername(credential.getUsername())!=null && !newCredentials.getUsername().equals(credential.getUsername())) {
+            throw new UsernameExistException("Υπάρχει ήδη λογαριασμός με αύτο το username.");
+        }else{
+        newCredentials.setUsername(credential.getUsername());
+        return credentialRepo.save(newCredentials);
+        }
     }
 
     @Override

@@ -470,3 +470,7 @@ ul.summary-list > li:last-child  {
 .suggestions{
     margin-top: 50px;
 }
+
+.error{
+    color: red;
+}

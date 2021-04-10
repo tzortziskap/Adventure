@@ -26,8 +26,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private RolesService rolesService;
     @Autowired
     private CredentialsService credentialsService;
@@ -40,13 +38,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer addCustomer(Customer customer) throws EmailExistException, UsernameExistException{
-        customer.getCredentialsId().setRolesId(rolesService.getRolesById(1));
-        credentialsService.addCredentials(customer.getCredentialsId());
         if(customerRepo.findByEmail(customer.getEmail())!=null){
             throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
+        }else{
+        customer.getCredentialsId().setRolesId(rolesService.getRolesById(1));
+        credentialsService.addCredentials(customer.getCredentialsId());
+        return customerRepo.save(customer);
         }
-        customerRepo.save(customer);
-        return customer;
     }
 
     @Override
@@ -60,7 +58,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer) throws EmailExistException, UsernameExistException {
+        Customer newCustomer = customerRepo.findById(customer.getId()).get();
+         if(customerRepo.findByEmail(customer.getEmail())!=null && !customer.getEmail().equals(newCustomer.getEmail())){
+            throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
+        }
+        customer.getCredentialsId().setId(newCustomer.getCredentialsId().getId());
+        credentialsService.updateCredentials(customer.getCredentialsId());
         return customerRepo.save(customer);
     }
 

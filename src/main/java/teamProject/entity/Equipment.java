@@ -48,7 +48,6 @@ public class Equipment implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    
     @ManyToMany(mappedBy = "equipmentList")
     private List<Event> eventList;
 

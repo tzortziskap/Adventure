@@ -5,6 +5,7 @@
  */
 package teamProject.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import teamProject.entity.Event;
@@ -33,4 +34,6 @@ public interface EventService{
     public List<Event> getEventsByCategoryName(String category);
 
     public List<Event> getEventsByCategoryId(int category);
+    
+    public List<Event> getAvailableEventsAccordingDateAndCustomerId(List<Integer> ids,Date date);
 }

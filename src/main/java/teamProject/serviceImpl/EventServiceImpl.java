@@ -5,11 +5,15 @@
  */
 package teamProject.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import teamProject.entity.Customer;
+import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
 import teamProject.repository.EventRepo;
 import teamProject.service.EventService;
@@ -67,6 +71,10 @@ public class EventServiceImpl implements EventService {
     public List<Event> getEventsByCategoryId(int category) {
         return eventRepo.findBycategoryId(category);
     }
-    
+
+    @Override
+    public List<Event> getAvailableEventsAccordingDateAndCustomerId(List<Integer> ids, Date date) {
+         return eventRepo.findByIdNotInAndStartingDateGreaterThan(ids,date);
+    }
     
 }

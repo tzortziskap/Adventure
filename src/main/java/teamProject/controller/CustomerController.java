@@ -5,10 +5,9 @@
  */
 package teamProject.controller;
 
-import java.security.Principal;
-import java.text.ParseException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -59,7 +58,6 @@ public class CustomerController {
             return "redirect:/register";
         } catch (EmailExistException ex) {
             attributes.addAttribute("custEmailExist", ex.getMessage());
-            credentialsService.deleteCredentials(customer.getCredentialsId().getId());
             return "redirect:/register";
         } 
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
@@ -71,22 +69,36 @@ public class CustomerController {
         return " ";
     }
     
-    @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable("id") int id, Model model){
-        Customer customer = service.getCustomerById(id);
-        model.addAttribute("customerToEdit", customer);
-        return " ";
+    @GetMapping("/update")
+    public String showFormUpdate(Model model, HttpServletRequest request){
+         model.addAttribute("custEmailExist", request.getParameter("custEmailExist"));
+        model.addAttribute("custUsernameExist", request.getParameter("custUsernameExist"));
+        return "customer_update";
     }
     
-    @PostMapping("/update")
-    public String update(Customer customer, RedirectAttributes attributes){
-        service.updateCustomer(customer);
-        return " ";
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") int id, Customer customer, RedirectAttributes attributes, HttpServletRequest request){
+        customer.setId(id);
+        try {
+            Customer newCustomer = service.updateCustomer(customer);
+            HttpSession session = request.getSession();
+             Credentials loggedInUser = credentialsService.findByUsername(newCustomer.getCredentialsId().getUsername());
+            loggedInUser.setPassword(null);
+            loggedInUser.setPasswordResetToken(null);
+            session.setAttribute("loggedInUser", loggedInUser);
+        }catch (UsernameExistException ex){
+            attributes.addAttribute("custUsernameExist", ex.getMessage());
+            return "redirect:/customer/update";
+        } catch (EmailExistException ex) {
+            attributes.addAttribute("custEmailExist", ex.getMessage());
+            return "redirect:/customer/update";
+        } 
+        return "customer_index";
     }
     
     @GetMapping("/myevents/{id}")
     @ResponseBody
-    public ResponseEntity getAvaliableEvents(@PathVariable("id") int id){
+    public ResponseEntity myEvents(@PathVariable("id") int id){
          Customer customer = service.getCustomerById(id);
          List<CustomerBooksEvent> events = customer.getCustomerBooksEventList();
          return new ResponseEntity<>(events, HttpStatus.OK);

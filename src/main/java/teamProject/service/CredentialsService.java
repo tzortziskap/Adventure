@@ -26,7 +26,7 @@ public interface CredentialsService extends UserDetailsService{
 
     Credentials getCredentialsById(int id) ;
 
-    Credentials updateCredentials(Credentials credentials);
+    Credentials updateCredentials(Credentials credentials)  throws UsernameExistException;
     
     Credentials findByUsername(String username);
     

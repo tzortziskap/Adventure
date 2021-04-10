@@ -71,7 +71,7 @@
                                 </li>
                             </security:authorize>
                             <li class="nav-item">
-                                <a class="nav-link" href="http:/localhost:8080/Adventure/#aboutus">Σχετικά με εμάς</a>
+                                <a class="nav-link" href="http://localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#footer">Πληροφορίες</a>
@@ -102,7 +102,7 @@
             <div class="container">
                 <div class="row align-items-start">
                     <div class="col-md-4">
-                        <img src="/Adventure/img/${event.categoryId.imgurl}" alt="1" class="rounded float-left"/>
+                        <img src="/Adventure/img/${event.categoryId.imgurl}" alt="1" width="90%" class="rounded float-left"/>
                         <div id="location">
                             <h3>Σημείο Συνάντησης</h3>
                             <table class="table">

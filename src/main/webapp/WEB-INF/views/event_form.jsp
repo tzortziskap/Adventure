@@ -71,7 +71,7 @@
                                 </li>
                             </security:authorize>
                             <li class="nav-item">
-                                <a class="nav-link" href="http:/localhost:8080/Adventure/#aboutus">Σχετικά με εμάς</a>
+                                <a class="nav-link" href="http://localhost:8080/Adventure#aboutus">Σχετικά με εμάς</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#footer">Πληροφορίες</a>
@@ -99,7 +99,6 @@
             </nav>
         </div>
         <main>
-
             <section class="Form my-4 mx-5">
                 <div class="container">
                     <div class="row no-gutters">
@@ -110,56 +109,56 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="name">Ονόμα δραστηριότητας</label>
-                                        <form:input path="name" class="form-control"/>
+                                        <input name="name" class="form-control" required/>
                                         <form:errors path="name" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="description">Περιγραφή δραστηριότητας</label>
-                                        <textarea name="description" value="${event.description}" class="form-control" id="description"></textarea>
+                                        <textarea name="description" value="${event.description}" class="form-control" id="description" required></textarea>
                                         <form:errors path="description" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="startingDate">Ημερομηνία διεξαγωγής</label>
-                                        <form:input path="startingDate" class="form-control" type="datetime-local"/>
+                                        <input name="startingDate" class="form-control" type="datetime-local" required/>
                                         <form:errors path="startingDate" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="endingDate">Ημερομηνία τελους</label>
-                                        <form:input path="endingDate" class="form-control" type="datetime-local"/>
+                                        <input name="endingDate" class="form-control" type="datetime-local" required/>
                                         <form:errors path="endingDate" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="positions">Διαθέσιμες θέσεις</label>
-                                        <form:input type="number" class="form-control" path="positions" />
+                                        <input type="number" class="form-control" name="positions" required/>
                                         <form:errors path="positions" />
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="level">Δυσκολία</label>
-                                        <select  name="difficultyId.id" id="level" class="form-control difficulty">
-                                            <option  value=''>Choose...</option>
+                                        <select  name="difficultyId.id" id="level" class="form-control difficulty" required>
+                                            <option value=''>Choose...</option>
                                         </select>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="price">Τιμή</label>
-                                        <form:input path="price" class="form-control" type="number" id="priceval" />
+                                        <input path="price" class="form-control" type="number" id="priceval" required/>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="category">Κατηγορία</label>
-                                        <select name="categoryId" id="category" class="form-control categories">
+                                        <select name="categoryId" id="category" class="form-control categories" required>
                                             <option  value=''>Choose...</option>
                                         </select>
                                     </div>
@@ -167,7 +166,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="type">Τύπος</label>
-                                        <select name="typeIndoorOutdoorId" id="type" class="form-control typeIndoorOutdoor">
+                                        <select name="typeIndoorOutdoorId" id="type" class="form-control typeIndoorOutdoor" required>
                                             <option  value=''>Choose...</option>
                                         </select>
                                     </div>
@@ -175,7 +174,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="equipments" >Εξοπλισμος</label>
-                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select form-control equipment" name="equipmentList">
+                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select form-control equipment" name="equipmentList" required>
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -183,15 +182,15 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="county">Νομός</label>
-                                        <select  name="locationId.cityId.countyId.id" id="county" class="form-control county">
+                                        <select  name="locationId.cityId.countyId.id" id="county" class="form-control county" required>
                                             <option  value=''>Choose...</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
-                                        <label for="city">Πόλη</label>
-                                        <select  name="locationId.cityId" id="city" class="form-control city">
+                                        <label for="city">Πόλη</label> 
+                                        <select  name="locationId.cityId" id="city" class="form-control city" required>
                                             <option  value=''>Choose...</option>
                                         </select>
                                     </div>
@@ -199,13 +198,13 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Διεύθυνση</label>
-                                        <form:input path="locationId.address" class="form-control" />
+                                        <input name="locationId.address" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Ταχυδρομικός Κώδικας</label>
-                                        <form:input path="locationId.postalCode" class="form-control" />
+                                        <input name="locationId.postalCode" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -218,13 +217,13 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Τοποθεσια X</label>
-                                        <input type="text" name="locationId.coordinateX" class="form-control" id="x" value=""/>
+                                        <input type="text" name="locationId.coordinateX" class="form-control" id="x"/>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Τοποθεσια Y</label>
-                                        <input type="text" name="locationId.coordinateY" class="form-control" id="y" value=""/>
+                                        <input type="text" name="locationId.coordinateY" class="form-control" id="y"/>
                                     </div>
                                 </div>
                                 <input hidden type="text" value="${loggedInUser.company.id}" name="companyId"/>

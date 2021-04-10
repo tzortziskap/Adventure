@@ -25,7 +25,7 @@ public interface CustomerService{
 
     Customer getCustomerById(int id) ;
 
-    Customer updateCustomer(Customer customer);
+    Customer updateCustomer(Customer customer) throws EmailExistException, UsernameExistException;
 
     Customer getCustomerByEmail(String email);
     

@@ -6,6 +6,7 @@
 package teamProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import teamProject.entity.CustomerBooksEvent;
 
@@ -14,6 +15,8 @@ import teamProject.entity.CustomerBooksEvent;
  * @author tzortziskapellas
  */
 @Repository
-public interface CustomerBooksEventRepo extends JpaRepository<CustomerBooksEvent,Integer>{
+public interface CustomerBooksEventRepo extends JpaRepository<CustomerBooksEvent, Integer> {
     
+    @Query ("select sum(amountPositions) from CustomerBooksEvent cbe where cbe.eventId.id=?1")
+    int countBookingById(int id);
 }

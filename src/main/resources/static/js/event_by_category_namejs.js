@@ -42,7 +42,7 @@ $(document).ready(function () {
                     "</ul> " +
                     "<div class='card-body'> " +
                     "<a href='/Adventure' class='btn btn-primary btn-md'>Κράτηση</a> " +
-                    "<a href='/Adventure' class='btn btn-primary btn-md'>Περισσότερα</a> " +
+                    "<a href='http://localhost:8080/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
                     "</div> " +
                     "</div> " +
                     "</div>";

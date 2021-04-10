@@ -94,7 +94,8 @@ public class Event implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne
     private Categories categoryId;
-    @JoinTable(name = "equipment_has_event", joinColumns = {
+    @JsonIgnore
+     @JoinTable(name = "equipment_has_event", joinColumns = {
         @JoinColumn(name = "event_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "equipment_id", referencedColumnName = "id")})
     @ManyToMany

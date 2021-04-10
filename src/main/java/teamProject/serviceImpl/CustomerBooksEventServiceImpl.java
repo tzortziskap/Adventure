@@ -5,11 +5,13 @@
  */
 package teamProject.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import teamProject.entity.CustomerBooksEvent;
+import teamProject.entity.Event;
 import teamProject.repository.CustomerBooksEventRepo;
 import teamProject.service.CustomerBooksEventService;
 
@@ -43,6 +45,11 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
     @Override
     public CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent) {
         return customerBooksEventRepo.save(customerBooksEvent);
+    }
+
+    @Override
+    public int getRemainingPositionsOfAnEvent(int id) {
+        return customerBooksEventRepo.countBookingById(id);
     }
     
 }
