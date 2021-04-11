@@ -47,7 +47,7 @@
                 <h3 class='category'>${category}</h3>
                 <div id="numberWithLeftButton">
                     <h3 id="number"></h3>
-                    <a href="${pageContext.request.contextPath}/event/search" class="btn btn-primary leftbutton">Δες τα όλα!</a>
+                    <a href="${pageContext.request.contextPath}/event" class="btn btn-primary leftbutton">Δες τα όλα!</a>
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-4 g-4" id='events'>

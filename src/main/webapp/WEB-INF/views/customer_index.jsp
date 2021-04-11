@@ -117,6 +117,7 @@
                                 <th scope="col">Όνομα</th>
                                 <th scope="col">Ημερομηνία</th>
                                 <th scope="col">Τιμή</th>
+                                <th scope="col">Θέσεις</th>
                                 <th scope="col">Πόλη</th>
                                 <th scope="col">Κατηγορία</th>
                                 <th scope="col">Περισσότερες Πληροφορίες</th>
@@ -139,6 +140,7 @@
                                 <th scope="col">Όνομα</th>
                                 <th scope="col">Ημερομηνία</th>
                                 <th scope="col">Τιμή</th>
+                                <th scope="col">Διαθέσιμες Θέσεις</th>
                                 <th scope="col">Πόλη</th>
                                 <th scope="col">Κατηγορία</th>
                                 <th scope="col">Περισσότερες Πληροφορίες</th>

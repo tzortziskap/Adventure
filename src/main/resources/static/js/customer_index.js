@@ -13,7 +13,6 @@ $(document).ready(function () {
     today = yyyy + "-" + mm + "-" + dd;
     let id = document.getElementById("customerid").innerHTML;
     $.getJSON("http://localhost:8080/Adventure/customer/myevents/" + id, function (results) {
-        var my_obj = JSON.parse((JSON.stringify(results)));
         let nym = results.length;
         document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + nym;
         $('#eventstable tbody').html('');
@@ -33,29 +32,22 @@ $(document).ready(function () {
     function createpoints(results, tablename) {
         let points = [];
         let bookings = [];
-        let link;
-        let link1;
-        let equip = "";
-        for (var i = 0; i < results.length; i++) {
-            points.push({id: results[i].id,
-                name: results[i].name,
-                x: results[i].locationId.coordinateX,
-                y: results[i].locationId.coordinateY,
-                start: dateformat(results[i].startingDate),
-                end: dateformat(results[i].endingDate),
-                price: results[i].price,
-                level: results[i].difficultyId.level,
-                location: results[i].locationId.cityId.name,
-                cat: results[i].categoryId.categoryName,
-            });
-            if (tablename === "eventstable") {
-                bookings.push({
-                    name: results[i].name,
-                });
-            }
-        }
         var table;
         if (tablename === "eventstable") {
+            for (var i = 0; i < results.length; i++) {
+                points.push({id: results[i].eventId.id,
+                    name: results[i].eventId.name,
+                    x: results[i].eventId.locationId.coordinateX,
+                    y: results[i].eventId.locationId.coordinateY,
+                    start: dateformat(results[i].eventId.startingDate),
+                    end: dateformat(results[i].eventId.endingDate),
+                    price: results[i].totalPrice,
+                    potitions: results[i].amountPositions,
+                    level: results[i].eventId.difficultyId.level,
+                    location: results[i].eventId.locationId.cityId.name,
+                    cat: results[i].eventId.categoryId.categoryName,
+                });
+            }
             table = $('#bookings').DataTable({});
             if (table !== null) {
                 table.destroy();
@@ -86,6 +78,7 @@ $(document).ready(function () {
                     {data: "name"},
                     {data: "start"},
                     {data: "price"},
+                    {data: "potitions"},
                     {data: "location"},
                     {data: "cat"},
                     {data: "id",
@@ -96,6 +89,20 @@ $(document).ready(function () {
                 ]
             });
         } else {
+            for (var i = 0; i < results.length; i++) {
+                points.push({id: results[i].id,
+                    name: results[i].name,
+                    x: results[i].locationId.coordinateX,
+                    y: results[i].locationId.coordinateY,
+                    start: dateformat(results[i].startingDate),
+                    end: dateformat(results[i].endingDate),
+                    price: results[i].price,
+                    potitions: results[i].remainingPositions,
+                    level: results[i].difficultyId.level,
+                    location: results[i].locationId.cityId.name,
+                    cat: results[i].categoryId.categoryName,
+                });
+            }
             table = $('#eventstobook').DataTable({
             });
             if (table !== null) {
@@ -114,6 +121,7 @@ $(document).ready(function () {
                     {data: "name"},
                     {data: "start"},
                     {data: "price"},
+                    {data: "potitions"},
                     {data: "location"},
                     {data: "cat"},
                     {data: "id",
@@ -121,7 +129,7 @@ $(document).ready(function () {
                             return "<a href='http://localhost:8080/Adventure/event/" + data + "'class='btn btn-primary'>Πληροφορίες</a>";
                         }
                     }
-                        ]});
+                ]});
         }
     }
     function dateformat(date) {

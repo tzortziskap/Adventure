@@ -111,11 +111,7 @@ public class CustomerController {
     @ResponseBody
     public ResponseEntity myEvents(@PathVariable("id") int id){
          Customer customer = service.getCustomerById(id);
-         List<CustomerBooksEvent> CustomerBooksEvents = customer.getCustomerBooksEventList();
-         List<Event> events = new ArrayList();
-         for (CustomerBooksEvent CustomerBooksEvent : CustomerBooksEvents){
-             events.add(CustomerBooksEvent.getEventId());
-         }
+         List<CustomerBooksEvent> events = customer.getCustomerBooksEventList();
          return new ResponseEntity<>(events, HttpStatus.OK);
      }
 }

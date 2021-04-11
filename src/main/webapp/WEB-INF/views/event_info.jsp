@@ -145,6 +145,7 @@
                             <a href="/" class="btn btn-primary btn-lg">Επεξεργασία</a>
                             </div>
                         </c:if>
+                            <c:if test="${event.remainingPositions != 0}">
                     <security:authorize access="!hasAuthority('COMPANY')">
                     <form:form class= "form-inline" action="http://localhost:8080/Adventure/payment/${event.id}" method="GET" modelAttribute="book">
                          <div class="form-inline my-3 ">
@@ -158,6 +159,7 @@
                          </div>
                     </form:form>
                     </security:authorize>
+                            </c:if>
                 </div>
             </div>
         </main>
