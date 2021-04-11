@@ -27,4 +27,6 @@ public interface CustomerBooksEventService{
     CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent);
     
     public CustomerBooksEvent create(HttpServletRequest request, String total, Order order);
+    
+    double getTotalPrice(CustomerBooksEvent book);
 }

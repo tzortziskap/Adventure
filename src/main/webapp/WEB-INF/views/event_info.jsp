@@ -40,15 +40,12 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="css/eventinfo.css" rel="stylesheet" type="text/css">
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
         <link href="http://localhost:8080/Adventure/css/event_info.css" rel="stylesheet" type="text/css">
         <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
-
         <%@ include file="nav.jsp" %>
         <main>
             <div class="container">
@@ -117,8 +114,8 @@
                                 <td>${event.typeIndoorOutdoorId.typeIndoorOutdoor}</td>
                             </tr>
                             <tr>
-                                <th scoe="col">Θέσεις</th>
-                                <td>${event.positions}</td>
+                                <th scoe="col">Διαθέσιμες Θέσεις</th>
+                                <td>${event.remainingPositions}</td>
                             </tr>
                             <tr>
                                 <th scoe="col">Εταίρια που το διοργανωνεί</th>
@@ -142,18 +139,29 @@
                             <div id="mapid" ></div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    
                         <c:if test="${loggedInUser.company.id == event.companyId.id}">
+                            <div class="col-md-6">
                             <a href="/" class="btn btn-primary btn-lg">Επεξεργασία</a>
+                            </div>
                         </c:if>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="/" class="btn btn-primary btn-lg">Κάνε Κράτηση</a>
-                    </div>
+                    <security:authorize access="!hasAuthority('COMPANY')">
+                    <form:form class= "form-inline" action="http://localhost:8080/Adventure/payment/${event.id}" method="GET" modelAttribute="book">
+                         <div class="form-inline my-3 ">
+                        <div class="col-md-7">
+                            <label class="form-check-label" for="count">Aριθμός θέσεων</label>
+                            <input type="number" style ="width: 100%" id="count" placeholder="Αριθμός Θέσεων" class="form-control" name="amountPositions" min="1" max="${event.remainingPositions}" required>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="submit"  class="btn btn-primary btn-lg" value="Συνέχεια" />
+                        </div>
+                         </div>
+                    </form:form>
+                    </security:authorize>
                 </div>
             </div>
         </main>
-       <%@ include file="footer.jsp" %>
+        <%@ include file="footer.jsp" %>
         <script src="http://localhost:8080/Adventure/js/event_info.js"></script>
     </body>
 </html>

@@ -107,8 +107,9 @@ public class EventController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getEventInfo(@PathVariable(name = "id") int id, Model model) {
         Event event = service.getEventById(id);
+        CustomerBooksEvent book = new CustomerBooksEvent();
         model.addAttribute("event", event);
-        model.addAttribute("bookings", "0");
+        model.addAttribute("book", book);
         return "event_info";
 
     }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import teamProject.dto.Order;
 import teamProject.entity.Company;
+import teamProject.entity.Credentials;
 import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
 import teamProject.service.CustomerBooksEventService;
@@ -43,13 +44,12 @@ public class PaypalController {
     Order οrder = new Order();
 
     @GetMapping("/{eventID}")
-    public String checkout(@PathVariable("eventID") int id, @RequestParam int count, Model model, HttpServletRequest request) {
-        Event event = eventService.getEventById(id);
-        οrder.setEvent(event);
-        οrder.setCount(count);
-        model.addAttribute("event", event);
-        model.addAttribute("count", count);
-        model.addAttribute("total", οrder.getTotalPrice());
+    public String checkout(@PathVariable("eventID") int id, CustomerBooksEvent book, Model model, HttpServletRequest request) {
+        Credentials user = (Credentials)request.getSession().getAttribute("loggedInUser");
+        book.setCustomerId(user.getCustomer());
+        book.setEventId(eventService.getEventById(id));
+        book.setTotalPrice(customerBooksEventService.getTotalPrice(book));
+        model.addAttribute("book", book);
         return "checkout";
     }
 

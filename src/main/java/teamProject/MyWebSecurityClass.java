@@ -42,6 +42,7 @@ public class MyWebSecurityClass extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customer/**").hasAuthority("CUSTOMER")
                 .antMatchers("/event/create").hasAuthority("COMPANY")
                 .antMatchers("/event/register").hasAuthority("CUSTOMER")
+                .antMatchers("/payment/**").hasAuthority("CUSTOMER")
                 .and()
                 .formLogin()
                 .loginPage("/loginPage")

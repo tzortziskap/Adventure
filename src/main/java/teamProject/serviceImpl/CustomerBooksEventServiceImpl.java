@@ -5,6 +5,8 @@
  */
 package teamProject.serviceImpl;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +52,16 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
     @Override
     public CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent) {
         return customerBooksEventRepo.save(customerBooksEvent);
+    }
+    
+@Override
+    public double getTotalPrice(CustomerBooksEvent book) {
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        double eventPrice = book.getEventId().getPrice();
+        int bookingPositions = book.getAmountPositions();
+        double totalPrice = eventPrice * bookingPositions;
+        formatter.format(totalPrice);
+        return totalPrice;
     }
 
     @Override
