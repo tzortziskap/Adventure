@@ -129,7 +129,10 @@ $(document).ready(function () {
     }
 
     function createpoints(results) {
-        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + results.length;
+        
+        var availableEvents=0;
+        var today = new Date();
+        var eventDate;
         $('#events').html('');
         $("#map").html("");
         $("#map").html('<div id="mapid" ></div>');
@@ -153,11 +156,13 @@ $(document).ready(function () {
                     "<li class='list-group-item'>" + results[i].locationId.cityId.name + "</li> " +
                     "</ul> " +
                     "<div class='card-body'> " +
-                    "<a href='/Adventure' class='btn btn-primary btn-md'>Κράτηση</a> " +
                     "<a href='http://localhost:8080/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
                     "</div> " +
                     "</div> " +
                     "</div>";
+             eventDate = new Date(results[i].startingDate);
+            if (today<eventDate){
+                availableEvents = availableEvents + 1;
             points.push({name: results[i].name, x: results[i].locationId.coordinateX,
                 y: results[i].locationId.coordinateY,
                 start: results[i].startingDate,
@@ -165,6 +170,8 @@ $(document).ready(function () {
                 type: results[i].categoryId.categoryName});
             $('#events').append(row);
         }
+        }
+        document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + availableEvents;
 
         createmap(points);
     }

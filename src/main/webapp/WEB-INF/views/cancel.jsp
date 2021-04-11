@@ -34,16 +34,16 @@
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""
         ></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/payment.css">
+        <link href="http://localhost:8080/Adventure/css/index.css" rel="stylesheet" type="text/css">
+        
     </head>
     <body>
         <%@ include file="nav.jsp" %>
         <main id="cancel">
-            <div class="container justify-content-center">
-                <h4 id="cancel">Η πληρωμή απέτυχε. Παρακαλώ δοκιμάστε ξανά.</h4>
-
-            </div>
+            <div class="container">
+            <h1 class="font-weight-bold py-3">Adventure Booking</h1>
+            <h3>Η πληρωμή απέτυχε. Παρακαλώ δοκιμάστε ξανά.</h3>
+        </div>
         </main>
         <%@ include file="footer.jsp" %>
     </body>

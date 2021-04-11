@@ -5,15 +5,14 @@
  */
 package teamProject.serviceImpl;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import teamProject.entity.Customer;
-import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
 import teamProject.repository.EventRepo;
 import teamProject.service.EventService;
@@ -79,12 +78,30 @@ public class EventServiceImpl implements EventService {
     
     @Override
     public List<Event> getAvailableEventsAccordingDate(Date date,int positions) {
-         return eventRepo.findByStartingDateAfterAndRemainingPositionsGreaterThan(date,positions);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+    try {
+        date = formatter.parse(formatter.format(date));
+        return eventRepo.findByStartingDateAfterAndRemainingPositionsGreaterThan(date,positions);
+    } catch (ParseException ex) {
+        return getEventsWhichHaveAvailablePositions(positions);
+    }
+         
     }
 
     @Override
     public List<Event> getEventsWhichHaveAvailablePositions(int positions) {
         return eventRepo.findByRemainingPositionsGreaterThan(positions);
+    }
+
+    @Override
+    public List<Event> getAvailableEventsAccordingCategoryNameAndDate(String categoryName, Date date, int positions) {
+             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+    try {
+        date = formatter.parse(formatter.format(date));
+        return eventRepo.findBycategoryIdCategoryNameContainingIgnoreCaseAndStartingDateAfterAndRemainingPositionsGreaterThan(categoryName,date,positions);
+    } catch (ParseException ex) {
+        return getEventsByCategoryName(categoryName);
+    }
     }
     
 }

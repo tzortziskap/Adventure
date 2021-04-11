@@ -40,4 +40,6 @@ public interface EventService{
     public List<Event> getAvailableEventsAccordingDate(Date date, int positions);
     
     List<Event> getEventsWhichHaveAvailablePositions(int positions);
+    
+    public List<Event> getAvailableEventsAccordingCategoryNameAndDate(String categoryName, Date date, int positions);
 }

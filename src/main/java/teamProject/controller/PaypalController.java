@@ -19,11 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import teamProject.dto.Order;
-import teamProject.entity.Company;
 import teamProject.entity.Credentials;
 import teamProject.entity.CustomerBooksEvent;
-import teamProject.entity.Event;
 import teamProject.service.CustomerBooksEventService;
 import teamProject.service.EventService;
 import teamProject.service.PaypalService;
@@ -39,61 +36,53 @@ public class PaypalController {
     @Autowired
     CustomerBooksEventService customerBooksEventService;
 
-    public static final String SUCCESS_URL = "pay/success";
-    public static final String CANCEL_URL = "pay/cancel";
-    Order οrder = new Order();
-
     @GetMapping("/{eventID}")
     public String checkout(@PathVariable("eventID") int id, CustomerBooksEvent book, Model model, HttpServletRequest request) {
         Credentials user = (Credentials)request.getSession().getAttribute("loggedInUser");
         book.setCustomerId(user.getCustomer());
         book.setEventId(eventService.getEventById(id));
         book.setTotalPrice(customerBooksEventService.getTotalPrice(book));
-        model.addAttribute("book", book);
+        request.getSession().setAttribute("book", book);
         return "checkout";
     }
 
     @PostMapping("/pay")
-    public String payment() {    
-
+    public String payment(CustomerBooksEvent book,HttpServletRequest request) {    
         try {
-            Payment payment = service.createPayment(οrder.getTotalPrice(), οrder.getEvent().getName(), "http://localhost:8080/Adventure/payment/" + CANCEL_URL,
-                    "http://localhost:8080/Adventure/payment/" + SUCCESS_URL);
-
+            Payment payment = service.createPayment(book.getTotalPrice(), book.getEventId().getName(), "http://localhost:8080/Adventure/payment/pay/cancel",
+                    "http://localhost:8080/Adventure/payment/pay/success");
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
                     return "redirect:" + link.getHref();
                 }
             }
         } catch (PayPalRESTException e) {
-
             e.printStackTrace();
         }
         return "redirect:/payment";
     }
 
-    @GetMapping(value = CANCEL_URL)
-    public String cancelPay() {
+    @GetMapping("/pay/cancel")
+    public String cancelPay(HttpServletRequest request) {
+        request.getSession().removeAttribute("book");
         return "cancel";
     }
 
-    @GetMapping(value = SUCCESS_URL)
+    @GetMapping("/pay/success")
     public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, Model model, HttpServletRequest request) {   //, 
         try {
+            CustomerBooksEvent book = (CustomerBooksEvent) request.getSession().getAttribute("book");
+            System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+ book.getAmountPositions());
             Payment payment = service.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
                 Transaction transaction = payment.getTransactions().get(0);
-                Company company = οrder.getEvent().getCompanyId();
                 PayerInfo payer = payment.getPayer().getPayerInfo();
-                model.addAttribute("event", οrder.getEvent());
                 model.addAttribute("payer", payer);
                 model.addAttribute("transaction", transaction);
-                model.addAttribute("company", company);
-                String total = transaction.getAmount().getTotal();
-                model.addAttribute("count", οrder.getCount());
-                CustomerBooksEvent customerBooksEvent = customerBooksEventService.create(request,total, οrder);
-                customerBooksEventService.addCustomerBooksEvent(customerBooksEvent);
+                model.addAttribute("book", book);
+                customerBooksEventService.addCustomerBooksEvent(book);
+                request.getSession().removeAttribute("book");
                 return "success";
             }
         } catch (PayPalRESTException e) {

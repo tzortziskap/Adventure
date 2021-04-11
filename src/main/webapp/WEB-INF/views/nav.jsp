@@ -19,13 +19,11 @@
                                 <a class="nav-link active" aria-current="page" href="http://localhost:8080/Adventure">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/event/search">Δράστηριοτητες</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/event/search">Αναζήτηση</a>
                             </li>
-                            <security:authorize access="hasAuthority('CUSTOMER')">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="${pageContext.request.contextPath}/event/register">Κράτηση</a>
+                                    <a class="nav-link" href="${pageContext.request.contextPath}/event">Δραστηριότητες</a>
                                 </li>
-                            </security:authorize>
                             <security:authorize access="hasAuthority('COMPANY')">
                                 <li class="nav-item">
                                     <a class="nav-link" href="${pageContext.request.contextPath}/event/create">Καταχωρήση</a>

@@ -35,40 +35,40 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/payment.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/Adventure/css/payment.css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
         <main>
             <div class="container justify-content-center">
                 <h4 class="font-weight-bold py-2">Στοιχεία Πληρωμής</h4>
-                <form:form action="${pageContext.request.contextPath}/payment/pay" method="POST" id="checkoutForm" >
+                <form:form action="http://localhost:8080/Adventure/payment/pay" method="POST" id="checkoutForm" modelAttribute="book">
                     <table class="table">
                         <tr>
-                        <input type="hidden" id="id" name="eventId" value="${book.eventId.id}" />
+                        <input type="hidden" id="id" name="eventId.id" value="${book.eventId.id}" />
                         </tr>
                         <tr>                                  
                             <td> <label for="name">Όνομα δραστηριότητας:</label> </td>
-                            <td> <input type="text" id="name" name="name" value="${event.name}" readonly/></td>
+                            <td> <input type="text" id="name" name="eventId.name" value="${book.eventId.name}" readonly/></td>
                         </tr>
                         <tr>
                             <td>   <label for="pricePerPerson">Τιμή ανα θέση:</label></td>
                             <td>
-                                <input type="text" id="pricePerPerson" name="pricePerPerson"  value="${event.price} EUR" readonly/>
+                                <input type="text" id="pricePerPerson" name="eventId.price"  value="${book.eventId.price}" readonly/>
                             </td>
                         </tr>
                         <tr>
                             <td>    <label for="count">Αριθμός θέσεων:</label></td>
-                            <td>    <input type="text" id="description" name="count"  value="${count}" readonly/></td>
+                            <td>    <input type="text" id="description" name="amountPositions"  value="${book.amountPositions}" readonly/></td>
                             </div> 
                         </tr>
                         <tr>
                             <td>   <label for="method">Τρόπος πληρωμής:</label></td>
-                            <td>   <input type="text" id="method" name="method" value="PayPal" readonly/></td>
+                            <td>   <input type="text" id="method" value="PayPal" readonly/></td>
                         </tr>
                         <tr>
                             <td>   <label for="price">Σύνολο:</label></td>
-                            <td>   <input class="input-symbol-euro" type="text" id="price" name="price" value="${total} EUR" readonly/></td>
+                            <td>   <input class="input-symbol-euro" type="text" id="price" name="totalPrice" value="${book.totalPrice}" readonly/></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Επομενο" class="btn btn-primary"></td>
@@ -78,7 +78,7 @@
                 </form:form>
             </div>
         </main>
-        <%@ include file="footer.jsp" %>Ï
+        <%@ include file="footer.jsp" %>
     </body>
 </html>
 

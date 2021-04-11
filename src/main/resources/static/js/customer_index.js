@@ -50,8 +50,7 @@ $(document).ready(function () {
             });
             if (tablename === "eventstable") {
                 bookings.push({
-                    name: results[i].eventId.name,
-                    kostos: results[i].totalPrice
+                    name: results[i].name,
                 });
             }
         }
@@ -121,11 +120,8 @@ $(document).ready(function () {
                         "render": function (data, type, full, meta) {
                             return "<a href='http://localhost:8080/Adventure/event/" + data + "'class='btn btn-primary'>Πληροφορίες</a>";
                         }
-                    },
-                    {data: "id",
-                        "render": function (data, type, full, meta) {
-                            return "<a href=<a href='http://localhost:8080/Adventure/event/" + data + "' class='btn btn-primary'>Κράτηση</a>";
-                        }}]});
+                    }
+                        ]});
         }
     }
     function dateformat(date) {

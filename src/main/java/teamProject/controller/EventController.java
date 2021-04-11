@@ -44,6 +44,12 @@ public class EventController {
     private EventService service;
     @Autowired
     private CustomerService customerService;
+    
+    @GetMapping()
+    public String showAllAvailableEvents(Model model){
+        model.addAttribute("events", service.getAvailableEventsAccordingDate(new Date(), 0));
+        return "all_events";
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showForm(@ModelAttribute("event") Event event, Model model) {
@@ -132,5 +138,10 @@ public class EventController {
         }
 
         return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+    @GetMapping("/category/{category}")
+    @ResponseBody
+    public ResponseEntity<List<Event>> getAvaliableEventsByCategory(@PathVariable("category") String categoryName){
+        return new ResponseEntity<>(service.getAvailableEventsAccordingCategoryNameAndDate(categoryName, new Date(), 0), HttpStatus.OK);
     }
 }

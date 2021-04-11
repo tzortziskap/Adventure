@@ -32,4 +32,6 @@ public interface EventRepo extends JpaRepository<Event,Integer>, JpaSpecificatio
     public List<Event> findByStartingDateAfterAndRemainingPositionsGreaterThan(Date date,int id);
     
     List<Event> findByRemainingPositionsGreaterThan(int positions);
+    
+    List<Event> findBycategoryIdCategoryNameContainingIgnoreCaseAndStartingDateAfterAndRemainingPositionsGreaterThan(String categoryName,Date date,int id);
 }

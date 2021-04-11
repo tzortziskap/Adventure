@@ -142,7 +142,6 @@
                                 <th scope="col">Πόλη</th>
                                 <th scope="col">Κατηγορία</th>
                                 <th scope="col">Περισσότερες Πληροφορίες</th>
-                                <th scope="col">Κράτηση</th>
                             </tr>
                         </thead>
                         <tbody>
