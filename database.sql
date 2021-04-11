@@ -38,7 +38,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Πεζοπορία','pezoporia.jpeg'),(2,'Τοξοβολία','toxovolia.jpeg'),(3,'Ιππασία','ippasia.jpeg'),(4,'Τρέξιμο',NULL),(5,'Εργαστήριο Φωτογραφίας',NULL),(19,'Μαθήματα Μαγειρικής','mageiriki.jpeg'),(20,'Κατάδυση','katadisi.jpeg'),(21,'Κανό Καγιάκ','canoe.jpg'),(22,'Bungee Jumping',NULL),(23,'Ορεινή Ποδηλασία','bike.jpeg'),(24,'Αναρρίχηση','anarixisi.jpeg'),(25,'Ski','ski.png');
+INSERT INTO `categories` VALUES (1,'Πεζοπορία','pezoporia.jpeg'),(2,'Τοξοβολία','toxovolia.jpeg'),(3,'Ιππασία','ippasia.jpeg'),(4,'Τρέξιμο','treximo.jpeg'),(5,'Εργαστήριο Φωτογραφίας','fotografia.jpeg'),(19,'Μαθήματα Μαγειρικής','mageiriki.jpeg'),(20,'Κατάδυση','katadisi.jpeg'),(21,'Κανό Καγιάκ','canoe.jpg'),(22,'Bungee Jumping','bungee-jumping.jpeg'),(23,'Ορεινή Ποδηλασία','bike.jpeg'),(24,'Αναρρίχηση','anarixisi.jpeg'),(25,'Ski','ski.png');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `company` (
   KEY `fk_company_city` (`city_id`),
   CONSTRAINT `fk_company_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `fk_company_credentials` FOREIGN KEY (`credentials_id`) REFERENCES `credentials` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (9,'TZORTZIS KAPELLAS','Neossoikon 77','tzortziskapellas@hotmail.com','928374974',26,'18537',61);
+INSERT INTO `company` VALUES (9,'TZORTZIS KAPELLAS','Neossoikon 77','tzortziskapellas@hotmail.com','928374974',26,'18537',61),(10,'TZORTZIS KAPELLAS','Neossoikon 77','tzortziskapewr@hotmail.com','928374974',26,'18537',62);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `credentials` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `fk_credentials_role_idx` (`roles_id`),
   CONSTRAINT `fk_credentials_role` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +156,7 @@ CREATE TABLE `credentials` (
 
 LOCK TABLES `credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES (59,'tzortziskap','$2a$10$s3ecbhXYlYpVZlOONCGqruOeSgI1IDSGaawZ7XBKY5McI8np0wghm',1,NULL),(60,'tzortziskap2','$2a$10$sUyemVPkaK8cILO8BXvC3OlxcfP9B1aPj0LMNAYq2pbWGf46BP0SO',1,NULL),(61,'tzortziskap3','$2a$10$RwSaWUdnt0mlmDdP6ozvVeKGQPJKiifZ8zeAUNXSrAAsN.Kans6XS',2,NULL);
+INSERT INTO `credentials` VALUES (61,'tzortziskap3','$2a$10$RwSaWUdnt0mlmDdP6ozvVeKGQPJKiifZ8zeAUNXSrAAsN.Kans6XS',2,NULL),(62,'tzortziskap6','$2a$10$MtN7vBEepKArcfZL0Ngha.YTABM8S3wqeTZcA22.BPrRtFed82TO6',2,NULL),(68,'tzortziskap1','$2a$10$2U6Ii2Xbn6GA8geKIG5X5u0OQsFLyy0AeYTPaOGg4ag.uMJXQDSxG',1,NULL),(69,'edaxhixho','$2a$10$wLpJriu/PzFsYVcPgRpMv.TRw1BtPMgVRzDOStTJGKU4lLc8r2y4e',1,NULL);
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `customer` (
   CONSTRAINT `fk_customer_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`),
   CONSTRAINT `fk_customer_credentials` FOREIGN KEY (`credentials_id`) REFERENCES `credentials` (`id`),
   CONSTRAINT `fk_customer_gender` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (42,'TZORTZIS','KAPELLAS','1997-08-22','tzortziskap@hotmail.com','Neossoikon 77',48,'18537',59,1),(43,'eda','xhixho','2021-04-01','edaxhixho@gmail.com','Neossoikon 77',26,'18537',60,2);
+INSERT INTO `customer` VALUES (47,'TZORTZIS','KAPELLAS','1997-08-10','tzortziskap@hotmail.com','Neossoikon 77',26,'18537',68,1),(48,'Eda','Xhixho','1991-09-26','edaxhixho@gmail.com','Neossoikon 77',27,'18537',69,2);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,7 +217,7 @@ CREATE TABLE `customer_books_event` (
   KEY `fk_customer_books_event_event` (`event_id`),
   CONSTRAINT `fk_customer_books_event_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   CONSTRAINT `fk_customer_books_event_event` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +226,7 @@ CREATE TABLE `customer_books_event` (
 
 LOCK TABLES `customer_books_event` WRITE;
 /*!40000 ALTER TABLE `customer_books_event` DISABLE KEYS */;
-INSERT INTO `customer_books_event` VALUES (1,43,11,1,20);
+INSERT INTO `customer_books_event` VALUES (11,47,20,3,105),(12,47,20,1,35);
 /*!40000 ALTER TABLE `customer_books_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,6 +301,7 @@ CREATE TABLE `equipment_has_event` (
 
 LOCK TABLES `equipment_has_event` WRITE;
 /*!40000 ALTER TABLE `equipment_has_event` DISABLE KEYS */;
+INSERT INTO `equipment_has_event` VALUES (2,20),(4,20),(1,21),(2,21),(3,21),(4,21),(1,22),(1,23);
 /*!40000 ALTER TABLE `equipment_has_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,6 +326,7 @@ CREATE TABLE `event` (
   `company_id` int DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `category_id` int NOT NULL,
+  `remaining_positions` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_event_difficulty` (`difficulty_id`),
   KEY `fk_event_type_indoor_outdoor` (`type_indoor_outdoor_id`),
@@ -338,7 +340,7 @@ CREATE TABLE `event` (
   CONSTRAINT `fk_event_location` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`),
   CONSTRAINT `fk_event_organiser_id` FOREIGN KEY (`organiser_id`) REFERENCES `organiser` (`id`),
   CONSTRAINT `fk_event_type_indoor_outdoor` FOREIGN KEY (`type_indoor_outdoor_id`) REFERENCES `type_indoor_outdoor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +349,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (11,'2021-04-10 18:41:00','2021-04-09 18:41:00',30,'kjbsvk ',12,20,2,1,NULL,9,'pezoporia',1),(12,'2021-04-17 18:42:00','2021-04-08 18:42:00',40,'bubjhbkj',13,20,1,3,NULL,9,'mathimnata mageirikis',19);
+INSERT INTO `event` VALUES (11,'2021-04-10 18:41:00','2021-04-09 18:41:00',30,'kjbsvk ',12,20,2,1,NULL,9,'pezoporia',1,20),(12,'2021-04-17 18:42:00','2021-04-08 18:42:00',0.01,'bubjhbkj',13,20,1,3,NULL,9,'mathimnata mageirikis',19,20),(20,'2021-04-10 18:54:00','2021-04-12 18:54:00',35,'ksjdzkasdhjmnc',3,4,2,3,NULL,9,'TZORTZIS KAPELLAS',23,0),(21,'2021-04-10 19:02:00','2021-04-09 19:02:00',0,'jkhbk',23,46,2,4,NULL,9,'TZORTZIS KAPELLAS',22,46),(22,'2021-04-23 19:13:00','2021-04-22 19:12:00',0,'jksafndvl',24,4,2,4,NULL,10,'TZORTZIS KAPELLAS',2,4),(23,'2021-04-17 01:45:00','2021-04-09 01:45:00',0,'ippasia sto marathona',25,43,2,2,NULL,9,'ippasia',3,43);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +394,7 @@ CREATE TABLE `location` (
   PRIMARY KEY (`id`),
   KEY `fk_location_city` (`city_id`),
   CONSTRAINT `fk_location_city` FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -401,7 +403,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (2,'likavitou 20','37.92686760148135','23.5546875',48,'18537'),(3,'likavitou 30','37.96529719562781','23.72573641063027',48,'18537'),(8,'sth fusi','39.28479375551926','20.400379332422748',283,'18537'),(10,'sth fusi','38.65119833229951','22.215774488467055',48,'18537'),(11,'sthn exochi','38.16911413556086','23.401851044285994',48,'18537'),(12,'likavitou 20','37.98317483351337','23.74220727418984',48,'18537'),(13,'likavitou 30','38.01455819225335','23.722927408657643',39,'18537');
+INSERT INTO `location` VALUES (2,'likavitou 20','37.92686760148135','23.5546875',48,'18537'),(3,'likavitou 30','37.96529719562781','23.72573641063027',48,'18537'),(8,'sth fusi','39.28479375551926','20.400379332422748',283,'18537'),(10,'sth fusi','38.65119833229951','22.215774488467055',48,'18537'),(11,'sthn exochi','38.16911413556086','23.401851044285994',48,'18537'),(12,'likavitou 20','37.98317483351337','23.74220727418984',48,'18537'),(13,'likavitou 30','38.01455819225335','23.722927408657643',39,'18537'),(22,'sth fusi','37.474858084971046','22.435418295100217',3,'18537'),(23,'likavitou 30','37.68982941863924','23.27889941307404',3,'18537'),(24,'likavitou 30','39.27632199013197','20.015486393684363',200,'18537'),(25,'marthono 125','38.00017843988864','23.8520019245334',86,'18537');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -497,4 +499,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-08 20:12:23
+-- Dump completed on 2021-04-11 17:59:01
