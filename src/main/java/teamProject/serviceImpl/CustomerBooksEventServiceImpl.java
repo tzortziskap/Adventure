@@ -7,9 +7,14 @@ package teamProject.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import teamProject.dto.Order;
+import teamProject.entity.Credentials;
+import teamProject.entity.Customer;
 import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
 import teamProject.repository.CustomerBooksEventRepo;
@@ -46,5 +51,16 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
     public CustomerBooksEvent updateCustomerBooksEvent(CustomerBooksEvent customerBooksEvent) {
         return customerBooksEventRepo.save(customerBooksEvent);
     }
-    
+
+    @Override
+    public CustomerBooksEvent create(HttpServletRequest request, String total, Order order) {
+        HttpSession session = request.getSession();
+        int count = order.getCount();
+        Credentials credentials = (Credentials) session.getAttribute("loggedInUser");
+        Customer customer = credentials.getCustomer();
+        Event event= order.getEvent();
+        double total_price = Double.parseDouble(total);
+        CustomerBooksEvent customerBooksEvent = new CustomerBooksEvent(count, total_price, customer, event);
+        return customerBooksEvent;
+    }
 }
