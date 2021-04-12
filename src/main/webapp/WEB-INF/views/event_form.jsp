@@ -58,13 +58,22 @@
                         <div class="col-centered">
                             <h1 class="font-weight-bold py-3">Adventure Booking</h1>
                             <c:if test="${event==null}">
+                                <h3 class="font-weight-bold py-3">Καταχωρήστε νέα δραστηριότητα </h3>
                                 <c:url value="event/create" var="link"/>
+                                <c:set var = "positions" scope = "request" value = "1"/>
                             </c:if>
                             <c:if test="${event!=null}">
+                                <h3 class="font-weight-bold py-3">Ενημέρωση δραστηριότητας </h3>
                                 <c:url  value="event/update/${event.id}" var="link"/>
+                                <c:if test="${event.remainingPositions==event.positions}">
+                                    <c:set var = "positions" scope = "request" value = "1"/>
+                                </c:if>
+                                <c:if test="${event.remainingPositions!=event.positions}">
+                                    <c:set var = "positions" scope = "request" value = "${event.remainingPositions}"/>
+                                </c:if>
                             </c:if>
+
                             <form:form action="/Adventure/${link}" id="form" method="POST" modelAttribute="event">
-                                <h3 class="font-weight-bold py-3">Καταχωρήστε τη δραστηριότητα </h3>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="name">Ονόμα δραστηριότητας</label>
@@ -94,7 +103,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="positions">Διαθέσιμες θέσεις</label>
-                                        <input type="number" class="form-control" value="${event.positions}" min="${event.remainingPositions}" name="positions" required/>
+                                        <input type="number" class="form-control" value="${event.positions}" min="${positions}" name="positions" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -103,7 +112,7 @@
                                         <select  name="difficultyId.id" id="level" class="form-control difficulty" required>
                                             <option value=''>Choose...</option>
                                             <c:if test="${event.difficultyId!=null}">
-                                            <option hidden selected value="${event.difficultyId.id}">${event.difficultyId.level}</option>
+                                                <option hidden selected value="${event.difficultyId.id}">${event.difficultyId.level}</option>
                                             </c:if>
                                         </select>
                                     </div>  
@@ -120,7 +129,7 @@
                                         <select name="categoryId" id="category" class="form-control categories" required>
                                             <option value=''>Choose...</option>
                                             <c:if test="${event.categoryId!=null}">
-                                            <option hidden selected value="${event.categoryId.id}">${event.categoryId.categoryName}</option>
+                                                <option hidden selected value="${event.categoryId.id}">${event.categoryId.categoryName}</option>
                                             </c:if>
                                         </select>
                                     </div>
@@ -131,7 +140,7 @@
                                         <select name="typeIndoorOutdoorId" id="type" class="form-control typeIndoorOutdoor" required>
                                             <option  value=''>Choose...</option>
                                             <c:if test="${event.typeIndoorOutdoorId!=null}">
-                                            <option hidden selected value="${event.typeIndoorOutdoorId.id}">${event.typeIndoorOutdoorId.typeIndoorOutdoor}</option>
+                                                <option hidden selected value="${event.typeIndoorOutdoorId.id}">${event.typeIndoorOutdoorId.typeIndoorOutdoor}</option>
                                             </c:if>
                                         </select>
                                     </div>
@@ -149,8 +158,8 @@
                                         <label for="county">Νομός</label>
                                         <select  name="locationId.cityId.countyId.id" id="county" class="form-control county" required>
                                             <option value=''>Choose...</option>
-                                             <c:if test="${event.typeIndoorOutdoorId!=null}">
-                                            <option hidden selected value="${event.locationId.cityId.countyId.id}">${event.locationId.cityId.countyId.name}</option>
+                                            <c:if test="${event.typeIndoorOutdoorId!=null}">
+                                                <option hidden selected value="${event.locationId.cityId.countyId.id}">${event.locationId.cityId.countyId.name}</option>
                                             </c:if>
                                         </select>
                                     </div>
@@ -160,8 +169,8 @@
                                         <label for="city">Πόλη</label> 
                                         <select name="locationId.cityId" id="city" class="form-control city" required>
                                             <option value=''>Choose...</option>
-                                             <c:if test="${event.locationId.cityId!=null}">
-                                            <option hidden selected value="${event.locationId.cityId.id}">${event.locationId.cityId.name}</option>
+                                            <c:if test="${event.locationId.cityId!=null}">
+                                                <option hidden selected value="${event.locationId.cityId.id}">${event.locationId.cityId.name}</option>
                                             </c:if>
                                         </select>
                                     </div>
@@ -195,10 +204,16 @@
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Τοποθεσια Y</label>
                                         <input type="text" value="${event.locationId.coordinateY}" name="locationId.coordinateY" class="form-control" id="y"/>
-                                    <div class="lastMessage" style="color: red"></div>
+                                        <div class="lastMessage" style="color: red"></div>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn1 mt-3 mb-5" id="submit" value="Create Event">
+                                <c:if test="${event==null}">
+                                    <input type="submit" class="btn1 mt-3 mb-5" id="submit" value="Δημιουργία Δραστηριότητας">
+                                </c:if>
+                                <c:if test="${event!=null}">
+                                    <input type="submit" class="btn1 mt-3 mb-5" id="submit" value="Ενημέρωση Δραστηριότητας">
+                                </c:if>
+
                             </form:form>
                         </div>
                     </div>

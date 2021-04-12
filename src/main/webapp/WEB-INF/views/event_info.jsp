@@ -142,7 +142,7 @@
                     
                         <c:if test="${loggedInUser.company.id == event.companyId.id}">
                             <div class="col-md-6">
-                            <a href="/" class="btn btn-primary btn-lg">Επεξεργασία</a>
+                            <a href="http://localhost:8080/Adventure/event/update/${event.id}" class="btn btn-primary btn-lg">Επεξεργασία</a>
                             </div>
                         </c:if>
                             <c:if test="${event.remainingPositions != 0}">

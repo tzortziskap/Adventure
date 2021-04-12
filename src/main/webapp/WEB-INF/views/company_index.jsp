@@ -78,6 +78,7 @@
                     <c:forEach items="${companysEvents}" var = "event">
                         <div class="col">
                             <div class="card h-100">
+                                <div onclick="location.href='http://localhost:8080/Adventure/event/${event.id}';" style="cursor:pointer;">
                                 <img
                                     src="${pageContext.request.contextPath}/img/${event.categoryId.imgurl}"
                                     class="card-img-top"
@@ -93,6 +94,7 @@
                                     <li class="list-group-item date">${event.startingDate}</li>
                                     <li class="list-group-item">${event.locationId.cityId.name}</li>
                                 </ul>
+                                </div>
                                 <div class="card-body">
                                     <a href="http://localhost:8080/Adventure/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>
                                     <a href="http://localhost:8080/Adventure/booking/getEventCustomers/${event.id}" class="btn btn-primary btn-md">Κρατησεις</a>
