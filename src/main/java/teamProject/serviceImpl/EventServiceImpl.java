@@ -56,6 +56,8 @@ public class EventServiceImpl implements EventService {
         }else if(newRemainPositions>totalPositions){
             newRemainPositions = newRemainPositions - totalPositions + remainPositions;
             event.setRemainingPositions(newRemainPositions);
+        }else if(newRemainPositions<totalPositions){
+            event.setRemainingPositions(newRemainPositions);
         }
         return eventRepo.save(event);
     }
