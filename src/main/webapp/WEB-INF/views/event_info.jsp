@@ -68,11 +68,11 @@
                                     <td>${event.locationId.postalCode}</td>
                                 </tr>
                                 <tr>
-                                    <th scoe="col">Πόλη</th>
+                                    <th scoe="col">Συντεταγμένες Χ</th>
                                     <td id="x">${event.locationId.coordinateX}</td>
                                 </tr>
                                 <tr>
-                                    <th scoe="col">Πόλη</th>
+                                    <th scoe="col">Συντεταγμένες Υ</th>
                                     <td id="y">${event.locationId.coordinateY}</td>
                                 </tr>
                             </table>
@@ -91,7 +91,7 @@
                             </tr>
                             <tr>
                                 <th scoe="col">Κόστος</th>
-                                <td>${event.price} $</td>
+                                <td>${event.price} EUR</td>
                             </tr>
                             <tr>
                                 <th scope="col">Ημερομηνία Ενάρξης</th>

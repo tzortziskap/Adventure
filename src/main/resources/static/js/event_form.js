@@ -1,4 +1,24 @@
 $(document).ready(function () {
+    
+    $("#submit").click(function (event){
+        $(".error").each(function(){
+            $(this).html('');
+        })
+    var stdate = new Date($(".stdate").val());
+    var edate = new Date($(".edate").val());
+    //Return the result of the comparison
+    var equal = stdate.getTime() > edate.getTime();
+    var row;
+    if(equal){
+        event.preventDefault();
+       row="<span style='color:red'>Ημερομήνια Ενάρξης δεν πρέπει να είναι μεγαλύτερη από αυτή του τέλους</span>";
+        $(".error").each(function(){
+            $(this).append(row);
+        });
+        $(".lastMessage").html('Διορθώστε τα παραπάνω  λάθη στη φόρμα και ξαναπροσπαθήστε');
+    }
+    
+    });
     var map = L.map("map_canvas").setView([38.25, 25.07], 5);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
         maxZoom: 18,
@@ -50,20 +70,31 @@ $(document).ready(function () {
     var urlCounties = "http://localhost:8080/Adventure/county";
     $(".city").prop("disabled", true);
 
+      var urlCounties = "http://localhost:8080/Adventure/county";
+    
+
     $.getJSON(urlCounties, function (result) {
         $(".county").county(result);
+        cityList();
     });
-
-
-    $(".county").on("change", function () {
-        var city = $("#form").find(".city");
-        city.val('');
-        if ($(this).find(">:first-child").is(":selected")) {
+    
+    $(".county").change(cityList);
+    
+            function cityList () {
+        var city = $(".county").closest("form").find(".city");
+        if ($(".county").find(">:first-child").is(":selected")) {
             city.prop("disabled", true);
             city.find(">:first-child").prop("selected", true);
-            city.val(city.find(">:first-child").val());
-        } else {
-            var data = $(this).children("option:selected").val();
+        } else if($(".county").find(">:first-child").next().is(":selected")){
+            var data = $(".county").children("option:selected").val();
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
+            $.getJSON(urlCities, function (result) {
+                city.citiesByCounty(result);
+                city.prop("disabled", false);
+            });
+        }
+        else {
+            var data = $(".county").children("option:selected").val();
             var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
@@ -72,7 +103,7 @@ $(document).ready(function () {
                 city.prop("disabled", false);
             });
         }
-    });
+    }
 
     (function ($) {
         // Populates a select drop-down with options in a list 

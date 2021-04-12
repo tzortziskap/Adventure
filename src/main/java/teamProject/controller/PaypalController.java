@@ -47,8 +47,9 @@ public class PaypalController {
     }
 
     @PostMapping("/pay")
-    public String payment(CustomerBooksEvent book,HttpServletRequest request) {    
+    public String payment(HttpServletRequest request) {    
         try {
+            CustomerBooksEvent book = (CustomerBooksEvent)request.getSession().getAttribute("book");
             Payment payment = service.createPayment(book.getTotalPrice(), book.getEventId().getName(), "http://localhost:8080/Adventure/payment/pay/cancel",
                     "http://localhost:8080/Adventure/payment/pay/success");
             for (Links link : payment.getLinks()) {

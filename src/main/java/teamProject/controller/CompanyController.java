@@ -6,6 +6,7 @@
 package teamProject.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Company;
 import teamProject.entity.Credentials;
 import teamProject.entity.Customer;
+import teamProject.entity.CustomerBooksEvent;
 import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
@@ -49,9 +51,12 @@ public class CompanyController {
     private CredentialsService credentialsService;
 
     @GetMapping()
-    public String show(@ModelAttribute("event") Event event, Model model, HttpServletRequest request) {
-        Credentials credentials = credentialsService.findByUsername(request.getUserPrincipal().getName());
-        model.addAttribute("companysEvents", credentials.getCompany().getEventList());
+    public String show(Model model, HttpServletRequest request) {
+        Credentials credentials = (Credentials)request.getSession().getAttribute("loggedInUser");
+        Company company = credentials.getCompany();
+        List<Event> events = service.getAllEventsByCompanyId(company.getId());
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+events.size());
+        model.addAttribute("companysEvents",events );
         return "company_index";
     }
     
@@ -73,7 +78,6 @@ public class CompanyController {
             attributes.addAttribute("compEmailExist", ex.getMessage());
             return "redirect:/register";
         }
-        System.out.println(company.toString());
         return "redirect:/loginPage";//Redirect instructs client to sent a new GET request to /customer
     }
 
@@ -83,16 +87,38 @@ public class CompanyController {
         return " ";
     }
 
-    @GetMapping("/update/{id}")
-    public String showFormUpdate(@PathVariable("id") int id, Model model) {
-        Company company = service.getCompanyById(id);
-        model.addAttribute("companyToEdit", company);
-        return " ";
+      @GetMapping("/update")
+    public String showFormUpdate(Model model, HttpServletRequest request){
+        model.addAttribute("compEmailExist", request.getParameter("compEmailExist"));
+        model.addAttribute("compUsernameExist", request.getParameter("compUsernameExist"));
+        return "company_update";
     }
-
-    @PostMapping("/update")
-    public String update(Company company, RedirectAttributes attributes) {
-        service.updateCompany(company);
-        return " ";
+    
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") int id, Company company,Model model, RedirectAttributes attributes, HttpServletRequest request){
+        Credentials checkCredentials = (Credentials)request.getSession().getAttribute("loggedInUser");
+        int sessionId = checkCredentials.getId();
+        int companyId = service.getCompanyById(id).getCredentialsId().getId();
+        if(sessionId!=companyId){
+            model.addAttribute("message", "Δεν έχετε δικαίωμα σε αυτό το λογαριασμό");
+            return "message";
+        }else{
+            company.setId(id);
+            try {
+                Company newCompany = service.updateCompany(company);
+                HttpSession session = request.getSession();
+                Credentials loggedInUser = credentialsService.findByUsername(newCompany.getCredentialsId().getUsername());
+                loggedInUser.setPassword(null);
+                loggedInUser.setPasswordResetToken(null);
+                session.setAttribute("loggedInUser", loggedInUser);
+            }catch (UsernameExistException ex){
+                attributes.addAttribute("compUsernameExist", ex.getMessage());
+                return "redirect:/company/update";
+            } catch (EmailExistException ex) {
+                attributes.addAttribute("compEmailExist", ex.getMessage());
+                return "redirect:/company/update";
+            }
+            return "redirect:/company";
+    }
     }
 }

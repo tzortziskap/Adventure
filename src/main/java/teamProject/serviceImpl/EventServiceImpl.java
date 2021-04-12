@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event addEvent(Event event) {
-        
+        event.setRemainingPositions(event.getPositions());
         return eventRepo.save(event);
     }
 
@@ -47,6 +47,16 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event updateEvent(Event event) {
+        Event oldEvent = eventRepo.findById(event.getId()).get();
+        int totalPositions  = oldEvent.getPositions();
+        int remainPositions = oldEvent.getRemainingPositions();
+        int newRemainPositions = event.getPositions();
+        if(newRemainPositions==totalPositions){
+            event.setRemainingPositions(remainPositions);
+        }else if(newRemainPositions>totalPositions){
+            newRemainPositions = newRemainPositions - totalPositions + remainPositions;
+            event.setRemainingPositions(newRemainPositions);
+        }
         return eventRepo.save(event);
     }
     
@@ -102,6 +112,11 @@ public class EventServiceImpl implements EventService {
     } catch (ParseException ex) {
         return getEventsByCategoryName(categoryName);
     }
+    }
+
+    @Override
+    public Event changeTheRemainPositions(Event updateEvent) {
+        return eventRepo.save(updateEvent);
     }
     
 }

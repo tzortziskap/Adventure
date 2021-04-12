@@ -7,6 +7,7 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -56,41 +57,44 @@
                     <div class="row no-gutters">
                         <div class="col-centered">
                             <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                            <form:form action="/Adventure/event/create" id="form" method="POST" modelAttribute="event">
+                            <c:if test="${event==null}">
+                                <c:url value="event/create" var="link"/>
+                            </c:if>
+                            <c:if test="${event!=null}">
+                                <c:url  value="event/update/${event.id}" var="link"/>
+                            </c:if>
+                            <form:form action="/Adventure/${link}" id="form" method="POST" modelAttribute="event">
                                 <h3 class="font-weight-bold py-3">Καταχωρήστε τη δραστηριότητα </h3>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="name">Ονόμα δραστηριότητας</label>
-                                        <input name="name" class="form-control" required/>
-                                        <form:errors path="name" />
+                                        <input value="${event.name}" name="name" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="description">Περιγραφή δραστηριότητας</label>
-                                        <textarea name="description" value="${event.description}" class="form-control" id="description" required></textarea>
-                                        <form:errors path="description" />
+                                        <textarea name="description" value="${event.description}" class="form-control" id="description" required>${event.description}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
-                                        <label for="startingDate">Ημερομηνία διεξαγωγής</label>
-                                        <input name="startingDate" class="form-control" type="datetime-local" required/>
-                                        <form:errors path="startingDate" />
+                                        <label for="startingDate">Ημερομηνία έναρξης</label>
+                                        <input name="startingDate" class="form-control stdate" type="datetime-local" value="<fmt:formatDate pattern="yyyy-MM-dd'T'hh:mm" value="${event.startingDate}"/>" required/>
+                                        <div class="error"></div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="endingDate">Ημερομηνία τελους</label>
-                                        <input name="endingDate" class="form-control" type="datetime-local" required/>
-                                        <form:errors path="endingDate" />
+                                        <input name="endingDate" class="form-control edate" type="datetime-local" value="<fmt:formatDate pattern="yyyy-MM-dd'T'hh:mm" value="${event.endingDate}"/>" required/>
+                                        <div class="error"></div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="positions">Διαθέσιμες θέσεις</label>
-                                        <input type="number" class="form-control" name="positions" required/>
-                                        <form:errors path="positions" />
+                                        <input type="number" class="form-control" value="${event.positions}" min="${event.remainingPositions}" name="positions" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -98,20 +102,26 @@
                                         <label for="level">Δυσκολία</label>
                                         <select  name="difficultyId.id" id="level" class="form-control difficulty" required>
                                             <option value=''>Choose...</option>
+                                            <c:if test="${event.difficultyId!=null}">
+                                            <option hidden selected value="${event.difficultyId.id}">${event.difficultyId.level}</option>
+                                            </c:if>
                                         </select>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="price">Τιμή</label>
-                                        <input path="price" class="form-control" type="number" id="priceval" required/>
+                                        <input value="${event.price}" name="price" class="form-control" type="number" id="priceval" required/>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="category">Κατηγορία</label>
                                         <select name="categoryId" id="category" class="form-control categories" required>
-                                            <option  value=''>Choose...</option>
+                                            <option value=''>Choose...</option>
+                                            <c:if test="${event.categoryId!=null}">
+                                            <option hidden selected value="${event.categoryId.id}">${event.categoryId.categoryName}</option>
+                                            </c:if>
                                         </select>
                                     </div>
                                 </div>
@@ -120,13 +130,16 @@
                                         <label for="type">Τύπος</label>
                                         <select name="typeIndoorOutdoorId" id="type" class="form-control typeIndoorOutdoor" required>
                                             <option  value=''>Choose...</option>
+                                            <c:if test="${event.typeIndoorOutdoorId!=null}">
+                                            <option hidden selected value="${event.typeIndoorOutdoorId.id}">${event.typeIndoorOutdoorId.typeIndoorOutdoor}</option>
+                                            </c:if>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="equipments" >Εξοπλισμος</label>
-                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select form-control equipment" name="equipmentList" required>
+                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select form-control equipment" name="equipmentList">
                                             <option value=""></option>
                                         </select>
                                     </div>
@@ -135,28 +148,34 @@
                                     <div class="col-lg-9 col-centered">
                                         <label for="county">Νομός</label>
                                         <select  name="locationId.cityId.countyId.id" id="county" class="form-control county" required>
-                                            <option  value=''>Choose...</option>
+                                            <option value=''>Choose...</option>
+                                             <c:if test="${event.typeIndoorOutdoorId!=null}">
+                                            <option hidden selected value="${event.locationId.cityId.countyId.id}">${event.locationId.cityId.countyId.name}</option>
+                                            </c:if>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="city">Πόλη</label> 
-                                        <select  name="locationId.cityId" id="city" class="form-control city" required>
-                                            <option  value=''>Choose...</option>
+                                        <select name="locationId.cityId" id="city" class="form-control city" required>
+                                            <option value=''>Choose...</option>
+                                             <c:if test="${event.locationId.cityId!=null}">
+                                            <option hidden selected value="${event.locationId.cityId.id}">${event.locationId.cityId.name}</option>
+                                            </c:if>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Διεύθυνση</label>
-                                        <input name="locationId.address" class="form-control" required/>
+                                        <input value="${event.locationId.address}" name="locationId.address" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Ταχυδρομικός Κώδικας</label>
-                                        <input name="locationId.postalCode" class="form-control" required/>
+                                        <input value="${event.locationId.postalCode}" name="locationId.postalCode" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -169,17 +188,17 @@
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Τοποθεσια X</label>
-                                        <input type="text" name="locationId.coordinateX" class="form-control" id="x"/>
+                                        <input type="text" value="${event.locationId.coordinateX}" name="locationId.coordinateX" class="form-control" id="x"/>
                                     </div>  
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-9 col-centered">
                                         <label for="inputState">Τοποθεσια Y</label>
-                                        <input type="text" name="locationId.coordinateY" class="form-control" id="y"/>
+                                        <input type="text" value="${event.locationId.coordinateY}" name="locationId.coordinateY" class="form-control" id="y"/>
+                                    <div class="lastMessage" style="color: red"></div>
                                     </div>
                                 </div>
-                                <input hidden type="text" value="${loggedInUser.company.id}" name="companyId"/>
-                                <input type="submit" class="btn1 mt-3 mb-5" id="btn1" value="Create Event">
+                                <input type="submit" class="btn1 mt-3 mb-5" id="submit" value="Create Event">
                             </form:form>
                         </div>
                     </div>

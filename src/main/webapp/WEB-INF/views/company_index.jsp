@@ -37,21 +37,44 @@
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="http://localhost:8080/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
-        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
         <div class="container-fluid">
             <main>
-                <h1 class="font-weight-bold py-3">Adventure Booking</h1>
-                <h3>Το προφίλ μου</h3>
-                <p>Ονόμα εταιρία: ${loggedInUser.company.name}</p>
-                <p>Διευθυνση εταιρίας: ${loggedInUser.company.address}</p>
-                <div hidden id="companyid">${loggedInUser.company.id}</div>
-
-                <h3 id="number"></h3>
-
+                    <h1 class="font-weight-bold py-3 custom" >Adventure Booking</h1>
+                <div class="container">
+                    <main>
+                        <div hidden id="companyid">${loggedInUser.company.id}</div>
+                        <table id="company" class="table">
+                            <h3>Η εταιρία μου</h3>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Όνομα Εταιρείας</th>
+                                    <th scoe="col">Διεύθυνση</th>
+                                    <th scope="col">ΑΦΜ</th>
+                                    <th scope="col">TK</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Πόλη που εδρεύει</th>
+                                    <th scope="col">Νομός που εδρεύει</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <td scope="col">${loggedInUser.company.name}</td>
+                            <td scope="col">${loggedInUser.company.address}</td>
+                            <td scope="col">${loggedInUser.company.afm}</td>
+                            <td scope="col">${loggedInUser.company.postalCode}</td>
+                            <td scope="col">${loggedInUser.company.email}</td>
+                            <th scope="col">${loggedInUser.company.cityId.name}</th>
+                            <th scope="col">${loggedInUser.company.cityId.countyId.name}</th>
+                            <td><a href="${pageContext.request.contextPath}/company/update" class="btn btn-primary" >Edit</a></td>
+                            </tbody>
+                        </table>
+                    </main>
+                </div>
                 <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <c:if test="${companysEvents != null}">
                     <c:forEach items="${companysEvents}" var = "event">
                         <div class="col">
                             <div class="card h-100">
@@ -71,14 +94,13 @@
                                     <li class="list-group-item">${event.locationId.cityId.name}</li>
                                 </ul>
                                 <div class="card-body">
-                                    <a href="${pageContext.request.contextPath}/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>
-                                    <a href="${pageContext.request.contextPath}/event/delete?id=${event.id}" class="btn btn-primary btn-md">Ακύρωση</a>
+                                    <a href="http://localhost:8080/Adventure/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>
+                                    <a href="http://localhost:8080/Adventure/booking/getEventCustomers/${event.id}" class="btn btn-primary btn-md">Κρατησεις</a>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
-                </div>
-                <div class="col-sm" id="map">
+            </c:if>
                 </div>
             </main>
         </div>

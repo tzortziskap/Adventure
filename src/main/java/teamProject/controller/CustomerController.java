@@ -5,8 +5,6 @@
  */
 package teamProject.controller;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import teamProject.entity.Credentials;
 import teamProject.entity.Customer;
 import teamProject.entity.CustomerBooksEvent;
-import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 import teamProject.service.CredentialsService;
@@ -74,13 +71,13 @@ public class CustomerController {
     
     @GetMapping("/update")
     public String showFormUpdate(Model model, HttpServletRequest request){
-         model.addAttribute("custEmailExist", request.getParameter("custEmailExist"));
+        model.addAttribute("custEmailExist", request.getParameter("custEmailExist"));
         model.addAttribute("custUsernameExist", request.getParameter("custUsernameExist"));
         return "customer_update";
     }
     
     @PostMapping("/update/{id}")
-    public String update(@PathVariable("id") int id, Customer customer,Model model, RedirectAttributes attributes, HttpServletRequest request,Principal principal){
+    public String update(@PathVariable("id") int id, Customer customer,Model model, RedirectAttributes attributes, HttpServletRequest request){
         Credentials checkCredentials = (Credentials)request.getSession().getAttribute("loggedInUser");
         int sessionId = checkCredentials.getId();
         int customerId = service.getCustomerById(id).getCredentialsId().getId();

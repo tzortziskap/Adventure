@@ -7,6 +7,7 @@ package teamProject.service;
 
 import java.util.List;
 import teamProject.entity.Company;
+import teamProject.entity.Event;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
 
@@ -25,6 +26,8 @@ public interface CompanyService{
 
     Company getCompanyById(int id) ;
 
-    Company updateCompany(Company company);
+    Company updateCompany(Company company) throws EmailExistException, UsernameExistException;
+    
+    List<Event> getAllEventsByCompanyId(int id);
     
 }

@@ -41,7 +41,7 @@ public class CustomerBooksEventServiceImpl implements CustomerBooksEventService 
         Event updateEvent = customerBooksEvent.getEventId();
         int remainingPositions = updateEvent.getRemainingPositions() - customerBooksEvent.getAmountPositions();
         updateEvent.setRemainingPositions(remainingPositions);
-        eventService.updateEvent(updateEvent);
+        eventService.changeTheRemainPositions(updateEvent);
         return customerBooksEventRepo.save(customerBooksEvent);
     }
 

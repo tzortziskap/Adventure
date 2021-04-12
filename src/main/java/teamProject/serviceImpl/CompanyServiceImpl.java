@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teamProject.entity.Company;
+import teamProject.entity.Event;
 import teamProject.entity.Roles;
 import teamProject.exceptions.EmailExistException;
 import teamProject.exceptions.UsernameExistException;
@@ -60,8 +61,19 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company updateCompany(Company company) {
+    public Company updateCompany(Company company) throws EmailExistException, UsernameExistException {
+              Company newCompany = companyRepo.findById(company.getId()).get();
+         if(companyRepo.findByEmail(company.getEmail())!=null && !company.getEmail().equals(newCompany.getEmail())){
+            throw new EmailExistException("Υπάρχει ήδη λογαριασμός με αύτο το mail.");
+        }
+        company.getCredentialsId().setId(newCompany.getCredentialsId().getId());
+        credentialsService.updateCredentials(company.getCredentialsId());
         return companyRepo.save(company);
+    }
+
+    @Override
+    public List<Event> getAllEventsByCompanyId(int id) {
+        return companyRepo.allEventsByCompany(id);
     }
 
 }

@@ -42,4 +42,6 @@ public interface EventService{
     List<Event> getEventsWhichHaveAvailablePositions(int positions);
     
     public List<Event> getAvailableEventsAccordingCategoryNameAndDate(String categoryName, Date date, int positions);
+
+    Event changeTheRemainPositions(Event updateEvent);
 }

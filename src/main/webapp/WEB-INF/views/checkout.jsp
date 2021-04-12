@@ -49,17 +49,17 @@
                         </tr>
                         <tr>                                  
                             <td> <label for="name">Όνομα δραστηριότητας:</label> </td>
-                            <td> <input type="text" id="name" name="eventId.name" value="${book.eventId.name}" readonly/></td>
+                            <td> <input type="text" id="name" value="${book.eventId.name}" readonly/></td>
                         </tr>
                         <tr>
                             <td>   <label for="pricePerPerson">Τιμή ανα θέση:</label></td>
                             <td>
-                                <input type="text" id="pricePerPerson" name="eventId.price"  value="${book.eventId.price}" readonly/>
+                                <input type="text" id="pricePerPerson" value="${book.eventId.price} EUR" readonly/>
                             </td>
                         </tr>
                         <tr>
                             <td>    <label for="count">Αριθμός θέσεων:</label></td>
-                            <td>    <input type="text" id="description" name="amountPositions"  value="${book.amountPositions}" readonly/></td>
+                            <td>    <input type="text" id="description" value="${book.amountPositions}" readonly/></td>
                             </div> 
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@
                         </tr>
                         <tr>
                             <td>   <label for="price">Σύνολο:</label></td>
-                            <td>   <input class="input-symbol-euro" type="text" id="price" name="totalPrice" value="${book.totalPrice}" readonly/></td>
+                            <td>   <input class="input-symbol-euro" type="text" id="price" value="${book.totalPrice} EUR" readonly/></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Επομενο" class="btn btn-primary"></td>
