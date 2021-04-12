@@ -47,7 +47,7 @@ public class PaypalController {
     }
 
     @PostMapping("/pay")
-    public String payment(HttpServletRequest request) {    
+    public String payment(HttpServletRequest request) {    // parses the approved Payment object returned from PayPal to find the approval URL
         try {
             CustomerBooksEvent book = (CustomerBooksEvent)request.getSession().getAttribute("book");
             Payment payment = service.createPayment(book.getTotalPrice(), book.getEventId().getName(), "http://localhost:8080/Adventure/payment/pay/cancel",
@@ -69,7 +69,7 @@ public class PaypalController {
         return "cancel";
     }
 
-    @GetMapping("/pay/success")
+    @GetMapping("/pay/success")  //captures Payers info and booking details and displays success jsp
     public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, Model model, HttpServletRequest request) {   //, 
         try {
             CustomerBooksEvent book = (CustomerBooksEvent) request.getSession().getAttribute("book");

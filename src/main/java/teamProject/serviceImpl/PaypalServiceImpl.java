@@ -22,6 +22,7 @@ import teamProject.service.PaypalService;
 import com.paypal.base.rest.PayPalRESTException;
 import java.math.RoundingMode;
 
+// encapsulates API calls to PayPal SDK
 @Transactional
 @Service
 public class PaypalServiceImpl implements PaypalService {
@@ -29,6 +30,7 @@ public class PaypalServiceImpl implements PaypalService {
     @Autowired
     private APIContext apiContext;
 
+    @Override
     public Payment createPayment(
             Double total,
             String description,
@@ -59,6 +61,7 @@ public class PaypalServiceImpl implements PaypalService {
         return payment.create(apiContext);
     }
 
+    @Override
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
         Payment payment = new Payment();
         payment.setId(paymentId);
