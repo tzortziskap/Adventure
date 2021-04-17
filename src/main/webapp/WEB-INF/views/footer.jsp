@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <footer class="footer" id="footer">

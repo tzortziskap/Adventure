@@ -34,7 +34,7 @@
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""
         ></script>
-        <link href="http://localhost:8080/Adventure/css/index.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/index.css" rel="stylesheet" type="text/css">
         
     </head>
     <body>

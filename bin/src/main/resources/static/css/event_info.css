@@ -1,0 +1,145 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container{
+    margin-top: 100px;
+}
+
+h3, h1{
+    text-align: center;
+}
+h1{
+    margin-bottom: 40px;
+}
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+img{
+    height: 250px;
+}
+
+#loginregister ul{
+	text-decoration: none;
+}
+
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
+}
+
+#loginregister a:hover{
+    color: rgba(255,255,255,.75);
+}
+
+.btn-floating i {
+    font-size: 1.25rem;
+    line-height: 47px;
+    display: inline-block;
+    width: inherit;
+    text-align: center;
+    color: #fff;
+}
+
+.footer {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    padding: 70px 0;
+    background-color: #0f1c5b;
+}
+
+.inner_footer {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.inner_footer .logo_container {
+    width: 200px;
+    float: left;
+    height: 100%;
+    display: block;
+
+}
+
+.inner_footer .logo_container img {
+    width: 200px;
+    height: 200px;
+
+}
+
+.inner_footer .footer_third {
+    width: calc(21, 7% - 20ps);
+    margin-right: 100px;
+    float: left;
+    height: 100%;
+    list-style: none;
+    transform: translate(100px, 0);
+}
+
+.inner_footer .footer_third:last-child {
+    margin-right: 0;
+}
+
+.inner_footer .footer_third h1 {
+    font-size: 16px;
+    color: beige;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.inner_footer .footer_third a {
+    text-decoration: none;
+    font-size: 16px;
+    color: beige;
+    display: block;
+    font-weight: 200;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+.inner_footer .footer_third li {
+    display: inline-block;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.inner_footer .footer_third span {
+    color: beige;
+    font-size: 12px;
+    font-weight: 200;
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+}
+
+
+
+.inner_footer .footer_third a:hover, .inner_footer .footer_third li:hover {
+    color: #ff9933;
+}
+#mapid { height: 400px; }
+
+#location{
+    top: 26px;
+    position: relative;
+}

@@ -1,0 +1,94 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+label {
+    justify-content: left !important;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: white;
+    border: 1px solid;
+    color: black;
+}
+
+#loginregister ul{
+	text-decoration: none;
+}
+
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
+}
+
+#loginregister a:hover{
+    color: rgba(255,255,255,.75);
+}
+
+main{
+    margin-top: 100px;
+}
+
+#map{
+    margin-top: 100px;
+    width: 50%;
+    margin: 100px auto 0 auto;
+}
+
+#mapid { 
+    height: 600px; 
+
+}
+
+.col{
+    margin-top: 30px;
+}
+
+.card-main{
+    height: 150px;
+}
+
+#numberWithLeftButton {
+  display: flex;
+  justify-content: space-between;
+}

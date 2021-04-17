@@ -4,7 +4,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <title>Spring Boot WebSocket Chat Application | CalliCoder</title>
-        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/chat.css"  type="text/css"/>
+        <link rel="stylesheet" href="/Adventure/css/chat.css"  type="text/css"/>
     </head>
     <body>
          <noscript>
@@ -52,6 +52,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-        <script src="http://localhost:8080/Adventure/js/chat.js"></script>
+        <script src="/Adventure/js/chat.js"></script>
     </body>
 </html>

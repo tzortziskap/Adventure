@@ -27,7 +27,7 @@
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="http://localhost:8080/Adventure/css/index.css" rel="stylesheet" type="text/css">
+        <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
         <title>Adventure Booking</title>
     </head>
     <body>
@@ -223,6 +223,6 @@
             </main>
         </div>
         <%@ include file="footer.jsp" %>
-        <script src="js/indexjs.js"></script>
+        <script src="/Adventure/js/indexjs.js"></script>
     </body>
 </html>

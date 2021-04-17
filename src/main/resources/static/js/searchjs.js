@@ -32,17 +32,17 @@ $(document).ready(function () {
         query = query + " AND remainingPositions>0";
 
         if (checknullvalues === true) {
-            $.getJSON("http://localhost:8080/Adventure/event/search/all", function (results) {
+            $.getJSON("/Adventure/event/search/all", function (results) {
                 createpoints(results);
             });
         } else {
-            $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (results) {
+            $.getJSON("/Adventure/event/search/results?search=" + query, function (results) {
                 createpoints(results);
             });
         }
     }
 
-    var urlCategories = "http://localhost:8080/Adventure/categories";
+    var urlCategories = "/Adventure/categories";
     $.getJSON(urlCategories, function (result) {
         $(".categories").categories(result);
         if (urlParams.get("categoryId.id") !== '') {
@@ -50,12 +50,12 @@ $(document).ready(function () {
         }
     });
 
-    var urlDifficulty = "http://localhost:8080/Adventure/difficulty";
+    var urlDifficulty = "/Adventure/difficulty";
     $.getJSON(urlDifficulty, function (result) {
         $(".difficulty").difficulty(result);
     });
 
-    var urlTypeIndoorOutdoor = "http://localhost:8080/Adventure/typeIndoorOutdoor";
+    var urlTypeIndoorOutdoor = "/Adventure/typeIndoorOutdoor";
     $.getJSON(urlTypeIndoorOutdoor, function (result) {
         $(".typeIndoorOutdoor").typeIndoorOutdoor(result);
         if (urlParams.get("typeIndoorOutdoorId.id") !== '') {
@@ -63,7 +63,7 @@ $(document).ready(function () {
         }
     });
 
-    var urlCounties = "http://localhost:8080/Adventure/county";
+    var urlCounties = "/Adventure/county";
     $(".city").prop("disabled", true);
     $.getJSON(urlCounties, function (result) {
         $(".county").county(result);
@@ -83,7 +83,7 @@ $(document).ready(function () {
             city.val(city.find(">:first-child").val());
         } else {
             var data = $(".county").children("option:selected").val();
-            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
+            var urlCities = "/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
                 city.append('<option value="">Choose...</option>');
@@ -123,7 +123,7 @@ $(document).ready(function () {
             }
         });
         query = query + " AND remainingPositions>0";
-        $.getJSON("http://localhost:8080/Adventure/event/search/results?search=" + query, function (results) {
+        $.getJSON("/Adventure/event/search/results?search=" + query, function (results) {
             createpoints(results);
         });
     }
@@ -156,7 +156,7 @@ $(document).ready(function () {
                     "<li class='list-group-item'>" + results[i].locationId.cityId.name + "</li> " +
                     "</ul> " +
                     "<div class='card-body'> " +
-                    "<a href='http://localhost:8080/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
+                    "<a href='/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
                     "</div> " +
                     "</div> " +
                     "</div>";

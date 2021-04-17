@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(209, 209, 214);
+}
+
+.row {
+    background-color: white;
+    border-radius: 30px;
+}
+
+img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: white;
+    border: 1px solid;
+    color: black;
+}
+
+#mati {
+    position: absolute;
+    bottom: 50%;
+    right: 10%;
+    width: 10%;
+    height: 8%;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    
+}
+h4,h1,p, #forgotPassword, #formFooter{
+    text-align: center;
+}
+
+h1:after{
+    display: block;
+    height: 2px;
+    background-color: black;
+    content: " ";
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+.success{
+    color: green;
+}
+.error{
+    color: red;
+}
+
+#loginregister ul{
+	text-decoration: none;
+}
+#loginregister a{
+	float: left;
+	display: block;
+        justify-content: space-between;
+	color: #fff;
+        padding-left: .5rem;
+        padding-right: .5rem;
+        margin-right: .5rem;
+}
+#loginregister a:hover{
+    color: rgba(255,255,255,.75);
+}
+.container{
+   
+   margin-top: 100px;
+   
+   
+}

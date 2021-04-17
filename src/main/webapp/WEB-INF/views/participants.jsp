@@ -40,7 +40,7 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="http://localhost:8080/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
         <script>
             $(document).ready(function () {
                 $('#table_id').dataTable();

@@ -25,6 +25,6 @@ $(document).ready(function () {
     }
     
     function getCustomers(d) {
-    window.open("http://localhost:8080/Adventure/event/get/customers/" + d.getAttribute("data-id"), 'popup', 'width=600,height=600');
+    window.open("/Adventure/event/get/customers/" + d.getAttribute("data-id"), 'popup', 'width=600,height=600');
 }
 });

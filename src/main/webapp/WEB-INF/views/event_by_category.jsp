@@ -36,8 +36,8 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="http://localhost:8080/Adventure/css/event_by_category_name.css" rel="stylesheet" type="text/css">
-        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/event_by_category_name.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>

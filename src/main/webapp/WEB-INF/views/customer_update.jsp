@@ -40,8 +40,8 @@
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""
         ></script>
-        <link href="http://localhost:8080/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
-        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
@@ -68,8 +68,8 @@
                                 </div>
 
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="http://localhost:8080/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
-                                    <li class="active"><a href="http://localhost:8080/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
+                                    <li><a href="/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
+                                    <li class="active"><a href="/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="panel">
                                 <div class="panel-body bio-graph-info">
                                     <h1>Επεξεργασία</h1>
-                                    <form:form id="guestForm" method="post" action="http://localhost:8080/Adventure/customer/update/${loggedInUser.customer.id}" modelAttribute="customerToEdit">
+                                    <form:form id="guestForm" method="post" action="/Adventure/customer/update/${loggedInUser.customer.id}" modelAttribute="customerToEdit">
                                         <div class="form-inline my-3 ">
                                             <div class="col-lg-6">
                                                 <label for="custfirstname">Όνομα:</label>
@@ -155,6 +155,6 @@
             </main>
         </div>
         <%@ include file="footer.jsp" %>
-        <script src="http://localhost:8080/Adventure/js/customer_update.js"></script>
+        <script src="/Adventure/js/customer_update.js"></script>
     </body>
 </html>

@@ -1,0 +1,73 @@
+!SESSION 2021-04-14 19:46:21.894 -----------------------------------------------
+eclipse.buildId=4.10.0.202103111225
+java.version=15.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_GR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/tzortziskapellas/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/tzortziskapellas/.eclipse_keyring
+
+!ENTRY org.eclipse.jface 2 0 2021-04-14 19:47:03.250
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2021-04-14 19:47:03.250
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2842ef02,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7e63374b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:00.558
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:00.558
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@601bba02[org.springframework.tooling.boot.ls:1.25.0.202103111026(id=548)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:00.560
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:00.575
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.692
+!MESSAGE Boot LS startup time from start to initialized: 2127ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.768
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.gyjTCidwisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.769
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.770
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.771
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:02.771
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.gyjTCidw => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:39.463
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.gyjTCidw
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:39.463
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.gyjTCidw
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:39.463
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2021-04-14 19:49:39.463
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.gyjTCidw => OK
+
+!ENTRY org.eclipse.ui 2 2 2021-04-14 19:52:12.796
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)

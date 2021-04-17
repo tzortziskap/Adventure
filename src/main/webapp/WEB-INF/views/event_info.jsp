@@ -41,8 +41,8 @@
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-        <link href="http://localhost:8080/Adventure/css/event_info.css" rel="stylesheet" type="text/css">
-        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/event_info.css" rel="stylesheet" type="text/css">
+        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -142,12 +142,12 @@
                     
                         <c:if test="${loggedInUser.company.id == event.companyId.id}">
                             <div class="col-md-6">
-                            <a href="http://localhost:8080/Adventure/event/update/${event.id}" class="btn btn-primary btn-lg">Επεξεργασία</a>
+                            <a href="/Adventure/event/update/${event.id}" class="btn btn-primary btn-lg">Επεξεργασία</a>
                             </div>
                         </c:if>
                             <c:if test="${event.remainingPositions != 0}">
                     <security:authorize access="!hasAuthority('COMPANY')">
-                    <form:form class= "form-inline" action="http://localhost:8080/Adventure/payment/${event.id}" method="GET" modelAttribute="book">
+                    <form:form class= "form-inline" action="/Adventure/payment/${event.id}" method="GET" modelAttribute="book">
                          <div class="form-inline my-3 ">
                         <div class="col-md-7">
                             <label class="form-check-label" for="count">Aριθμός θέσεων</label>
@@ -164,6 +164,6 @@
             </div>
         </main>
         <%@ include file="footer.jsp" %>
-        <script src="http://localhost:8080/Adventure/js/event_info.js"></script>
+        <script src="/Adventure/js/event_info.js"></script>
     </body>
 </html>
