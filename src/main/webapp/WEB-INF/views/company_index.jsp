@@ -36,7 +36,7 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
@@ -78,7 +78,7 @@
                     <c:forEach items="${companysEvents}" var = "event">
                         <div class="col">
                             <div class="card h-100">
-                                <div onclick="location.href='/Adventure/event/${event.id}';" style="cursor:pointer;">
+                                <div onclick="location.href='http://localhost:8080/Adventure/event/${event.id}';" style="cursor:pointer;">
                                 <img
                                     src="${pageContext.request.contextPath}/img/${event.categoryId.imgurl}"
                                     class="card-img-top"
@@ -96,8 +96,8 @@
                                 </ul>
                                 </div>
                                 <div class="card-body">
-                                    <a href="/Adventure/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>
-                                    <a href="/Adventure/booking/getEventCustomers/${event.id}" class="btn btn-primary btn-md">Κρατησεις</a>
+                                    <a href="http://localhost:8080/Adventure/event/update/${event.id}" class="btn btn-primary btn-md">Επεξεργασία</a>
+                                    <a href="http://localhost:8080/Adventure/booking/getEventCustomers/${event.id}" class="btn btn-primary btn-md">Κρατησεις</a>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +107,6 @@
             </main>
         </div>
         <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/company_index.js"></script>
+        <script src="js/company_index.js"></script>
     </body>
 </html>

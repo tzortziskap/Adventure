@@ -40,8 +40,8 @@
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""
         ></script>
-        <link href="/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
-        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
@@ -54,7 +54,7 @@
                             <div class="panel">
                                 <div class="panel-body bio-graph-info">
                                     <h1>Επεξεργασία</h1>
-                                    <form:form id="guestForm" method="post" action="/Adventure/company/update/${loggedInUser.company.id}" modelAttribute="customerToEdit">
+                                    <form:form id="guestForm" method="post" action="http://localhost:8080/Adventure/company/update/${loggedInUser.company.id}" modelAttribute="customerToEdit">
                                         <div class="form-inline my-3 ">
                                             <div class="col-lg-6">
                                                 <label for="compfirstname">Όνομα:</label>
@@ -117,6 +117,6 @@
             </main>
         </div>
         <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/customer_update.js"></script>
+        <script src="http://localhost:8080/Adventure/js/customer_update.js"></script>
     </body>
 </html>

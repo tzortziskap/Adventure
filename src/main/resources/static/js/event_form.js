@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
     
 
-    var urlEquipment = "/Adventure/equipment";
+    var urlEquipment = "http://localhost:8080/Adventure/equipment";
 
     $.getJSON(urlEquipment, function (result) {
         $(".equipment").equipment(result);
@@ -49,28 +49,28 @@ $(document).ready(function () {
 });
     });
 
-    var urlCategories = "/Adventure/categories";
+    var urlCategories = "http://localhost:8080/Adventure/categories";
 
     $.getJSON(urlCategories, function (result) {
         $(".categories").categories(result);
     });
 
-    var urlDifficulty = "/Adventure/difficulty";
+    var urlDifficulty = "http://localhost:8080/Adventure/difficulty";
 
     $.getJSON(urlDifficulty, function (result) {
         $(".difficulty").difficulty(result);
     });
 
-    var urlTypeIndoorOutdoor = "/Adventure/typeIndoorOutdoor";
+    var urlTypeIndoorOutdoor = "http://localhost:8080/Adventure/typeIndoorOutdoor";
 
     $.getJSON(urlTypeIndoorOutdoor, function (result) {
         $(".typeIndoorOutdoor").typeIndoorOutdoor(result);
     });
 
-    var urlCounties = "/Adventure/county";
+    var urlCounties = "http://localhost:8080/Adventure/county";
     $(".city").prop("disabled", true);
 
-      var urlCounties = "/Adventure/county";
+      var urlCounties = "http://localhost:8080/Adventure/county";
     
 
     $.getJSON(urlCounties, function (result) {
@@ -87,7 +87,7 @@ $(document).ready(function () {
             city.find(">:first-child").prop("selected", true);
         } else if($(".county").find(">:first-child").next().is(":selected")){
             var data = $(".county").children("option:selected").val();
-            var urlCities = "/Adventure/county/cities/" + data;
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.citiesByCounty(result);
                 city.prop("disabled", false);
@@ -95,7 +95,7 @@ $(document).ready(function () {
         }
         else {
             var data = $(".county").children("option:selected").val();
-            var urlCities = "/Adventure/county/cities/" + data;
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
                 city.append('<option value="">Choose...</option>');

@@ -24,8 +24,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>  
         <title>Εγγραφή</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
-        <link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/register.css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -217,7 +217,6 @@
                             </div>
                             <br>
                             <div class="col-lg-2">
-                                
                                 <input type="submit" value="Εγγραφή" class="btn1 mt-3 mb-5">
                             </div>
                         </form:form>
@@ -226,6 +225,6 @@
             </div>
         </section>
        <%@ include file="footer.jsp" %>
-        <script src="${pageContext.request.contextPath}/js/registerjs.js"></script>
+        <script src="js/registerjs.js"></script>
     </body>
 </html>

@@ -40,8 +40,8 @@
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""
         ></script>
-        <link href="/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
-        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/customer_index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
@@ -68,8 +68,8 @@
                                 </div>
 
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
-                                    <li><a href="/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
+                                    <li class="active"><a href="http://localhost:8080/Adventure/customer"> <i class="fa fa-user"></i> Προφίλ</a></li>
+                                    <li><a href="http://localhost:8080/Adventure/customer/update"> <i class="fa fa-edit"></i> Επεξεργασία</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -153,6 +153,6 @@
             </main>
         </div>
 <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/customer_index.js"></script>
+        <script src="http://localhost:8080/Adventure/js/customer_index.js"></script>
     </body>
 </html>

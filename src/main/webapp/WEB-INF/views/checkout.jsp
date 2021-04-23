@@ -35,14 +35,14 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="/Adventure/css/payment.css">
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/Adventure/css/payment.css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
         <main>
             <div class="container justify-content-center">
                 <h4 class="font-weight-bold py-2">Στοιχεία Πληρωμής</h4>
-                <form:form action="/Adventure/payment/pay" method="POST" id="checkoutForm" modelAttribute="book">
+                <form:form action="http://localhost:8080/Adventure/payment/pay" method="POST" id="checkoutForm" modelAttribute="book">
                     <table class="table">
                         <tr>
                         <input type="hidden" id="id" name="eventId.id" value="${book.eventId.id}" />

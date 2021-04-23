@@ -32,8 +32,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>  
         <title>Login</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/Adventure/css/login.css">
-        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/login.css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
@@ -88,6 +88,6 @@
             </div>
         </section>
        <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/loginJs.js"></script>
+        <script src="js/loginJs.js"></script>
     </body>
 </html>

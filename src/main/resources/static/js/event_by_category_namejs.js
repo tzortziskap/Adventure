@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var category = $(".category").text();
 
-    var urlCategories = "/Adventure/event/category/" + category;
+    var urlCategories = "http://localhost:8080/Adventure/event/category/" + category;
     console.log(category);
 
     $.getJSON(urlCategories, function (results) {
@@ -41,7 +41,7 @@ $(document).ready(function () {
                     "<li class='list-group-item'>" + results[i].locationId.cityId.name + "</li> " +
                     "</ul> " +
                     "<div class='card-body'> " +
-                    "<a href='/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
+                    "<a href='http://localhost:8080/Adventure/event/" + results[i].id + "' class='btn btn-primary btn-md'>Περισσότερα</a> " +
                     "</div> " +
                     "</div> " +
                     "</div>";

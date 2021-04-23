@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-     var urlCounties = "/Adventure/county";
+     var urlCounties = "http://localhost:8080/Adventure/county";
     
 
     $.getJSON(urlCounties, function (result) {
@@ -22,7 +22,7 @@ $(document).ready(function () {
             city.find(">:first-child").prop("selected", true);
         } else if($(".county").find(">:first-child").next().is(":selected")){
             var data = $(".county").children("option:selected").val();
-            var urlCities = "/Adventure/county/cities/" + data;
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.citiesByCounty(result);
                 city.prop("disabled", false);
@@ -30,7 +30,7 @@ $(document).ready(function () {
         }
         else {
             var data = $(".county").children("option:selected").val();
-            var urlCities = "/Adventure/county/cities/" + data;
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
                 city.append('<option value="">Choose...</option>');
@@ -40,7 +40,7 @@ $(document).ready(function () {
         }
     }
     
-    var urlGender = "/Adventure/gender";
+    var urlGender = "http://localhost:8080/Adventure/gender";
     
     $.getJSON(urlGender, function (result) {
         $(".gender").gender(result);

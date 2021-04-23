@@ -33,8 +33,8 @@ $(document).ready(function () {
             $("#guestForm").show();
         }
     });
-    
-    var urlCounties = "/Adventure/county";
+
+    var urlCounties = "http://localhost:8080/Adventure/county";
     $(".city").each(function () {
         $(this).prop("disabled", true);
     });
@@ -53,7 +53,7 @@ $(document).ready(function () {
             city.find(">:first-child").prop("selected", true);
         } else {
             var data = $(this).children("option:selected").val();
-            var urlCities = "/Adventure/county/cities/" + data;
+            var urlCities = "http://localhost:8080/Adventure/county/cities/" + data;
             $.getJSON(urlCities, function (result) {
                 city.empty();
                 city.append('<option value="">Choose...</option>');
@@ -62,7 +62,7 @@ $(document).ready(function () {
             });
         }
     });
-    var urlGender = "/Adventure/gender";
+    var urlGender = "http://localhost:8080/Adventure/gender";
     
     $.getJSON(urlGender, function (result) {
         $(".gender").each(function () {

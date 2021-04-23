@@ -36,7 +36,7 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/company_index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <%@ include file="nav.jsp" %>
@@ -64,7 +64,7 @@
                                     <li class="list-group-item">${event.locationId.cityId.name}</li>
                                 </ul>
                                 <div class="card-body">
-                                    <a href="/Adventure/event/${event.id}" class="btn btn-primary btn-md">Περισσότερα</a>
+                                    <a href="http://localhost:8080/Adventure/event/${event.id}" class="btn btn-primary btn-md">Περισσότερα</a>
                                 </div>
                             </div>
                         </div>

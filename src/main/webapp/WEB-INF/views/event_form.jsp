@@ -44,8 +44,8 @@
         <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="/Adventure/css/event_form.css" rel="stylesheet" type="text/css">
-        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/event_form.css" rel="stylesheet" type="text/css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -222,6 +222,6 @@
             </section>
         </main>
         <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/event_form.js"></script>
+        <script src="http://localhost:8080/Adventure/js/event_form.js"></script>
     </body>
 </html>

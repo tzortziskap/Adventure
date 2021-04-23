@@ -12,7 +12,7 @@ $(document).ready(function () {
     var yyyy = today.getFullYear();
     today = yyyy + "-" + mm + "-" + dd;
     let id = document.getElementById("customerid").innerHTML;
-    $.getJSON("/Adventure/customer/myevents/" + id, function (results) {
+    $.getJSON("http://localhost:8080/Adventure/customer/myevents/" + id, function (results) {
         let nym = results.length;
         document.getElementById("number").innerHTML = "Αριθμος δραστηριοτήτων " + nym;
         $('#eventstable tbody').html('');
@@ -22,7 +22,7 @@ $(document).ready(function () {
     function fetchrestofevent(id) {
         $.ajax({
             type: "GET",
-            url: "/Adventure/event/otherevents/" + id + "/" + today,
+            url: "http://localhost:8080/Adventure/event/otherevents/" + id + "/" + today,
             dataType: 'json'
         }).done(function (results) {
             createpoints(results, "");
@@ -83,7 +83,7 @@ $(document).ready(function () {
                     {data: "cat"},
                     {data: "id",
                         "render": function (data, type, full, meta) {
-                            return "<a href='/Adventure/event/" + data + "' class='btn btn-primary'>Πληροφορίες</a>";
+                            return "<a href='http://localhost:8080/Adventure/event/" + data + "' class='btn btn-primary'>Πληροφορίες</a>";
                         }
                     }
                 ]
@@ -126,7 +126,7 @@ $(document).ready(function () {
                     {data: "cat"},
                     {data: "id",
                         "render": function (data, type, full, meta) {
-                            return "<a href='/Adventure/event/" + data + "'class='btn btn-primary'>Πληροφορίες</a>";
+                            return "<a href='http://localhost:8080/Adventure/event/" + data + "'class='btn btn-primary'>Πληροφορίες</a>";
                         }
                     }
                 ]});

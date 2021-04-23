@@ -37,8 +37,8 @@
                 crossorigin=""
         ></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/Adventure/css/search.css">
-        <link href="/Adventure/css/footer.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="http://localhost:8080/Adventure/css/search.css">
+        <link href="http://localhost:8080/Adventure/css/footer.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -113,7 +113,7 @@
             </div>
         </main>
         <%@ include file="footer.jsp" %>
-        <script src="/Adventure/js/searchjs.js"></script>
+        <script src="http://localhost:8080/Adventure/js/searchjs.js"></script>
     </body>
 </html>
 
