@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>teamProject</groupId>
-    <artifactId>Adventure</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>adventure</artifactId>
+    <version>0.0.1</version>
     <name>Adventure</name>
     <description>Book an Adventure</description>
     <properties>
