@@ -1,2 +1,2 @@
 docker run --name mysqldb --network adventure-mysql -e MYSQL_ROOT_PASSWORD=2846 -e MYSQL_DATABASE=adventure -d mysql:8
-docker exec -i mysqldb mysql -u root --password=2846 < database.sql
+docker exec -i adventure-db mysql -u root --password=2846 < database/database.sql
